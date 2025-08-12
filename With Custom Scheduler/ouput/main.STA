@@ -1,41 +1,43 @@
 
-ROM used:   5356/65536 (8%)
-            5356/65536 (8%) including unused fragments
+ROM used:   6114/65536 (9%)
+            6114/65536 (9%) including unused fragments
 
-            2.5 Average locations per line
-            16.1 Average locations per statement
+            2.6 Average locations per line
+            14.9 Average locations per statement
 
-RAM used:   1200/3896 (31%) at main() level
-            1278/3896 (33%) worst case
+RAM used:   1222/3896 (31%) at main() level
+            1299/3896 (33%) worst case
 
-Stack used: 5 worst case (5 in main + 0 for interrupts)
+Stack used: 7 worst case (6 in main + 1 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   11     0   0  $linker.c
-   33    16   5  Drivers\eeprom_24LC512.c
+   12     0   0  $linker.c
+   39    16   4  Drivers\eeprom_24LC512.c
  1099     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F46K22.h
-   14     0   0  Drivers\eeprom_24LC512.h
-   35    11   3  Drivers\joystick.c
-   17     0   0  Drivers\joystick.h
-   80    53  16  Drivers\sh1106.c
+   15     0   0  Drivers\eeprom_24LC512.h
+   45    11   3  Drivers\joystick.c
+   13     0   0  Drivers\joystick.h
+   92    53  13  Drivers\sh1106.c
    19     0   0  Drivers\sh1106.h
-   97    34  10  API\controller.c
-   18     0   0  API\controller.h
+  101    34   8  API\controller.c
+   20     0   0  API\controller.h
    10     0   0  Utilities\vec2.h
-   48     0   0  Utilities\entities.h
-  288   121  36  API\display.c
-   36     0   0  API\display.h
-   44     0   0  Utilities\font.h
+   40     0   0  Utilities\entities.h
+  281   116  28  API\display.c
+   37     0   0  API\display.h
+   46     0   0  Utilities\font.h
    11     0   0  Utilities\sprites.h
-   19     4   1  API\memory.c
-   25     2   1  Utilities\entities.c
-   17     0   0  Utilities\sprites.c
-  173    92  28  main.c
-    8     0   0  API\memory.h
+   24     4   1  API\memory.c
+   18     1   0  Utilities\entities.c
+   22     0   0  Utilities\sprites.c
+  224   119  29  main.c
+   10     0   0  API\memory.h
+   41     0   0  simple_scheduler.h
+  106    56  14  simple_scheduler.c
 ----- -----
- 2102   333 Total
+ 2325   410 Total
 
 Page ROM  %  RAM    Vol Diff  Functions:
 ---- --- --- ---    --- ----  ----------
@@ -51,65 +53,78 @@ Page ROM  %  RAM    Vol Diff  Functions:
 0     38   0    1     92  1.3  sh1106_cmd
 0     42   0    1     92  1.3  sh1106_data
 0    242   2    0    561  1.4  sh1106_init
-0    122   1    4    262  4.3  sh1106_update_screen
+0    124   1    4    262  4.3  sh1106_update_screen
 0     34   0    5    260  5.5  @MUL1616
-0    176   2    8    374  9.6  sh1106_draw_pixel
-0     80   1    4    176  3.8  sh1106_clear_buffer
+0    176   1    8    374  9.6  sh1106_draw_pixel
+0     82   1    4    176  3.8  sh1106_clear_buffer
 0      6   0    0     12  0.8  controller_init
-0    300   3    8   1109  6.9  controller_update
+0    320   3    8   1109  6.9  controller_update
 0     50   0    1    143  2.8  controller_update_button_only
-0     12   0    0     13  1.0  is_button_pressed
-0     10   0    0     13  1.0  is_button_just_pressed
-0     84   1    7    260  5.5  controller_shoot
+0     16   0    0     13  1.0  is_button_pressed
+0     14   0    0     13  1.0  is_button_just_pressed
+0     82   1    6    260  5.5  controller_shoot
 0     10   0    0     31  1.1  display_init
 0      4   0    0     12  0.8  display_clear
 0      4   0    0     12  0.8  display_update
-0    124   1    8    431  8.8  display_draw_digit
-0    234   2   15   1230  9.2  display_draw_number
-0     44   0    3             @DIV88
-0    152   1    9    515  8.2  display_draw_letter
+0    140   1    8    431  8.8  display_draw_digit
+0    238   2   15   1230  9.2  display_draw_number
+0     44   0    3     92  3.2  @DIV88
+0    156   1   10    515  8.2  display_draw_letter
 0     52   0    7    191  5.5  display_draw_word
-0     94   1   11    405  7.4  display_draw_entity
-0     56   1    8    297  5.0  display_clear_entity
-0     32   0    2     52  1.6  display_draw_player
+0    114   1   11    405  7.4  display_draw_entity
+0     60   0    8    297  5.0  display_clear_entity
+0     30   0    2     52  1.6  display_draw_player
 0     30   0    2     52  1.6  display_draw_enemy
-0     32   0    2     52  1.6  display_draw_bullet
+0     30   0    2     52  1.6  display_draw_bullet
 0     26   0    3     72  2.0  display_draw_score
 0     32   0    2     72  1.8  display_clear_score
 0     88   1    4    427  4.6  display_move_player
-0    148   1    8    937  8.6  display_move_enemy
-0    112   1    6    340  4.7  display_move_bullet
+0    152   1    7    937  8.6  display_move_enemy
+0     82   1    5    227  4.6  display_move_bullet
 0    306   3   43   1149  3.1  display_gameover_screen
-0    236   2   46    782  3.0  display_start_screen
+0    290   2   52   1057  3.0  display_start_screen
 0     18   0    1     37  2.0  load_highscore
 0     24   0    2     65  3.0  save_highscore
-0     48   0   11    371  4.7  check_collisionBE
-0    244   2   39    735  4.8  spawn_enemy_wave
-0   1032  10   24   2638 11.9  main_loop
-0     28   0    0             @const1277
-0     42   0    3             @PSTRINGCN_9600_31766_31767
-0    126   1    2             @PRINTF_U_9600_31766_31767
-0     82   1    2    260  3.8  game_over_loop
+0     64   1    9    427  5.2  check_collisionBE
+0    208   2   35    647  4.8  spawn_enemy_wave
+0     76   1    0    174  3.1  task_player
+0     28   0    0     29  1.6  task_bullet
+0    334   3    6    753  7.4  task_collision
+0     40   0    1     92  3.2  task_display
+0    312   3    6    761  8.5  task_enemies
+0     72   1    1    232  5.4  task_score
 0     44   0    0    153  2.5  start_screen_loop
-0    274   3    1    100  2.0  MAIN
+0     82   1    1    248  3.6  game_over_loop
+0     32   0    0    243  2.3  reset_globals
+0    548   4    2    439  3.3  MAIN
+0     84   1    5    173  4.0  sched_init
+0    136   1    7    285  6.0  sched_add_task
+0    140   1    5    217  5.4  sched_run_cycle
+0     14   0    0    207  3.2  @GOTOPTR
+0     28   0    5     92  3.8  sem_init
+0     54   0    3    147  4.3  sem_trywait
+0     26   0    2     64  3.0  sem_signal
+0     54   0    5    236  5.9  mbox_init
+0    100   1    9    346  7.7  mbox_send
+0    100   1    9    354  8.2  mbox_receive
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               48
-    Statements              333
-    Comments                76
-    Volume (V)              28598
-    Difficulty (D)          179.2
-    Effort to implement (E) 5125566
-    Time to implement (T)   79 hours, 6 minutes
-    Est Delivered Bugs (B)  10
-    Cyclomatic Complexity   58
-    Maintainability (MI)    153
+    Functions               65
+    Statements              410
+    Comments                86
+    Volume (V)              35750
+    Difficulty (D)          256.9
+    Effort to implement (E) 9185978
+    Time to implement (T)   141 hours, 46 minutes
+    Est Delivered Bugs (B)  15
+    Cyclomatic Complexity   76
+    Maintainability (MI)    157
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
-00004-0FFFE  5352  60180  
+00004-0FFFE  6110  59422  
 
 
 

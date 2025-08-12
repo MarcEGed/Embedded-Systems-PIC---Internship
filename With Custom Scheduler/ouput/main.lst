@@ -1,6 +1,6 @@
-CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
+CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 16:28
 
-               Filename:   C:\Users\User\Desktop\Stage\Project Final\With Custom Scheduler\ouput\main.lst
+               Filename:   ..\ouput\main.lst
 
                ROM used:   6114 bytes (9%)
                            Largest free fragment is 59422
@@ -855,6 +855,8 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "../Utilities/entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
@@ -869,11 +871,6 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... #endif
 .................... 
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -894,7 +891,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -947,15 +944,12 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "../Utilities/entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
 .................... #include "vec2.h"
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -976,7 +970,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -1370,6 +1364,8 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "../Utilities/entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
@@ -1384,11 +1380,6 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... #endif
 .................... 
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -1409,7 +1400,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -1454,6 +1445,8 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "../Utilities/font.h"
+.................... //font.h
+.................... 
 .................... #ifndef FONT_H
 .................... #define FONT_H
 .................... 
@@ -1504,9 +1497,9 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... #define SPRITE_SIZE 8 
 .................... 
-.................... extern  int8 PLAYER_SPRITE[8];
-.................... extern  int8 ENEMY_SPRITE[8];
-.................... extern  int8 BULLET_SPRITE[8];
+.................... extern  int8 PLAYER_SPRITE[SPRITE_SIZE];
+.................... extern  int8 ENEMY_SPRITE[SPRITE_SIZE];
+.................... extern  int8 BULLET_SPRITE[SPRITE_SIZE];
 .................... 
 .................... #endif
 .................... 
@@ -1542,15 +1535,12 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "../Utilities/entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
 .................... #include "vec2.h"
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -1571,7 +1561,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -2764,6 +2754,8 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #use delay(clock=16M)
 .................... 
 .................... #include "entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
@@ -2778,11 +2770,6 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... #endif
 .................... 
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -2803,7 +2790,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -2834,9 +2821,9 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... #define SPRITE_SIZE 8 
 .................... 
-.................... extern  int8 PLAYER_SPRITE[8];
-.................... extern  int8 ENEMY_SPRITE[8];
-.................... extern  int8 BULLET_SPRITE[8];
+.................... extern  int8 PLAYER_SPRITE[SPRITE_SIZE];
+.................... extern  int8 ENEMY_SPRITE[SPRITE_SIZE];
+.................... extern  int8 BULLET_SPRITE[SPRITE_SIZE];
 .................... 
 .................... #endif
 .................... 
@@ -2880,7 +2867,12 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 00E06:  GOTO   0ECE (RETURN)
 .................... }
 .................... 
-.................... #include <18F46K22.h>
+.................... /*
+.................... /*
+....................     sprites.c 
+....................     Contains sprites for all gam entities
+.................... */
+.................... 
 .................... #include <18F46K22.h>
 .................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
 .................... ///////////////////////////////////////////////////////////////////////////
@@ -2904,22 +2896,22 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... #define SPRITE_SIZE 8 
 .................... 
-.................... extern  int8 PLAYER_SPRITE[8];
-.................... extern  int8 ENEMY_SPRITE[8];
-.................... extern  int8 BULLET_SPRITE[8];
+.................... extern  int8 PLAYER_SPRITE[SPRITE_SIZE];
+.................... extern  int8 ENEMY_SPRITE[SPRITE_SIZE];
+.................... extern  int8 BULLET_SPRITE[SPRITE_SIZE];
 .................... 
 .................... #endif
 .................... 
 .................... 
-.................... int8 PLAYER_SPRITE[8] = {
+.................... int8 PLAYER_SPRITE[SPRITE_SIZE] = {
 ....................     0x70, 0x8c, 0x82, 0x81, 0x81, 0x82, 0x8c, 0x70
 .................... };
 .................... 
-.................... int8 ENEMY_SPRITE[8] = {
+.................... int8 ENEMY_SPRITE[SPRITE_SIZE] = {
 ....................     0x18, 0x24, 0x42, 0x81, 0x42, 0x5a, 0x24, 0xc3
 .................... };
 .................... 
-.................... int8 BULLET_SPRITE[8] = {
+.................... int8 BULLET_SPRITE[SPRITE_SIZE] = {
 ....................     0x00, 0x00, 0x00, 0x7e, 0x7e, 0x00, 0x00, 0x00
 .................... };
 .................... 
@@ -2963,6 +2955,8 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "../Utilities/entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
@@ -2977,11 +2971,6 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... #endif
 .................... 
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -3002,7 +2991,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -3064,15 +3053,12 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "../Utilities/entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
 .................... #include "vec2.h"
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -3093,7 +3079,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -3132,15 +3118,12 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... #endif
 .................... 
 .................... #include "Utilities/entities.h"
+.................... //entities.h
+.................... 
 .................... #ifndef ENTITIES_H
 .................... #define ENTITIES_H
 .................... 
 .................... #include "vec2.h"
-.................... 
-.................... //type contains p for player
-.................... //              e for enemies
-.................... //              b for bullet
-.................... //this will help with detecting collisions later
 .................... 
 .................... #define PLAYER_MAX_X    100
 .................... #define PLAYER_MIN_X    80
@@ -3161,7 +3144,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... 
 .................... typedef struct{
 ....................     Vec2 pos;
-....................     int vdir;   //-1 = up, 1 = down
+....................     int vdir;               //-1 = up, 1 = down
 ....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
 ....................     int is_active;
 .................... } Enemy;
@@ -3250,12 +3233,12 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 .................... //spawns a wave of enemies with the positions set
 .................... void spawn_enemy_wave() {
 ....................     Enemy new_wave[ENEMIES_PER_WAVE] = {
-....................         {{5,  5}, 1, 0, 1 },  // enemies[0]
-....................         {{5, 25}, 1, 0, 1 },  // enemies[1]
-....................         {{5, 45}, 1, 0, 1 },  // enemies[2]
-....................         {{30,  5}, 1, 0, 1 },  // enemies[3]
-....................         {{30, 25}, 1, 0, 1 },  // enemies[4]
-....................         {{30, 45}, 1, 0, 1 }   // enemies[5]
+....................         {{5,  5}, 1, 0, 1 },
+....................         {{5, 25}, 1, 0, 1 },
+....................         {{5, 45}, 1, 0, 1 },
+....................         {{30,  5}, 1, 0, 1 },
+....................         {{30, 25}, 1, 0, 1 },
+....................         {{30, 45}, 1, 0, 1 }   
 ....................     };
 *
 0072A:  MOVLW  05
@@ -3778,7 +3761,7 @@ CCS PCH C Compiler, Version 5.120, 4205               12-Aug-25 10:39
 011F2:  MOVF   FEF,W
 011F4:  SUBLW  4A
 011F6:  BC    11FC
-....................                     game_over_flag = 1; // signal to stop scheduler
+....................                     game_over_flag = 1; //signal to stop scheduler
 011F8:  MOVLW  01
 011FA:  MOVWF  xA5
 ....................                 }

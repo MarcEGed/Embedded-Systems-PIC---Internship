@@ -1,8 +1,8 @@
-D G "__PCH__" 0 102 ""5.120""
-D G "__DEVICE__" 0 102 "4622"
-D G "__DATE__" 0 102 ""12-Aug-25""
-D G "__TIME__" 0 102 ""10:39:21""
-D G "_UNICODE" 0 102 ""?""
+D G "__PCH__" 0 40 ""5.120""
+D G "__DEVICE__" 0 40 "4622"
+D G "__DATE__" 0 40 ""12-Aug-25""
+D G "__TIME__" 0 40 ""16:28:53""
+D G "_UNICODE" 0 40 ""?""
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1
@@ -165,6 +165,18 @@ F B "disable_peripheral" 2 0
 F B "enable_peripheral" 2 0
 F B "delay_ms" 1 0
 F B "delay_us" 1 0
+F B "i2c_read" 0 2
+F B "i2c_write" 1 2
+F B "i2c_write_slave" 1 2
+F B "i2c_start" 0 2
+F B "i2c_stop" 0 1
+F B "i2c_isr_state" 0 1
+F B "i2c_transfer" 3 6
+F B "i2c_transfer_out" 3 4
+F B "i2c_transfer_in" 3 4
+F B "i2c_init" 1 2
+F B "i2c_poll" 0 1
+F B "i2c_speed" 1 2
 F B "putchar" 1 2
 F B "puts" 1 2
 F B "getch" 0 1

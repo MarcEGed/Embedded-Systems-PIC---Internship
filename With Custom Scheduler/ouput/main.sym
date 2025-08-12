@@ -379,7 +379,7 @@ Project Directory:
 
 Project Files:
     Drivers\eeprom_24LC512.c (link)                         [11-Aug-25 20:00  CRC=726A7C35]
-    ..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F46K22.h [30-May-25 13:08  CRC=4F466C02]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F46K22.h [30-May-25 13:08  CRC=4F466C02]
     Drivers\eeprom_24LC512.h                                [11-Aug-25 19:46  CRC=B96F2DBD]
     Drivers\joystick.c (link)                               [11-Aug-25 19:59  CRC=F34CD4AC]
     Drivers\joystick.h                                      [11-Aug-25 19:34  CRC=B96F2DBD]
@@ -388,20 +388,20 @@ Project Files:
     API\controller.c (link)                                 [11-Aug-25 20:26  CRC=4CAE5EEA]
     API\controller.h                                        [11-Aug-25 19:40  CRC=8372E06F]
     Utilities\vec2.h                                        [29-Jul-25 20:42  CRC=00000000]
-    Utilities\entities.h                                    [12-Aug-25 10:38  CRC=C7395B90]
+    Utilities\entities.h                                    [12-Aug-25 10:41  CRC=1D83362E]
     API\display.c (link)                                    [11-Aug-25 20:31  CRC=5A3A2521]
     API\display.h                                           [11-Aug-25 20:24  CRC=135E489D]
-    Utilities\font.h                                        [09-Aug-25 18:29  CRC=EDFAC4D5]
-    Utilities\sprites.h                                     [05-Aug-25 13:57  CRC=D872A938]
+    Utilities\font.h                                        [12-Aug-25 10:42  CRC=4A6875B0]
+    Utilities\sprites.h                                     [12-Aug-25 10:43  CRC=D872A938]
     API\memory.c (link)                                     [11-Aug-25 20:32  CRC=3ECB5171]
     Utilities\entities.c (link)                             [11-Aug-25 14:48  CRC=D818E9B8]
-    Utilities\sprites.c (link)                              [05-Aug-25 13:57  CRC=1CE12175]
-    main.c (link)                                           [12-Aug-25 10:39  CRC=D0A4E279]
+    Utilities\sprites.c (link)                              [12-Aug-25 10:43  CRC=F4FCB473]
+    main.c (link)                                           [12-Aug-25 13:28  CRC=51E59B5B]
     API\memory.h                                            [11-Aug-25 20:31  CRC=B96F2DBD]
     simple_scheduler.h                                      [12-Aug-25 10:28  CRC=5D0EFBA9]
     simple_scheduler.c (link)                               [12-Aug-25 10:30  CRC=0CD57208]
 
-Source signature=FB1ED64E
+Source signature=0732ADA7
 Program memory checksum=0000
 Hex file CRC=1800
 
@@ -427,11 +427,13 @@ Compiler Settings:
     Compile Mode:   CCS5
 
 Output Files:
-    XREF file:   ..\ouput\main.xsym
+    XREF file:   ..\ouput\main.hex.xsym
     Errors:      ..\ouput\main.err
     Ext Symbols: ..\ouput\main.esym
     INHX32:      ..\ouput\main.hex
     Symbols:     ..\ouput\main.sym
     List:        ..\ouput\main.lst
-    Debug/eCOD:  ..\ouput\main.cod
+    Debug/COFF:  ..\ouput\main.cof
     Project:     main.ccspjt
+    Call Tree:   ..\ouput\main.tre
+    Statistics:  ..\ouput\main.STA
