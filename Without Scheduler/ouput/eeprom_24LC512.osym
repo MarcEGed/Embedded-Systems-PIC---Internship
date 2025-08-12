@@ -1,0 +1,48 @@
+_RETURN_
+CCP_1
+CCP_1_LOW
+CCP_1_HIGH
+CCP_2
+CCP_2_LOW
+CCP_2_HIGH
+CCP_3
+CCP_3_LOW
+CCP_3_HIGH
+CCP_4
+CCP_4_LOW
+CCP_4_HIGH
+CCP_5
+CCP_5_LOW
+CCP_5_HIGH
+C1OUT
+C2OUT
+
+Project Directory:
+    C:\Users\User\Desktop\Stage\Project Final\With Custom Scheduler\src\
+
+Project Files:
+    Drivers\eeprom_24LC512.c                                [23-Jul-25 23:47  CRC=7952CB2A]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F46K22.h [30-May-25 13:08  CRC=4F466C02]
+    Drivers\eeprom_24LC512.h                                [23-Jul-25 23:47  CRC=B96F2DBD]
+
+Source signature=3B7792A6
+
+Units:
+    C:\Users\User\Desktop\Stage\Project Final\With Custom Scheduler\src\Drivers\eeprom_24LC512
+
+Compiler Settings:
+    Processor:      PIC18F46K22
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Output file:    Relocatable
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   ..\ouput\eeprom_24LC512.xsym
+    Errors:      ..\ouput\main.err
+    Ext Symbols: ..\ouput\eeprom_24LC512.esym
+    Object:      ..\ouput\eeprom_24LC512.o
+    Symbols:     ..\ouput\eeprom_24LC512.osym

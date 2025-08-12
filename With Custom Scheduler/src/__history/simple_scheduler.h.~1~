@@ -1,0 +1,41 @@
+#ifndef SIMPLE_SCHEDULER_H
+#define SIMPLE_SCHEDULER_H
+
+typedef void (*task_fn_t)(void);
+
+#define SCHED_MAX_TASKS 6
+
+typedef struct{
+    task_fn_t fn;
+    unsigned char active; //0 if unused, 1 if active
+} Task;
+
+typedef struct{
+    unsigned char count;
+} Semaphore;
+
+typedef struct{
+    unsigned char full; //0 if empty, 1 if full
+    unsigned char data[8]; //size can be changed
+} Mailbox;
+
+/*Scheduler API*/
+void sched_init(void);
+int sched_add_task(task_fn_t fn);
+void sched_run_cycle(void); //run one cycle
+void sched_run_forever(unsigned int cycle_delay_ms);
+
+void sched_yield(void);
+
+/*Semaphore API*/
+void sem_init(Semaphore *s, unsigned char init);
+unsigned char sem_trywait(Semaphore *s);
+void sem_wait(Semaphore *s);    /* blocks co-operatively: sets count-- if >0 else returns 0 so task can yield */
+void sem_signal(Semaphore *s);
+
+/*mailbox*/
+void mbox_init(Mailbox *m);
+unsigned char mbox_send(Mailbox *m, const void *data, unsigned char size);
+unsigned char mbox_receive(Mailbox *m, void *out, unsigned char size);
+
+#endif

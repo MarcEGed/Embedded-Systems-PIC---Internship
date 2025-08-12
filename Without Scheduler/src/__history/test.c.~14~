@@ -1,0 +1,130 @@
+#include <18F46K22.h>
+#fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+#use delay(clock=16MHz)
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+
+#include "vec2.h"
+#include "joystick.h"
+#include "display.h"
+#include "controller.h"
+#include "entities.h"
+#include "memory.h"
+
+#define ENEMIES_PER_WAVE     6
+
+Enemy enemies[ENEMIES_PER_WAVE];
+
+int highscore = load_highscore();
+
+void spawn_enemy_wave(){
+    Enemy new_wave[ENEMIES_PER_WAVE] = {
+        { 'e',  {5,  5}, 1, 0, 1 },  // enemies[0]
+        { 'e',  {5, 25}, 1, 0, 1 },  // enemies[1]
+        { 'e',  {5, 45}, 1, 0, 1 },  // enemies[2]
+
+        // Column 2 (x = 5 + 8 + 10 = 23)
+        { 'e', {30,  5}, 1, 0, 1 },  // enemies[3]
+        { 'e', {30, 25}, 1, 0, 1 },  // enemies[4]
+        { 'e', {30, 45}, 1, 0, 1 } 
+    };
+
+    for (int i = 0; i < ENEMIES_PER_WAVE; i++) {
+        enemies[i] = new_wave[i];
+        display_draw_enemy(enemies[i].pos);
+    }
+}
+
+void main() {
+    int frame_counter = 0;
+    int enemy_move_interval = 6;
+    int score = 0;
+    int last_score = 0;
+
+    int all_defeated = 0;
+    int wave_spawned = 0;
+
+    Player p = {'p', {80, 50}};
+    Bullet b = {'b', {0, 0}, 0};
+
+    display_init();
+    controller_init();
+    display_draw_score(score);
+    spawn_enemy_wave();
+
+    /*Vec2 letter_pos = {0, 0};
+    display_draw_letter(letter_pos, 'g');
+    display_draw_player(p.pos);
+    display_update();*/
+
+    //while (TRUE);
+    
+    while (TRUE){
+        display_clear_entity(p.pos, 8, 8);
+
+        controller_update(&p.pos);
+        controller_shoot(p, &b);
+
+
+        if (b.is_active){
+            b = display_move_bullet(b);
+        }
+
+
+        //COLLISION CHECK
+        for (int i = 0; i < ENEMIES_PER_WAVE; i++){
+            if (check_collisionBE(b, enemies[i]) && b.is_active &&  enemies[i].is_active){
+                b.is_active = 0;
+                enemies[i].is_active = 0;
+                display_clear_entity(enemies[i].pos, 8, 8);
+                display_clear_entity(b.pos, 8, 8);
+                score++;
+                break;
+            }
+        }
+
+        //WAVE SYSTEM
+        int active_count = 0;
+        for (int i = 0; i < ENEMIES_PER_WAVE; i++){
+            if (enemies[i].is_active){
+                active_count++;
+            }
+        }
+        
+        if (active_count == 0 && !wave_spawned){
+            if (enemy_move_interval > 1){
+                enemy_move_interval--;
+            }
+            spawn_enemy_wave();
+            wave_spawned = 1;
+        }
+
+        if (wave_spawned && active_count > 0){
+            wave_spawned = 0;
+        }
+
+
+        //ENEMY MOVEMENT
+        if (frame_counter % enemy_move_interval == 0){
+            for (int i = 0; i < ENEMIES_PER_WAVE; i++){
+                if (enemies[i].is_active){
+                    enemies[i] = display_move_enemy(enemies[i]);
+                }
+            }
+        }
+
+        //PLAYER MOVEMENT
+        p.pos = display_move_player(p.pos);
+
+        //SCORE UPDATER
+        if (score != last_score){
+            display_clear_score();
+            display_draw_score(score);
+        }
+
+        //SCREEN UPDATER
+        display_update();
+        delay_ms(100);
+        frame_counter++;
+    }
+
+}

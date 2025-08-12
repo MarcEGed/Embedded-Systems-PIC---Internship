@@ -1,0 +1,59 @@
+#include <18F46K22.h>
+#fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+#use delay(clock=16MHz)
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+
+#include "sh1106.h"
+#include "display.h"
+#include "font.h"
+
+void main() {
+    const unsigned char player_sprite[] = {
+        0x18, 0x24, 0x24, 0x42, 0x42, 0x81, 0x81, 0x7E
+    };
+
+    const unsigned char bullet_sprite[] = {
+        0x00, 0x00, 0x18, 0x18, 0x18, 0x18, 0x00, 0x00
+    };
+
+    int player_x = 64;
+    int player_y = 32;
+    int sprite_w = 8;
+    int sprite_h = 8;
+
+    display_init();
+
+    int bullet_x = player_x - sprite_w - 2;  // Start in front of player
+    int bullet_y = player_y + 2;
+
+    while (bullet_x > 0) {
+        display_clear();
+
+        // Draw player sprite inline
+        for (int col = 0; col < sprite_w; col++) {
+            unsigned char line = player_sprite[col];
+            for (int row = 0; row < sprite_h; row++) {
+                if (line & (1 << row)) {
+                    sh1106_draw_pixel(player_x + col, player_y + row, 1);
+                }
+            }
+        }
+
+        // Draw bullet sprite inline
+        for (int col = 0; col < sprite_w; col++) {
+            unsigned char line = bullet_sprite[col];
+            for (int row = 0; row < sprite_h; row++) {
+                if (line & (1 << row)) {
+                    sh1106_draw_pixel(bullet_x + col, bullet_y + row, 1);
+                }
+            }
+        }
+
+        display_update();
+        delay_ms(50);
+
+        bullet_x -= 2;
+    }
+
+    while(TRUE);
+}

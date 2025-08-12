@@ -1,0 +1,20 @@
+#include <18F46K22.h>
+#fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+#use delay(clock=16MHz)
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+
+#include "vec2.h"
+#include "joystick.h"
+#include "display.h"
+#include "controller.h"
+#include "entities.h"
+#include "memory.h"
+
+void main() {
+    display_init();
+    controller_init();
+
+    display_draw_number({50, 50}, load_highscore());
+
+    while (TRUE);
+}

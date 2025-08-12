@@ -1,0 +1,4 @@
+- Fix enemy movement pattern                                        ✔
+- Find out why controller is so slow and how to manage resources
+- Add limits to where player can move                               ✔
+- Add shooting (bullet spawn, bullet movement and collision)

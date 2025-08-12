@@ -1,0 +1,52 @@
+// main.c
+#include <18F46K22.h>
+#fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+#use delay(clock=16M)
+
+#use i2c(Master, SDA=PIN_C4, SCL=PIN_C3, FAST=100000)
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7, bits=8, parity=N, stop=1)
+
+#include "sh1106.h"
+#include "joystick.h"
+
+void main() {
+   int x = 0;
+   int direction = 1; // 1 = right, -1 = left
+   int y = 30;        
+   int size = 14;      
+
+   sh1106_init();
+   sh1106_clear_buffer();
+
+   joystick_init();
+
+   
+
+   while(TRUE) {
+      sh1106_clear_buffer();
+
+      // draw cube
+      for (int i = 0; i < size; i++) {
+         for (int j = 0; j < size; j++) {
+               sh1106_draw_pixel(x + i, y + j, 1);
+         }
+      }
+
+      sh1106_update_screen();
+
+      // move cube
+      x += direction*5;
+
+      // bounce off edges
+      if (x <= 0 || x + size >= 128) {
+         direction = -direction;
+      }
+
+      delay_ms(10);
+
+
+      JoystickState ctrl = joystick_read();
+      printf("X: %lu  Y: %lu  Button: %u\r\n", ctrl.x, ctrl.y, !ctrl.sw); // ! = pressed
+      delay_ms(200);
+   }
+}

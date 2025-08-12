@@ -1,0 +1,213 @@
+ÀÄ
+   ÀÄMAIN  0/274  Ram=1
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ@cinit2  (Inline)  Ram=0
+      ÃÄdisplay_init  0/10  Ram=0
+      ³  ÃÄsh1106_init  0/242  Ram=0
+      ³  ³  ÃÄ@delay_ms1  0/42  Ram=1
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+      ³  ³  ³  ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+      ³  ³  ³  ÀÄ@I2C_WRITEU_129  0/28  Ram=1
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄsh1106_cmd  0/38  Ram=1
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÀÄsh1106_cmd  0/38  Ram=1
+      ³  ³     ÀÄ*
+      ³  ÃÄdisplay_clear  0/4  Ram=0
+      ³  ³  ÀÄsh1106_clear_buffer  0/80  Ram=4
+      ³  ³     ÀÄ@MUL1616  0/34  Ram=5
+      ³  ÀÄdisplay_update  0/4  Ram=0
+      ³     ÀÄsh1106_update_screen  0/122  Ram=4
+      ³        ÃÄsh1106_cmd  0/38  Ram=1
+      ³        ³  ÀÄ*
+      ³        ÃÄsh1106_cmd  0/38  Ram=1
+      ³        ³  ÀÄ*
+      ³        ÃÄsh1106_cmd  0/38  Ram=1
+      ³        ³  ÀÄ*
+      ³        ÃÄ@MUL1616  0/34  Ram=5
+      ³        ÀÄsh1106_data  0/42  Ram=1
+      ³           ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+      ³           ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+      ³           ÀÄ@I2C_WRITEU_129  0/28  Ram=1
+      ÃÄcontroller_init  0/6  Ram=0
+      ³  ÀÄjoystick_init  0/48  Ram=0
+      ÃÄstart_screen_loop  0/44  Ram=0
+      ³  ÃÄdisplay_clear  0/4  Ram=0
+      ³  ³  ÀÄ*
+      ³  ÃÄdisplay_start_screen  0/236  Ram=46
+      ³  ³  ÃÄdisplay_draw_word  0/52  Ram=7
+      ³  ³  ³  ÀÄdisplay_draw_letter  0/152  Ram=9
+      ³  ³  ³     ÀÄsh1106_draw_pixel  0/176  Ram=8
+      ³  ³  ³        ÃÄ@MUL1616  0/34  Ram=5
+      ³  ³  ³        ÀÄ@MUL1616  0/34  Ram=5
+      ³  ³  ÀÄdisplay_draw_word  0/52  Ram=7
+      ³  ³     ÀÄ*
+      ³  ÃÄdisplay_update  0/4  Ram=0
+      ³  ³  ÀÄ*
+      ³  ÃÄcontroller_update_button_only  0/50  Ram=1
+      ³  ³  ÀÄget_Joystick_SW  0/12  Ram=0
+      ³  ÃÄis_button_just_pressed  0/10  Ram=0
+      ³  ÃÄdisplay_clear  0/4  Ram=0
+      ³  ³  ÀÄ*
+      ³  ÃÄ@delay_ms1  0/42  Ram=1
+      ³  ÀÄ@delay_ms1  0/42  Ram=1
+      ÃÄmain_loop  0/1032  Ram=24
+      ³  ÃÄspawn_enemy_wave  0/244  Ram=39
+      ³  ³  ÀÄdisplay_draw_enemy  0/30  Ram=2
+      ³  ³     ÀÄdisplay_draw_entity  0/94  Ram=11
+      ³  ³        ÀÄsh1106_draw_pixel  0/176  Ram=8
+      ³  ³           ÀÄ*
+      ³  ÃÄdisplay_draw_score  0/26  Ram=3
+      ³  ³  ÀÄdisplay_draw_number  0/234  Ram=15
+      ³  ³     ÃÄdisplay_draw_digit  0/124  Ram=8
+      ³  ³     ³  ÀÄsh1106_draw_pixel  0/176  Ram=8
+      ³  ³     ³     ÀÄ*
+      ³  ³     ÃÄdisplay_draw_digit  0/124  Ram=8
+      ³  ³     ³  ÀÄ*
+      ³  ³     ÃÄdisplay_draw_digit  0/124  Ram=8
+      ³  ³     ³  ÀÄ*
+      ³  ³     ÃÄ@DIV88  0/44  Ram=3
+      ³  ³     ÃÄ@DIV88  0/44  Ram=3
+      ³  ³     ÃÄdisplay_draw_digit  0/124  Ram=8
+      ³  ³     ³  ÀÄ*
+      ³  ³     ÃÄsh1106_draw_pixel  0/176  Ram=8
+      ³  ³     ³  ÀÄ*
+      ³  ³     ÀÄdisplay_draw_digit  0/124  Ram=8
+      ³  ³        ÀÄ*
+      ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ÀÄsh1106_draw_pixel  0/176  Ram=8
+      ³  ³     ÀÄ*
+      ³  ÃÄcontroller_update  0/300  Ram=8
+      ³  ³  ÃÄget_Joystick_X  0/34  Ram=0
+      ³  ³  ÃÄget_Joystick_Y  0/34  Ram=0
+      ³  ³  ÀÄget_Joystick_SW  0/12  Ram=0
+      ³  ÃÄcontroller_shoot  0/84  Ram=7
+      ³  ³  ÀÄis_button_pressed  0/12  Ram=0
+      ³  ÃÄdisplay_move_bullet  0/112  Ram=6
+      ³  ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÀÄdisplay_draw_bullet  0/32  Ram=2
+      ³  ³     ÀÄdisplay_draw_entity  0/94  Ram=11
+      ³  ³        ÀÄ*
+      ³  ÃÄcheck_collisionBE  0/48  Ram=11
+      ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ÀÄ*
+      ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ÀÄ*
+      ³  ÃÄspawn_enemy_wave  0/244  Ram=39
+      ³  ³  ÀÄ*
+      ³  ÃÄ@DIV88  0/44  Ram=3
+      ³  ÃÄdisplay_move_enemy  0/148  Ram=8
+      ³  ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄdisplay_draw_enemy  0/30  Ram=2
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÀÄdisplay_draw_enemy  0/30  Ram=2
+      ³  ³     ÀÄ*
+      ³  ÃÄ@PSTRINGCN_9600_31766_31767  0/42  Ram=3
+      ³  ÃÄ@PRINTF_U_9600_31766_31767  0/126  Ram=2
+      ³  ³  ÃÄ@DIV88  0/44  Ram=3
+      ³  ³  ÀÄ@DIV88  0/44  Ram=3
+      ³  ÃÄ@PSTRINGCN_9600_31766_31767  0/42  Ram=3
+      ³  ÃÄ@PRINTF_U_9600_31766_31767  0/126  Ram=2
+      ³  ³  ÀÄ*
+      ³  ÃÄ@PSTRINGCN_9600_31766_31767  0/42  Ram=3
+      ³  ÃÄ@PRINTF_U_9600_31766_31767  0/126  Ram=2
+      ³  ³  ÀÄ*
+      ³  ÃÄdisplay_move_player  0/88  Ram=4
+      ³  ³  ÃÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³  ³  ÀÄ*
+      ³  ³  ÀÄdisplay_draw_player  0/32  Ram=2
+      ³  ³     ÀÄdisplay_draw_entity  0/94  Ram=11
+      ³  ³        ÀÄ*
+      ³  ÃÄdisplay_clear_score  0/32  Ram=2
+      ³  ³  ÀÄdisplay_clear_entity  0/56  Ram=8
+      ³  ³     ÀÄ*
+      ³  ÃÄdisplay_draw_score  0/26  Ram=3
+      ³  ³  ÀÄ*
+      ³  ÃÄdisplay_update  0/4  Ram=0
+      ³  ³  ÀÄ*
+      ³  ÀÄ@delay_ms1  0/42  Ram=1
+      ÀÄgame_over_loop  0/82  Ram=2
+         ÃÄload_highscore  0/18  Ram=1
+         ³  ÀÄeeprom_read_byte  0/82  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÀÄ@I2C_READU_129  0/30  Ram=1
+         ÃÄsave_highscore  0/24  Ram=2
+         ³  ÀÄeeprom_write_byte  0/68  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÃÄ@I2C_WRITEU_129  0/28  Ram=1
+         ³     ÀÄ@delay_ms1  0/42  Ram=1
+         ÃÄdisplay_clear  0/4  Ram=0
+         ³  ÀÄ*
+         ÃÄdisplay_gameover_screen  0/306  Ram=43
+         ³  ÃÄdisplay_draw_word  0/52  Ram=7
+         ³  ³  ÀÄ*
+         ³  ÃÄdisplay_draw_word  0/52  Ram=7
+         ³  ³  ÀÄ*
+         ³  ÃÄdisplay_draw_word  0/52  Ram=7
+         ³  ³  ÀÄ*
+         ³  ÃÄdisplay_draw_word  0/52  Ram=7
+         ³  ³  ÀÄ*
+         ³  ÃÄdisplay_draw_number  0/234  Ram=15
+         ³  ³  ÀÄ*
+         ³  ÀÄdisplay_draw_number  0/234  Ram=15
+         ³     ÀÄ*
+         ÃÄdisplay_update  0/4  Ram=0
+         ³  ÀÄ*
+         ÃÄcontroller_update_button_only  0/50  Ram=1
+         ³  ÀÄ*
+         ÃÄis_button_just_pressed  0/10  Ram=0
+         ÃÄdisplay_clear  0/4  Ram=0
+         ³  ÀÄ*
+         ÃÄ@delay_ms1  0/42  Ram=1
+         ÀÄ@delay_ms1  0/42  Ram=1

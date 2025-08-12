@@ -1,0 +1,54 @@
+#include <18F46K22.h>
+#fuses INTRC_IO, NOWDT, NOMCLR, NOLVP
+#use delay(clock=16MHz)
+
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+#use i2c(master, sda=PIN_C4, scl=PIN_C3, FAST)
+
+#define EEPROM_ADDR_WRITE  0xA0
+#define EEPROM_ADDR_READ   0xA1
+
+// Replace this with your chosen EEPROM address
+#define STATE_ADDR 0x0000
+
+void eeprom_write_byte(unsigned int16 address, BYTE data) {
+   i2c_start();
+   i2c_write(EEPROM_ADDR_WRITE);
+   i2c_write(address >> 8);
+   i2c_write(address & 0xFF);
+   i2c_write(data);
+   i2c_stop();
+   delay_ms(5);
+}
+
+BYTE eeprom_read_byte(unsigned int16 address) {
+   BYTE data;
+   i2c_start();
+   i2c_write(EEPROM_ADDR_WRITE);
+   i2c_write(address >> 8);
+   i2c_write(address & 0xFF);
+   i2c_start();
+   i2c_write(EEPROM_ADDR_READ);
+   data = i2c_read(0);
+   i2c_stop();
+   return data;
+}
+
+void main() {
+   delay_ms(500); // let everything power up
+
+   BYTE last_value = eeprom_read_byte(STATE_ADDR);
+
+   printf("Boot: EEPROM stored value = %u\r\n", last_value);
+
+   // If you want to detect first time boot:
+   if (last_value == 0xFF) {
+      printf("EEPROM is fresh/uninitialized\r\n");
+      last_value = 0x00;
+   }
+
+   // Simulate changing and saving a new value
+   last_value++;
+   printf("Saving updated value: %u\r\n", last_value);
+   eeprom_write_byte(STATE_ADDR, last_value);
+}

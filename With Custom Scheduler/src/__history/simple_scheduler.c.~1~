@@ -1,0 +1,118 @@
+#include "simple_scheduler.h"
+
+static Task task_list[SCHED_MAX_TASKS];
+
+void sched_init(void){
+    unsigned char i;
+
+    for (i = 0; i < SCHED_MAX_TASKS; i++){
+        task_list[i].fn = 0;
+        task_list[i].active = 0;
+    }
+}
+
+int sched_add_task(task_fn_t fn){
+    unsigned char i;
+    for (i = 0; i < SCHED_MAX_TASKS; i++){
+        if (task_list[i].active == 0){
+            task_list[i].fn = fn;
+            task_list[i].active = 1;
+            return i;
+        }
+    }
+    return -1; //no space in the list
+}
+
+void sched_run_cycle(void){
+    unsigned char i;
+    for (i = 0; i < SCHED_MAX_TASKS; i++){
+        if (task_list[i].active && task_list[i].fn != 0){
+            task_list[i].fn();
+        }
+    }
+}
+
+void sched_run_forever(unsigned int cycle_delay_ms){
+    while (1){
+        sched_run_cycle();
+        delay_ms(cycle_delay_ms);
+    }
+}
+
+// For cooperative tasks that want to yield voluntarily
+void sched_yield(void) {
+    // In a cooperative scheduler, yield just returns control
+    // to sched_run_cycle by exiting the task function.
+    // Nothing else needed here.
+}
+
+
+
+//SEMAPHORES
+void sem_init(Semaphore *s, unsigned char init){
+    if (s != 0){
+        s->count = init;
+    }
+}
+
+unsigned char sem_trywait(Semaphore *s){
+    if (s == 0) return 0;
+    if (s->count > 0){
+        s->count--;
+        return 1;
+    }
+    return 0;
+}
+
+void sem_wait(Semaphore *s){
+    if (s == 0) return;
+    while (s->count == 0){
+        sched_yield();
+    }
+    s->count--;
+}
+
+void sem_signal(Semaphore *s){
+    if (s != 0){
+        s->count++;
+    }
+}
+
+//MAILBOX
+void mbox_init(Mailbox *m){
+    unsigned char i;
+    if (m != 0){
+        m->full = 0;
+        for (i = 0; i < sizeof(m->data); i++){
+            m->data[i] = 0;
+        }
+    }
+}
+
+unsigned char mbox_send(Mailbox *m, const void *data, unsigned char size){
+    unsigned char i;
+    const unsigned char *src = (const unsigned char*)data;
+    if (m == 0 || data == 0) return 0;
+    if (m->full) return 0; //already full
+    if (size > sizeof(m->data)) size = sizeof(m->data);
+
+    for (i = 0; i < size; i++){
+        m->data[i] = src[i];
+    }
+    m->full = 1;
+    return 1;
+}
+
+unsigned char mbox_receive(Mailbox *m, void *out, unsigned char size){
+    unsigned char i;
+    unsigned char *dst = (unsigned char*)out;
+    if (m == 0 || out == 0) return 0;
+    if (m->full) return 0; //already full
+    if (size > sizeof(m->data)) size = sizeof(m->data);
+
+    for (i = 0; i < size; i++){
+        dst[i] = m->data[i];
+    }
+    m->full = 0;
+    return 1;
+}

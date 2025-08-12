@@ -1,0 +1,63 @@
+#include <18F46K22.h>
+#fuses INTRC_IO, NOWDT, NOLVP, NOMCLR
+#use delay(clock=16MHz)
+
+// UART for output
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7, bits=8, parity=N, stop=1)
+
+// I2C on hardware pins C3=SCL, C4=SDA
+#use i2c(master, sda=PIN_C4, scl=PIN_C3, FAST)
+
+// EEPROM I2C base address
+#define EEPROM_ADDR_WRITE  0xA0  // 0x50 << 1
+#define EEPROM_ADDR_READ   0xA1
+
+void eeprom_write_byte(unsigned int16 address, BYTE data) {
+   i2c_start();
+   i2c_write(EEPROM_ADDR_WRITE);
+   i2c_write(address >> 8);      // high byte of address
+   i2c_write(address & 0xFF);    // low byte of address
+   i2c_write(data);
+   i2c_stop();
+   delay_ms(5); // EEPROM write delay
+}
+
+BYTE eeprom_read_byte(unsigned int16 address) {
+   BYTE data;
+
+   i2c_start();
+   i2c_write(EEPROM_ADDR_WRITE);
+   i2c_write(address >> 8);      // high byte
+   i2c_write(address & 0xFF);    // low byte
+   i2c_start();                  // repeated start
+   i2c_write(EEPROM_ADDR_READ);
+   data = i2c_read(0);
+   i2c_stop();
+
+   return data;
+}
+
+void main() {
+   delay_ms(500); // let the system stabilize
+   printf("EEPROM Test Start\r\n");
+
+   BYTE test_value = 0x5A;
+   unsigned int16 test_addr = 0x0010;
+
+   // Write to EEPROM
+   eeprom_write_byte(test_addr, test_value);
+   printf("Wrote 0x%X to address 0x%LX\r\n", test_value, test_addr);
+
+   // Read from EEPROM
+   BYTE read_value = eeprom_read_byte(test_addr);
+   printf("Read  0x%X from address 0x%LX\r\n", read_value, test_addr);
+
+   // Check if OK
+   if(read_value == test_value)
+      printf("EEPROM Test PASSED\r\n");
+   else
+      printf("EEPROM Test FAILED\r\n");
+
+   while(TRUE); // Stop here
+}
+

@@ -1,0 +1,129 @@
+
+ROM used:   6118/65536 (9%)
+            6118/65536 (9%) including unused fragments
+
+            2.7 Average locations per line
+            14.4 Average locations per statement
+
+RAM used:   1220/3896 (31%) at main() level
+            1296/3896 (33%) worst case
+
+Stack used: 7 worst case (6 in main + 1 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   12     0   0  ..\$linker.c
+   33    16   4  eeprom_24LC512.c
+ 1099     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F46K22.h
+   14     0   0  eeprom_24LC512.h
+   35    11   3  joystick.c
+   17     0   0  joystick.h
+   80    53  12  sh1106.c
+   19     0   0  sh1106.h
+   97    34   8  ..\API\controller.c
+   18     0   0  ..\API\controller.h
+   10     0   0  ..\Utilities\vec2.h
+   46     0   0  ..\Utilities\entities.h
+  291   127  30  ..\API\display.c
+   36     0   0  ..\API\display.h
+   44     0   0  ..\Utilities\font.h
+   11     0   0  ..\Utilities\sprites.h
+   19     4   1  ..\API\memory.c
+   18     1   0  ..\Utilities\entities.c
+   17     0   0  ..\Utilities\sprites.c
+  202   116  27  ..\main.c
+    8     0   0  ..\API\memory.h
+   42     0   0  ..\simple_scheduler.h
+  115    62  15  ..\simple_scheduler.c
+----- -----
+ 2283   424 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     42   0    1             @delay_ms1
+0     28   0    1     78  1.6  @I2C_WRITEU_129
+0     30   0    1     48  1.4  @I2C_READU_129
+0     68   1    1    154  2.2  eeprom_write_byte
+0     82   1    1    207  3.2  eeprom_read_byte
+0     48   0    0     78  1.6  joystick_init
+0     34   0    0     48  1.4  get_Joystick_X
+0     34   0    0     48  1.4  get_Joystick_Y
+0     12   0    0     21  1.0  get_Joystick_SW
+0     38   0    1     92  1.3  sh1106_cmd
+0     42   0    1     92  1.3  sh1106_data
+0    242   2    0    561  1.4  sh1106_init
+0    124   1    4    262  4.3  sh1106_update_screen
+0     34   0    5    260  5.5  @MUL1616
+0    176   1    8    374  9.6  sh1106_draw_pixel
+0     82   1    4    176  3.8  sh1106_clear_buffer
+0      6   0    0     12  0.8  controller_init
+0    300   2    8   1109  6.9  controller_update
+0     50   0    1    143  2.8  controller_update_button_only
+0     12   0    0     13  1.0  is_button_pressed
+0     10   0    0     13  1.0  is_button_just_pressed
+0     84   1    7    260  5.5  controller_shoot
+0     10   0    0     31  1.1  display_init
+0      4   0    0     12  0.8  display_clear
+0      4   0    0     12  0.8  display_update
+0    142   1    8    431  8.8  display_draw_digit
+0    238   2   15   1230  9.2  display_draw_number
+0     44   0    3     92  3.2  @DIV88
+0    168   1    9    515  8.2  display_draw_letter
+0     52   0    7    191  5.5  display_draw_word
+0    104   1   11    405  7.4  display_draw_entity
+0     60   0    8    297  5.0  display_clear_entity
+0     30   0    2     52  1.6  display_draw_player
+0     30   0    2     52  1.6  display_draw_enemy
+0     30   0    2     52  1.6  display_draw_bullet
+0     26   0    3     72  2.0  display_draw_score
+0     34   0    2     72  1.8  display_clear_score
+0     88   1    4    427  4.6  display_move_player
+0    152   1    8    937  8.6  display_move_enemy
+0    136   1    6    398  5.2  display_move_bullet
+0    306   3   43   1149  3.1  display_gameover_screen
+0    290   2   52   1057  3.0  display_start_screen
+0     18   0    1     37  2.0  load_highscore
+0     24   0    2     65  3.0  save_highscore
+0     48   0   11    371  4.7  check_collisionBE
+0    184   2   21    444  4.7  spawn_enemy_wave
+0     80   1    0    174  3.1  task_player
+0     48   0    0     56  2.6  task_bullet
+0    314   3    8    537  6.8  task_collision
+0     40   0    1     92  3.2  task_display
+0    328   3   11    761  8.5  task_enemies
+0     72   1    1    232  5.4  task_score
+0     44   0    0    153  2.5  start_screen_loop
+0     82   1    1    248  3.6  game_over_loop
+0    570   5    2    753  4.3  MAIN
+0     84   1    5    173  4.0  sched_init
+0    136   1    7    285  6.0  sched_add_task
+0    140   1    5    217  5.4  sched_run_cycle
+0     14   0    0             @GOTOPTR
+0     28   0    5     92  3.8  sem_init
+0     54   0    3    147  4.3  sem_trywait
+0     26   0    2     64  3.0  sem_signal
+0     54   0    5    236  5.9  mbox_init
+0    100   1    9    346  7.7  mbox_send
+0    100   1    9    354  8.2  mbox_receive
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               63
+    Statements              424
+    Comments                86
+    Volume (V)              34716
+    Difficulty (D)          252.8
+    Effort to implement (E) 8777294
+    Time to implement (T)   135 hours, 27 minutes
+    Est Delivered Bugs (B)  14
+    Cyclomatic Complexity   77
+    Maintainability (MI)    156
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-0FFFE  6114  59418  
+
+
+

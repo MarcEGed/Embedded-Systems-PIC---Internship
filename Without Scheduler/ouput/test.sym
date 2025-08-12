@@ -1,0 +1,373 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 x
+006-007 y
+008.0   sw
+008.1   sw
+008.2   sw
+008.3   button_pressed
+008.4   last_button_state
+008.5   just_pressed
+008.6   just_released
+009-02C enemies
+02D-02E x
+02F-030 y
+031-430 buffer
+431-432 x
+433-434 y
+435-452 digit_font_3x5
+453-463 letter_index_3x5
+464-496 letter_font_3x5
+497-49E PLAYER_SPRITE
+49F-4A6 ENEMY_SPRITE
+4A7-4AE BULLET_SPRITE
+4AF     MAIN.final_score
+4B0-4B1 display_start_screen.title_pos
+4B0-4B2 main_loop.p
+4B0     game_over_loop.score
+4B1     game_over_loop.hs
+4B2     display_gameover_screen.score
+4B2-4B3 display_start_screen.start_pos
+4B2     sh1106_clear_buffer.page
+4B2     load_highscore.highscore
+4B2     save_highscore.score
+4B2.0   controller_update_button_only.sw
+4B3     display_gameover_screen.high_score
+4B3     sh1106_clear_buffer.col
+4B3-4B6 main_loop.b
+4B3     save_highscore.hs
+4B3     eeprom_read_byte.data
+4B4     eeprom_write_byte.data
+4B4-4CF display_start_screen.title_text
+4B4     @I2C_READU_129.P1
+4B4-4B5 display_gameover_screen.gameover_pos
+4B4     sh1106_clear_buffer.@SCRATCH1
+4B5     sh1106_clear_buffer.@SCRATCH2
+4B6-4B7 display_gameover_screen.hs_label_pos
+4B7     main_loop.frame_counter
+4B8-4B9 display_gameover_screen.hs_pos
+4B8     main_loop.enemy_move_interval
+4B9     main_loop.score
+4BA-4BB display_gameover_screen.ss_label_pos
+4BA     main_loop.last_score
+4BB     main_loop.wave_spawned
+4BC-4BD display_gameover_screen.ss_pos
+4BC     main_loop.i
+4BD     main_loop.active_count
+4BE-4BF display_gameover_screen.restart_label_pos
+4BE     main_loop.i
+4BF     main_loop.i
+4C0-4C1 display_move_player.pos
+4C0-4C1 display_clear_score.pos
+4C0-4C3 display_move_bullet.Bullet
+4C0-4C1 controller_update.player_pos
+4C0-4C8 display_gameover_screen.gameover_text
+4C0-4E3 spawn_enemy_wave.new_wave
+4C0     display_draw_score.score
+4C0-4C2 controller_shoot.p
+4C0     @delay_ms1.P1
+4C0     sh1106_update_screen.page
+4C0     main_loop.@SCRATCH1
+4C1-4C2 display_draw_score.pos
+4C1     sh1106_update_screen.col
+4C1     main_loop.@SCRATCH2
+4C2-4C3 display_move_player.last_pos
+4C2     controller_update.x
+4C2     main_loop.@SCRATCH3
+4C2     sh1106_update_screen.@SCRATCH1
+4C3     sh1106_data.data
+4C3     controller_update.y
+4C3     sh1106_cmd.cmd
+4C3-4C4 controller_shoot.b
+4C3     main_loop.@SCRATCH4
+4C3     sh1106_update_screen.@SCRATCH2
+4C4     @I2C_WRITEU_129.P1
+4C4.0   controller_update.sw
+4C4-4C5 display_draw_player.pos
+4C4-4C5 display_move_bullet.last_pos
+4C4     @PRINTF_U_9600_31766_31767.P1
+4C4     @PSTRINGCN_9600_31766_31767.P2
+4C4     main_loop.@SCRATCH5
+4C5     @PRINTF_U_9600_31766_31767.P1
+4C5     main_loop.@SCRATCH6
+4C5     @PSTRINGCN_9600_31766_31767.@SCRATCH1
+4C5     controller_update.@SCRATCH1
+4C5     controller_shoot.@SCRATCH1
+4C6-4C9 check_collisionBE.b
+4C6-4C7 display_draw_bullet.pos
+4C6     main_loop.@SCRATCH7
+4C6     @PSTRINGCN_9600_31766_31767.@SCRATCH2
+4C6     controller_update.@SCRATCH2
+4C6     controller_shoot.@SCRATCH2
+4C7     main_loop.@SCRATCH8
+4C7     controller_update.@SCRATCH3
+4C9-4CA display_gameover_screen.hs_text
+4CA-4CF check_collisionBE.e
+4CB-4CC display_gameover_screen.ss_text
+4CD-4DC display_gameover_screen.click_to_restart_text
+4CE-4D3 display_move_enemy.Enemy
+4D0-4DD display_start_screen.start_text
+4D0     check_collisionBE.@SCRATCH1
+4D4-4D5 display_move_enemy.last_pos
+4D6-4D7 display_clear_entity.pos
+4D8     display_clear_entity.h
+4D9     display_clear_entity.w
+4DA     display_clear_entity.i
+4DB     display_clear_entity.j
+4DC     display_clear_entity.@SCRATCH1
+4DD-4DE display_draw_number.pos
+4DD     display_clear_entity.@SCRATCH2
+4DE-4DF display_draw_word.pos
+4DF     display_draw_number.number
+4E0-4E1 display_draw_word.word
+4E0-4E1 display_draw_number.pos1
+4E2-4E3 display_draw_number.pos2
+4E2     display_draw_word.length
+4E3     display_draw_word.i
+4E4     display_draw_number.tens
+4E4     spawn_enemy_wave.i
+4E4     display_draw_word.@SCRATCH1
+4E5     display_draw_number.ones
+4E5-4E6 display_draw_letter.pos
+4E5     spawn_enemy_wave.@SCRATCH1
+4E6     display_draw_number.col
+4E6     spawn_enemy_wave.@SCRATCH2
+4E7     display_draw_number.row
+4E7-4E8 display_draw_enemy.pos
+4E7     display_draw_letter.c
+4E8-4E9 display_draw_number.ones_pos
+4E8     display_draw_letter.i
+4E9     display_draw_letter.col
+4E9-4EA display_draw_entity.pos
+4EA     @DIV88.P1
+4EA     display_draw_letter.row
+4EA-4EB display_draw_digit.pos
+4EA     display_draw_number.@SCRATCH1
+4EB     display_draw_letter.pixel
+4EB     @DIV88.P1
+4EB-4EC display_draw_entity.sprite_data
+4EB     display_draw_number.@SCRATCH2
+4EC     display_draw_digit.digit
+4EC     @DIV88.@SCRATCH1
+4EC     display_draw_letter.@SCRATCH1
+4ED     display_draw_entity.h
+4ED     display_draw_digit.col
+4ED     display_draw_letter.@SCRATCH2
+4EE     display_draw_entity.w
+4EE     display_draw_digit.row
+4EF     display_draw_entity.i
+4EF     display_draw_digit.pixel
+4F0     display_draw_entity.j
+4F0     display_draw_digit.@SCRATCH1
+4F1     display_draw_entity.pixel
+4F1     display_draw_digit.@SCRATCH2
+4F2     display_draw_entity.@SCRATCH1
+4F3     display_draw_entity.@SCRATCH2
+4F4     sh1106_draw_pixel.x
+4F5     sh1106_draw_pixel.y
+4F6     sh1106_draw_pixel.color
+4F7     sh1106_draw_pixel.page
+4F8     sh1106_draw_pixel.mask
+4F9-4FA @MUL1616.P1
+4F9     sh1106_draw_pixel.@SCRATCH1
+4FA     sh1106_draw_pixel.@SCRATCH2
+4FB-4FC @MUL1616.P1
+4FB     sh1106_draw_pixel.@SCRATCH3
+4FD     @MUL1616.@SCRATCH1
+F55     CCP_5_LOW
+F55     CCP_5
+F55     CCP_5_LOW
+F55     CCP_5
+F55     CCP_5_LOW
+F55     CCP_5
+F55     CCP_5_LOW
+F55     CCP_5
+F55     CCP_5_LOW
+F55     CCP_5
+F55     CCP_5_LOW
+F55     CCP_5
+F55     CCP_5_LOW
+F56     CCP_5_HIGH
+F58     CCP_4_LOW
+F58     CCP_4
+F58     CCP_4_LOW
+F58     CCP_4
+F58     CCP_4_LOW
+F58     CCP_4
+F58     CCP_4_LOW
+F58     CCP_4
+F58     CCP_4_LOW
+F59     CCP_4_HIGH
+F5E     CCP_3
+F5E     CCP_3_LOW
+F5E     CCP_3
+F5E     CCP_3_LOW
+F5E     CCP_3
+F5E     CCP_3_LOW
+F5E     CCP_3
+F5E     CCP_3_LOW
+F5E     CCP_3
+F5F     CCP_3_HIGH
+F67     CCP_2
+F67     CCP_2_LOW
+F67     CCP_2
+F67     CCP_2_LOW
+F67     CCP_2
+F67     CCP_2_LOW
+F67     CCP_2
+F67     CCP_2_LOW
+F67     CCP_2
+F67     CCP_2_LOW
+F67     CCP_2
+F68     CCP_2_HIGH
+F78.6   C2OUT
+F79.6   C1OUT
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  @const918.call
+000020  @delay_ms1
+000020  @delay_ms1
+000020  @delay_ms1
+000020  @delay_ms1
+000020  @delay_ms1
+000020  @delay_ms1
+000020  @delay_ms1
+000020  @delay_ms1
+000020  @delay_ms1
+00004A  @I2C_WRITEU_129
+00004A  @I2C_WRITEU_129
+000066  sh1106_cmd
+00008C  sh1106_init
+00017E  @MUL1616
+0001A0  sh1106_clear_buffer
+0001F0  display_clear
+0001F4  sh1106_data
+00021E  sh1106_update_screen
+000298  display_update
+00029C  display_init
+0002A6  joystick_init
+0002D6  controller_init
+0002DC  sh1106_draw_pixel
+00038C  display_draw_letter
+000424  display_draw_word
+000458  display_start_screen
+000544  get_Joystick_SW
+000550  controller_update_button_only
+000582  is_button_just_pressed
+00058C  start_screen_loop
+0005B8  display_draw_entity
+000616  display_draw_enemy
+000634  spawn_enemy_wave
+000728  display_draw_digit
+0007A4  @DIV88
+0007A4  @DIV88
+0007D0  display_draw_number
+0008BA  display_draw_score
+0008D4  display_clear_entity
+00090C  get_Joystick_X
+00092E  get_Joystick_Y
+000950  controller_update
+000A7C  is_button_pressed
+000A88  controller_shoot
+000ADC  display_draw_bullet
+000AFC  display_move_bullet
+000B6C  check_collisionBE
+000B9C  display_move_enemy
+000C30  @PSTRINGCN_9600_31766_31767
+000C5A  @PRINTF_U_9600_31766_31767
+000CD8  display_draw_player
+000CF8  display_move_player
+000D50  display_clear_score
+000D70  main_loop
+001178  @I2C_READU_129
+001178  @I2C_READU_129
+001196  eeprom_read_byte
+0011E8  load_highscore
+0011FA  eeprom_write_byte
+00123E  save_highscore
+001256  display_gameover_screen
+001388  game_over_loop
+0013DA  @cinit1
+0013DA  MAIN
+0014D0  @cinit2
+
+Project Directory:
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\
+
+Project Files:
+    test.c (link)                                           [08-Aug-25 23:05  CRC=DF0DFF62]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F46K22.h [30-May-25 13:08  CRC=4F466C02]
+    vec2.h                                                  [29-Jul-25 20:42  CRC=00000000]
+    joystick.h                                              [30-Jul-25 14:07  CRC=61BD6AE6]
+    display.h                                               [08-Aug-25 22:49  CRC=008525BD]
+    entities.h                                              [08-Aug-25 21:23  CRC=3BF3B611]
+    controller.h                                            [08-Aug-25 22:22  CRC=B723CC71]
+    memory.h                                                [08-Aug-25 22:40  CRC=D872A938]
+    joystick.c (link)                                       [30-Jul-25 14:29  CRC=A5122130]
+    sh1106.c (link)                                         [22-Jul-25 17:35  CRC=94A515C7]
+    sh1106.h                                                [20-Jul-25 23:45  CRC=50812873]
+    eeprom_24LC512.c (link)                                 [23-Jul-25 23:47  CRC=7952CB2A]
+    eeprom_24LC512.h                                        [23-Jul-25 23:47  CRC=B96F2DBD]
+    controller.c (link)                                     [08-Aug-25 22:22  CRC=BA91A248]
+    display.c (link)                                        [08-Aug-25 23:02  CRC=0169AC70]
+    font.h                                                  [09-Aug-25 18:29  CRC=EDFAC4D5]
+    sprites.h                                               [05-Aug-25 13:57  CRC=D872A938]
+    sprites.c (link)                                        [05-Aug-25 13:57  CRC=1CE12175]
+    memory.c (link)                                         [08-Aug-25 22:40  CRC=C451E437]
+    entities.c (link)                                       [05-Aug-25 14:13  CRC=AA5A82EF]
+
+Source signature=D16C4861
+Program memory checksum=0000
+Hex file CRC=5A17
+
+Units:
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\test
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\joystick
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\sh1106
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\eeprom_24LC512
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\controller
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\display
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\sprites
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\memory
+    C:\Users\User\Desktop\Stage\Testing CCS Linking\src\entities
+
+Compiler Settings:
+    Processor:      PIC18F46K22
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   ..\ouput\test.xsym
+    Errors:      ..\ouput\test.err
+    Ext Symbols: ..\ouput\test.esym
+    INHX32:      ..\ouput\test.hex
+    Symbols:     ..\ouput\test.sym
+    List:        ..\ouput\test.lst
+    Debug/eCOD:  ..\ouput\test.cod
+    Project:     test.ccspjt

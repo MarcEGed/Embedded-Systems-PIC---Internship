@@ -1,0 +1,60 @@
+_RETURN_
+CCP_1
+CCP_1_LOW
+CCP_1_HIGH
+CCP_2
+CCP_2_LOW
+CCP_2_HIGH
+CCP_3
+CCP_3_LOW
+CCP_3_HIGH
+CCP_4
+CCP_4_LOW
+CCP_4_HIGH
+CCP_5
+CCP_5_LOW
+CCP_5_HIGH
+C1OUT
+C2OUT
+digit_font_3x5
+letter_index_3x5
+letter_font_3x5
+PLAYER_SPRITE
+ENEMY_SPRITE
+BULLET_SPRITE
+buffer
+
+Project Directory:
+    C:\Users\User\Desktop\Stage\Project Final\With Custom Scheduler\src\
+
+Project Files:
+    API\display.c                                           [09-Aug-25 18:53  CRC=008E0735]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F46K22.h [30-May-25 13:08  CRC=4F466C02]
+    API\display.h                                           [09-Aug-25 18:53  CRC=1F0C3691]
+    Utilities\vec2.h                                        [29-Jul-25 20:42  CRC=00000000]
+    Utilities\entities.h                                    [08-Aug-25 21:23  CRC=3BF3B611]
+    Utilities\font.h                                        [09-Aug-25 18:29  CRC=EDFAC4D5]
+    Utilities\sprites.h                                     [05-Aug-25 13:57  CRC=D872A938]
+    Drivers\sh1106.h                                        [20-Jul-25 23:45  CRC=50812873]
+
+Source signature=12441ECC
+
+Units:
+    C:\Users\User\Desktop\Stage\Project Final\With Custom Scheduler\src\API\display
+
+Compiler Settings:
+    Processor:      PIC18F46K22
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Output file:    Relocatable
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   ..\ouput\display.xsym
+    Errors:      ..\ouput\main.err
+    Ext Symbols: ..\ouput\display.esym
+    Object:      ..\ouput\display.o
+    Symbols:     ..\ouput\display.osym

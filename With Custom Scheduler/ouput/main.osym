@@ -1,0 +1,64 @@
+_RETURN_
+CCP_1
+CCP_1_LOW
+CCP_1_HIGH
+CCP_2
+CCP_2_LOW
+CCP_2_HIGH
+CCP_3
+CCP_3_LOW
+CCP_3_HIGH
+CCP_4
+CCP_4_LOW
+CCP_4_HIGH
+CCP_5
+CCP_5_LOW
+CCP_5_HIGH
+C1OUT
+C2OUT
+enemies
+p
+b
+score
+last_score
+wave_spawned
+game_over_flag
+enemy_move_sem
+enemy_move_interval
+frame_counter
+collision_mbox
+
+Project Directory:
+    C:\Users\User\Desktop\Stage\Project Final\With Custom Scheduler\src\
+
+Project Files:
+    main.c                                                  [12-Aug-25 10:39  CRC=D0A4E279]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F46K22.h [30-May-25 13:08  CRC=4F466C02]
+    API\display.h                                           [11-Aug-25 20:24  CRC=135E489D]
+    Utilities\vec2.h                                        [29-Jul-25 20:42  CRC=00000000]
+    Utilities\entities.h                                    [12-Aug-25 10:38  CRC=C7395B90]
+    API\controller.h                                        [11-Aug-25 19:40  CRC=8372E06F]
+    API\memory.h                                            [11-Aug-25 20:31  CRC=B96F2DBD]
+    simple_scheduler.h                                      [12-Aug-25 10:28  CRC=5D0EFBA9]
+
+Source signature=F182F826
+
+Units:
+    C:\Users\User\Desktop\Stage\Project Final\With Custom Scheduler\src\main
+
+Compiler Settings:
+    Processor:      PIC18F46K22
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Output file:    Relocatable
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   ..\ouput\main.xsym
+    Errors:      ..\ouput\main.err
+    Ext Symbols: ..\ouput\main.esym
+    Object:      ..\ouput\main.o
+    Symbols:     ..\ouput\main.osym

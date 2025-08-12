@@ -1,0 +1,23 @@
+#ifndef DISPLAY_H
+#define DISPLAY_H
+
+#include <18F46K22.h>
+
+typedef struct{
+    int x;
+    int y;
+} Vec2;
+
+void display_init();
+void display_clear();
+void display_update();
+
+void display_draw_player(Vec2 pos);
+void display_draw_enemy(Vec2 pos);
+void display_draw_bullet(Vec2 pos);
+void display_draw_score(int score);
+
+void display_clear_entity(Vec2 pos, const BYTE* sprite, int height);
+void display_draw_entity(Vec2 pos, const BYTE* sprite, int height);
+
+#endif

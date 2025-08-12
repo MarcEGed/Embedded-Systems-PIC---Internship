@@ -1,0 +1,4189 @@
+CCS PCH C Compiler, Version 5.120, 4205               09-Aug-25 18:55
+
+               Filename:   ..\ouput\main.lst
+
+               ROM used:   5356 bytes (8%)
+                           Largest free fragment is 60180
+               RAM used:   1200 (31%) at main() level
+                           1278 (33%) worst case
+               Stack used: 5 locations
+               Stack size: 31
+
+*
+00000:  GOTO   13DA
+.................... #import(file="..\ouput\eeprom_24LC512.o")
+.................... //24LC512.c     eeprom driver
+.................... //24LC512.c     eeprom driver
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+.................... 
+.................... #list
+.................... 
+.................... #fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+.................... #use delay(clock=16M)
+*
+00020:  MOVLW  04
+00022:  MOVWF  FEA
+00024:  MOVLW  C0
+00026:  MOVWF  FE9
+00028:  MOVF   FEF,W
+0002A:  BZ    0048
+0002C:  MOVLW  05
+0002E:  MOVWF  01
+00030:  CLRF   00
+00032:  DECFSZ 00,F
+00034:  BRA    0032
+00036:  DECFSZ 01,F
+00038:  BRA    0030
+0003A:  MOVLW  2E
+0003C:  MOVWF  00
+0003E:  DECFSZ 00,F
+00040:  BRA    003E
+00042:  BRA    0044
+00044:  DECFSZ FEF,F
+00046:  BRA    002C
+00048:  RETURN 0
+.................... #use i2c(Master, SDA=PIN_C4, SCL=PIN_C3, FAST=100000)
+0004A:  BCF    FC6.7
+0004C:  BCF    F9E.3
+0004E:  MOVFF  4C4,FC9
+00052:  MOVLW  02
+00054:  BTFSC  FC6.7
+00056:  BRA    0062
+00058:  BTFSC  FC7.2
+0005A:  BRA    0058
+0005C:  MOVLW  00
+0005E:  BTFSC  FC5.6
+00060:  MOVLW  01
+00062:  MOVWF  01
+00064:  RETURN 0
+*
+01178:  BCF    FC6.6
+0117A:  BSF    FC5.3
+0117C:  BTFSC  FC5.3
+0117E:  BRA    117C
+01180:  BTFSC  00.0
+01182:  BCF    FC5.5
+01184:  BTFSS  00.0
+01186:  BSF    FC5.5
+01188:  BSF    FC5.4
+0118A:  BTFSC  FC5.4
+0118C:  BRA    118A
+0118E:  MOVFF  FC9,01
+01192:  GOTO   11D2 (RETURN)
+.................... 
+.................... #include "eeprom_24LC512.h"
+.................... //24LC512.h     i2c eeprom driver
+.................... #ifndef EEPROM_24LC512
+.................... #define EEPROM_24LC512
+.................... 
+.................... #define EEPROM_ADDR_WRITE  0xA0
+.................... #define EEPROM_ADDR_READ   0xA1
+.................... 
+.................... #define STATE_ADDR 0x0000
+.................... 
+.................... void eeprom_write_byte(BYTE data);
+.................... BYTE eeprom_read_byte();
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... void eeprom_write_byte(BYTE data) {
+....................     //Writes byte to STATE_ADDR
+....................     i2c_start();
+*
+011FA:  BSF    FC5.0
+011FC:  BTFSC  FC5.0
+011FE:  BRA    11FC
+....................     i2c_write(EEPROM_ADDR_WRITE);
+01200:  MOVLW  A0
+01202:  MOVLB  4
+01204:  MOVWF  xC4
+01206:  MOVLB  0
+01208:  CALL   004A
+....................     i2c_write(STATE_ADDR >> 8);     //upper bits
+0120C:  MOVLB  4
+0120E:  CLRF   xC4
+01210:  MOVLB  0
+01212:  CALL   004A
+....................     i2c_write(STATE_ADDR & 0xFF);   //lower bits
+01216:  MOVLB  4
+01218:  CLRF   xC4
+0121A:  MOVLB  0
+0121C:  CALL   004A
+....................     i2c_write(data);
+01220:  MOVFF  4B4,4C4
+01224:  CALL   004A
+....................     i2c_stop();
+01228:  BSF    FC5.2
+0122A:  BTFSC  FC5.2
+0122C:  BRA    122A
+....................     delay_ms(5);
+0122E:  MOVLW  05
+01230:  MOVLB  4
+01232:  MOVWF  xC0
+01234:  MOVLB  0
+01236:  CALL   0020
+0123A:  GOTO   124E (RETURN)
+.................... }
+.................... 
+.................... BYTE eeprom_read_byte() {
+....................     //Reads byte from STATE_ADDR
+....................     BYTE data;
+....................     i2c_start();
+*
+01196:  BSF    FC5.0
+01198:  BTFSC  FC5.0
+0119A:  BRA    1198
+....................     i2c_write(EEPROM_ADDR_WRITE);
+0119C:  MOVLW  A0
+0119E:  MOVLB  4
+011A0:  MOVWF  xC4
+011A2:  MOVLB  0
+011A4:  CALL   004A
+....................     i2c_write(STATE_ADDR >> 8);     //upper bits
+011A8:  MOVLB  4
+011AA:  CLRF   xC4
+011AC:  MOVLB  0
+011AE:  CALL   004A
+....................     i2c_write(STATE_ADDR & 0xFF);   //lower bits
+011B2:  MOVLB  4
+011B4:  CLRF   xC4
+011B6:  MOVLB  0
+011B8:  CALL   004A
+....................     i2c_start();
+011BC:  BSF    FC5.1
+011BE:  BTFSC  FC5.1
+011C0:  BRA    11BE
+....................     i2c_write(EEPROM_ADDR_READ);
+011C2:  MOVLW  A1
+011C4:  MOVLB  4
+011C6:  MOVWF  xC4
+011C8:  MOVLB  0
+011CA:  CALL   004A
+....................     data = i2c_read(0);
+011CE:  CLRF   00
+011D0:  BRA    1178
+011D2:  MOVFF  01,4B3
+....................     i2c_stop();
+011D6:  BSF    FC5.2
+011D8:  BTFSC  FC5.2
+011DA:  BRA    11D8
+....................     return data;
+011DC:  MOVLB  4
+011DE:  MOVFF  4B3,01
+011E2:  MOVLB  0
+011E4:  GOTO   11EA (RETURN)
+.................... }
+.................... 
+.................... //joystick.c
+.................... //joystick.c
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=16M)
+.................... 
+.................... #include "joystick.h"
+.................... //joystick.h
+.................... 
+.................... #ifndef JOYSTICK_H
+.................... #define JOYSTICK_H
+.................... 
+.................... unsigned int16 x;   //VRX on AN2
+.................... unsigned int16 y;   //VRY on AN1
+.................... int1 sw;            //Button on B0
+.................... 
+.................... void joystick_init();
+.................... 
+.................... int get_Joystick_X();
+.................... int get_Joystick_Y();
+.................... int1 get_Joystick_SW();
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... #define VRX_PIN 2   //RA2
+.................... #define VRY_PIN 1   //RA1
+.................... #define SW_PIN  PIN_B0
+.................... 
+.................... void joystick_init(){
+....................     setup_adc_ports(sAN1 | sAN2);
+*
+002A6:  MOVF   FC1,W
+002A8:  ANDLW  F0
+002AA:  MOVWF  FC1
+002AC:  MOVLW  06
+002AE:  MOVLB  F
+002B0:  MOVWF  x38
+002B2:  MOVLW  00
+002B4:  MOVWF  x3C
+002B6:  MOVWF  x39
+002B8:  MOVWF  x3A
+002BA:  MOVWF  x3B
+....................     setup_adc(ADC_CLOCK_INTERNAL);
+002BC:  MOVF   FC0,W
+002BE:  ANDLW  C0
+002C0:  IORLW  07
+002C2:  MOVWF  FC0
+002C4:  BCF    FC0.7
+002C6:  BSF    FC2.0
+.................... 
+....................     port_b_pullups(TRUE);
+002C8:  MOVLW  01
+002CA:  MOVWF  F61
+002CC:  BCF    FF1.7
+....................     input(SW_PIN);
+002CE:  BSF    F93.0
+002D0:  MOVLB  0
+002D2:  GOTO   02D8 (RETURN)
+.................... }
+.................... 
+.................... int get_Joystick_X(){
+....................     set_adc_channel(VRX_PIN);
+*
+0090C:  MOVLW  08
+0090E:  MOVWF  01
+00910:  MOVF   FC2,W
+00912:  ANDLW  83
+00914:  IORWF  01,W
+00916:  MOVWF  FC2
+....................     delay_us(10);
+00918:  MOVLW  0D
+0091A:  MOVWF  00
+0091C:  DECFSZ 00,F
+0091E:  BRA    091C
+....................     return read_adc();
+00920:  BSF    FC2.1
+00922:  BTFSC  FC2.1
+00924:  BRA    0922
+00926:  MOVFF  FC4,01
+0092A:  GOTO   0952 (RETURN)
+.................... }
+.................... 
+.................... int get_Joystick_Y(){
+....................     set_adc_channel(VRY_PIN);
+0092E:  MOVLW  04
+00930:  MOVWF  01
+00932:  MOVF   FC2,W
+00934:  ANDLW  83
+00936:  IORWF  01,W
+00938:  MOVWF  FC2
+....................     delay_us(10);
+0093A:  MOVLW  0D
+0093C:  MOVWF  00
+0093E:  DECFSZ 00,F
+00940:  BRA    093E
+....................     return read_adc();
+00942:  BSF    FC2.1
+00944:  BTFSC  FC2.1
+00946:  BRA    0944
+00948:  MOVFF  FC4,01
+0094C:  GOTO   0958 (RETURN)
+.................... }
+.................... 
+.................... int1 get_Joystick_SW(){
+....................     return input(SW_PIN);
+*
+00544:  BSF    F93.0
+00546:  MOVLW  00
+00548:  BTFSC  F81.0
+0054A:  MOVLW  01
+0054C:  MOVWF  01
+0054E:  RETURN 0
+.................... }
+.................... 
+.................... 
+.................... //sh1106.c
+.................... //sh1106.c
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+*
+0017E:  MOVLB  4
+00180:  MOVF   xF9,W
+00182:  MULWF  xFB
+00184:  MOVFF  FF3,01
+00188:  MOVFF  FF4,00
+0018C:  MULWF  xFC
+0018E:  MOVF   FF3,W
+00190:  ADDWF  00,F
+00192:  MOVF   xFA,W
+00194:  MULWF  xFB
+00196:  MOVF   FF3,W
+00198:  ADDWFC 00,W
+0019A:  MOVWF  02
+0019C:  MOVLB  0
+0019E:  RETURN 0
+.................... 
+.................... #list
+.................... 
+.................... #fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+.................... #use delay(clock=16M)
+.................... #use i2c(Master, SDA=PIN_C4, SCL=PIN_C3, FAST=100000)
+.................... 
+.................... #include "sh1106.h"
+.................... //sh1106.h
+.................... #ifndef SH1106_H
+.................... #define SH1106_H
+.................... 
+.................... #define SH1106_ADDR 0x78
+.................... #define WIDTH 128
+.................... #define HEIGHT 64
+.................... 
+.................... extern BYTE buffer[8][128];
+.................... 
+.................... void sh1106_cmd(unsigned char cmd);
+.................... void sh1106_data(unsigned char data);
+.................... void sh1106_init();
+.................... void sh1106_update_screen();
+.................... void sh1106_draw_pixel(int x, int y, int color);
+.................... void sh1106_clear_buffer();
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... BYTE buffer[8][128];
+.................... 
+.................... void sh1106_cmd(unsigned char cmd) {
+....................    i2c_start();
+*
+00066:  BSF    FC5.0
+00068:  BTFSC  FC5.0
+0006A:  BRA    0068
+....................    i2c_write(SH1106_ADDR);
+0006C:  MOVLW  78
+0006E:  MOVLB  4
+00070:  MOVWF  xC4
+00072:  MOVLB  0
+00074:  RCALL  004A
+....................    i2c_write(0x00);
+00076:  MOVLB  4
+00078:  CLRF   xC4
+0007A:  MOVLB  0
+0007C:  RCALL  004A
+....................    i2c_write(cmd);
+0007E:  MOVFF  4C3,4C4
+00082:  RCALL  004A
+....................    i2c_stop();
+00084:  BSF    FC5.2
+00086:  BTFSC  FC5.2
+00088:  BRA    0086
+0008A:  RETURN 0
+.................... }
+.................... 
+.................... void sh1106_data(unsigned char data) {
+....................    i2c_start();
+*
+001F4:  BSF    FC5.0
+001F6:  BTFSC  FC5.0
+001F8:  BRA    01F6
+....................    i2c_write(SH1106_ADDR);
+001FA:  MOVLW  78
+001FC:  MOVLB  4
+001FE:  MOVWF  xC4
+00200:  MOVLB  0
+00202:  RCALL  004A
+....................    i2c_write(0x40);
+00204:  MOVLW  40
+00206:  MOVLB  4
+00208:  MOVWF  xC4
+0020A:  MOVLB  0
+0020C:  RCALL  004A
+....................    i2c_write(data);
+0020E:  MOVFF  4C3,4C4
+00212:  RCALL  004A
+....................    i2c_stop();
+00214:  BSF    FC5.2
+00216:  BTFSC  FC5.2
+00218:  BRA    0216
+0021A:  GOTO   0288 (RETURN)
+.................... }
+.................... 
+.................... void sh1106_init() {
+....................    delay_ms(100);                       //wait for power
+*
+0008C:  MOVLW  64
+0008E:  MOVLB  4
+00090:  MOVWF  xC0
+00092:  MOVLB  0
+00094:  RCALL  0020
+.................... 
+....................    sh1106_cmd(0xAE);                    //display off
+00096:  MOVLW  AE
+00098:  MOVLB  4
+0009A:  MOVWF  xC3
+0009C:  MOVLB  0
+0009E:  RCALL  0066
+....................    sh1106_cmd(0xD5); sh1106_cmd(0x80);  //set clock
+000A0:  MOVLW  D5
+000A2:  MOVLB  4
+000A4:  MOVWF  xC3
+000A6:  MOVLB  0
+000A8:  RCALL  0066
+000AA:  MOVLW  80
+000AC:  MOVLB  4
+000AE:  MOVWF  xC3
+000B0:  MOVLB  0
+000B2:  RCALL  0066
+....................    sh1106_cmd(0xA8); sh1106_cmd(0x3F);  //multiplex 64
+000B4:  MOVLW  A8
+000B6:  MOVLB  4
+000B8:  MOVWF  xC3
+000BA:  MOVLB  0
+000BC:  RCALL  0066
+000BE:  MOVLW  3F
+000C0:  MOVLB  4
+000C2:  MOVWF  xC3
+000C4:  MOVLB  0
+000C6:  RCALL  0066
+....................    sh1106_cmd(0xD3); sh1106_cmd(0x00);  //no offset
+000C8:  MOVLW  D3
+000CA:  MOVLB  4
+000CC:  MOVWF  xC3
+000CE:  MOVLB  0
+000D0:  RCALL  0066
+000D2:  MOVLB  4
+000D4:  CLRF   xC3
+000D6:  MOVLB  0
+000D8:  RCALL  0066
+....................    sh1106_cmd(0x40);                    //start line0
+000DA:  MOVLW  40
+000DC:  MOVLB  4
+000DE:  MOVWF  xC3
+000E0:  MOVLB  0
+000E2:  RCALL  0066
+.................... 
+....................    sh1106_cmd(0xAD); sh1106_cmd(0x8B);  //charge pump
+000E4:  MOVLW  AD
+000E6:  MOVLB  4
+000E8:  MOVWF  xC3
+000EA:  MOVLB  0
+000EC:  RCALL  0066
+000EE:  MOVLW  8B
+000F0:  MOVLB  4
+000F2:  MOVWF  xC3
+000F4:  MOVLB  0
+000F6:  RCALL  0066
+....................    sh1106_cmd(0xA1);                    //mirror x
+000F8:  MOVLW  A1
+000FA:  MOVLB  4
+000FC:  MOVWF  xC3
+000FE:  MOVLB  0
+00100:  RCALL  0066
+....................    sh1106_cmd(0xC8);                    //mirror y
+00102:  MOVLW  C8
+00104:  MOVLB  4
+00106:  MOVWF  xC3
+00108:  MOVLB  0
+0010A:  RCALL  0066
+.................... 
+....................    sh1106_cmd(0xDA); sh1106_cmd(0x12);  //com config
+0010C:  MOVLW  DA
+0010E:  MOVLB  4
+00110:  MOVWF  xC3
+00112:  MOVLB  0
+00114:  RCALL  0066
+00116:  MOVLW  12
+00118:  MOVLB  4
+0011A:  MOVWF  xC3
+0011C:  MOVLB  0
+0011E:  RCALL  0066
+....................    sh1106_cmd(0x81); sh1106_cmd(0xCF);  //contrast
+00120:  MOVLW  81
+00122:  MOVLB  4
+00124:  MOVWF  xC3
+00126:  MOVLB  0
+00128:  RCALL  0066
+0012A:  MOVLW  CF
+0012C:  MOVLB  4
+0012E:  MOVWF  xC3
+00130:  MOVLB  0
+00132:  RCALL  0066
+....................    sh1106_cmd(0xD9); sh1106_cmd(0xF1);  //precharge
+00134:  MOVLW  D9
+00136:  MOVLB  4
+00138:  MOVWF  xC3
+0013A:  MOVLB  0
+0013C:  RCALL  0066
+0013E:  MOVLW  F1
+00140:  MOVLB  4
+00142:  MOVWF  xC3
+00144:  MOVLB  0
+00146:  RCALL  0066
+....................    sh1106_cmd(0xDB); sh1106_cmd(0x40);  //vcom level
+00148:  MOVLW  DB
+0014A:  MOVLB  4
+0014C:  MOVWF  xC3
+0014E:  MOVLB  0
+00150:  RCALL  0066
+00152:  MOVLW  40
+00154:  MOVLB  4
+00156:  MOVWF  xC3
+00158:  MOVLB  0
+0015A:  RCALL  0066
+.................... 
+....................    sh1106_cmd(0xA4);                   //use display ram
+0015C:  MOVLW  A4
+0015E:  MOVLB  4
+00160:  MOVWF  xC3
+00162:  MOVLB  0
+00164:  RCALL  0066
+....................    sh1106_cmd(0xA6);                   //normal display
+00166:  MOVLW  A6
+00168:  MOVLB  4
+0016A:  MOVWF  xC3
+0016C:  MOVLB  0
+0016E:  RCALL  0066
+....................    sh1106_cmd(0xAF);                   //display on
+00170:  MOVLW  AF
+00172:  MOVLB  4
+00174:  MOVWF  xC3
+00176:  MOVLB  0
+00178:  RCALL  0066
+0017A:  GOTO   029E (RETURN)
+.................... }
+.................... 
+.................... void sh1106_update_screen() {
+....................    for (int page = 0; page < 8; page++) {
+*
+0021E:  MOVLB  4
+00220:  CLRF   xC0
+00222:  MOVF   xC0,W
+00224:  SUBLW  07
+00226:  BNC   0292
+....................       sh1106_cmd(0xB0 + page);
+00228:  MOVLW  B0
+0022A:  ADDWF  xC0,W
+0022C:  MOVWF  xC2
+0022E:  MOVWF  xC3
+00230:  MOVLB  0
+00232:  RCALL  0066
+....................       sh1106_cmd(0x02);
+00234:  MOVLW  02
+00236:  MOVLB  4
+00238:  MOVWF  xC3
+0023A:  MOVLB  0
+0023C:  RCALL  0066
+....................       sh1106_cmd(0x10);
+0023E:  MOVLW  10
+00240:  MOVLB  4
+00242:  MOVWF  xC3
+00244:  MOVLB  0
+00246:  RCALL  0066
+....................       for (int col = 0; col < 128; col++) {
+00248:  MOVLB  4
+0024A:  CLRF   xC1
+0024C:  MOVF   xC1,W
+0024E:  SUBLW  7F
+00250:  BNC   028E
+....................          sh1106_data(buffer[page][col]);
+00252:  CLRF   xFA
+00254:  MOVFF  4C0,4F9
+00258:  CLRF   xFC
+0025A:  MOVLW  80
+0025C:  MOVWF  xFB
+0025E:  MOVLB  0
+00260:  RCALL  017E
+00262:  MOVFF  01,4C2
+00266:  MOVLB  4
+00268:  MOVF   xC1,W
+0026A:  ADDWF  01,W
+0026C:  MOVWF  01
+0026E:  MOVLW  00
+00270:  ADDWFC 02,W
+00272:  MOVWF  03
+00274:  MOVF   01,W
+00276:  ADDLW  09
+00278:  MOVWF  FE9
+0027A:  MOVLW  00
+0027C:  ADDWFC 03,W
+0027E:  MOVWF  FEA
+00280:  MOVFF  FEF,4C3
+00284:  MOVLB  0
+00286:  BRA    01F4
+00288:  MOVLB  4
+0028A:  INCF   xC1,F
+0028C:  BRA    024C
+....................       }
+0028E:  INCF   xC0,F
+00290:  BRA    0222
+....................    }
+00292:  MOVLB  0
+00294:  GOTO   029A (RETURN)
+.................... }
+.................... 
+.................... void sh1106_draw_pixel(int x, int y, int color) {
+....................    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) return;
+*
+002DC:  MOVLB  4
+002DE:  MOVF   xF4,W
+002E0:  SUBLW  7F
+002E2:  BC    02EA
+002E4:  BRA    02F0
+002E6:  BTFSC  00.0
+002E8:  BRA    02F0
+002EA:  MOVF   xF5,W
+002EC:  SUBLW  3F
+002EE:  BTFSS  FD8.0
+002F0:  BRA    0388
+.................... 
+....................    int page = y / 8;
+....................    BYTE mask = 1 << (y % 8);
+002F2:  RRCF   xF5,W
+002F4:  MOVWF  xF7
+002F6:  RRCF   xF7,F
+002F8:  RRCF   xF7,F
+002FA:  MOVLW  1F
+002FC:  ANDWF  xF7,F
+002FE:  MOVF   xF5,W
+00300:  ANDLW  07
+00302:  MOVWF  01
+00304:  MOVLW  01
+00306:  MOVWF  xF8
+00308:  MOVF   01,F
+0030A:  BZ    0314
+0030C:  BCF    FD8.0
+0030E:  RLCF   xF8,F
+00310:  DECFSZ 01,F
+00312:  BRA    030C
+.................... 
+....................    if (color)
+00314:  MOVF   xF6,F
+00316:  BZ    0352
+....................       buffer[page][x] |= mask;
+00318:  CLRF   xFA
+0031A:  MOVFF  4F7,4F9
+0031E:  CLRF   xFC
+00320:  MOVLW  80
+00322:  MOVWF  xFB
+00324:  MOVLB  0
+00326:  RCALL  017E
+00328:  MOVFF  02,4FA
+0032C:  MOVFF  01,4F9
+00330:  MOVLB  4
+00332:  MOVF   xF4,W
+00334:  ADDWF  01,W
+00336:  MOVWF  01
+00338:  MOVLW  00
+0033A:  ADDWFC 02,W
+0033C:  MOVWF  03
+0033E:  MOVF   01,W
+00340:  ADDLW  09
+00342:  MOVWF  FE9
+00344:  MOVLW  00
+00346:  ADDWFC 03,W
+00348:  MOVWF  FEA
+0034A:  MOVF   FEF,W
+0034C:  IORWF  xF8,W
+0034E:  MOVWF  FEF
+00350:  BRA    0388
+....................    else
+....................       buffer[page][x] &= ~mask;
+00352:  CLRF   xFA
+00354:  MOVFF  4F7,4F9
+00358:  CLRF   xFC
+0035A:  MOVLW  80
+0035C:  MOVWF  xFB
+0035E:  MOVLB  0
+00360:  RCALL  017E
+00362:  MOVFF  01,4F9
+00366:  MOVLB  4
+00368:  MOVF   xF4,W
+0036A:  ADDWF  01,W
+0036C:  MOVWF  01
+0036E:  MOVLW  00
+00370:  ADDWFC 02,W
+00372:  MOVWF  03
+00374:  MOVF   01,W
+00376:  ADDLW  09
+00378:  MOVWF  FE9
+0037A:  MOVLW  00
+0037C:  ADDWFC 03,W
+0037E:  MOVWF  FEA
+00380:  MOVF   xF8,W
+00382:  XORLW  FF
+00384:  ANDWF  FEF,W
+00386:  MOVWF  FEF
+00388:  MOVLB  0
+0038A:  RETURN 0
+.................... }
+.................... 
+.................... void sh1106_clear_buffer() {
+....................    for (int page = 0; page < 8; page++) {
+*
+001A0:  MOVLB  4
+001A2:  CLRF   xB2
+001A4:  MOVF   xB2,W
+001A6:  SUBLW  07
+001A8:  BNC   01EA
+....................       for (int col = 0; col < 128; col++) {
+001AA:  CLRF   xB3
+001AC:  MOVF   xB3,W
+001AE:  SUBLW  7F
+001B0:  BNC   01E6
+....................          buffer[page][col] = 0x00;
+001B2:  CLRF   xFA
+001B4:  MOVFF  4B2,4F9
+001B8:  CLRF   xFC
+001BA:  MOVLW  80
+001BC:  MOVWF  xFB
+001BE:  MOVLB  0
+001C0:  RCALL  017E
+001C2:  MOVFF  01,4B4
+001C6:  MOVLB  4
+001C8:  MOVF   xB3,W
+001CA:  ADDWF  01,W
+001CC:  MOVWF  01
+001CE:  MOVLW  00
+001D0:  ADDWFC 02,W
+001D2:  MOVWF  03
+001D4:  MOVF   01,W
+001D6:  ADDLW  09
+001D8:  MOVWF  FE9
+001DA:  MOVLW  00
+001DC:  ADDWFC 03,W
+001DE:  MOVWF  FEA
+001E0:  CLRF   FEF
+001E2:  INCF   xB3,F
+001E4:  BRA    01AC
+....................       }
+001E6:  INCF   xB2,F
+001E8:  BRA    01A4
+....................    }
+001EA:  MOVLB  0
+001EC:  GOTO   01F2 (RETURN)
+.................... }
+.................... 
+.................... /*
+.................... /*
+....................     0.0: Joystick X/Y completely functional. Clean up the code a bit then make sure all button-related functions work
+.................... */
+.................... 
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=16M)
+.................... 
+.................... #include "controller.h"
+.................... #ifndef CONTROLLER_H
+.................... #define CONTROLLER_H
+.................... 
+.................... #include "../Utilities/vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... void controller_init();
+.................... void controller_update(Vec2 *pos);
+.................... void controller_update_button_only();
+.................... 
+.................... int1 is_button_pressed();
+.................... int1 is_button_just_pressed();
+.................... int1 is_button_just_released();
+.................... 
+.................... void controller_shoot(Player p, Bullet *b);
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Drivers/joystick.h"
+.................... //joystick.h
+.................... 
+.................... #ifndef JOYSTICK_H
+.................... #define JOYSTICK_H
+.................... 
+.................... unsigned int16 x;   //VRX on AN2
+.................... unsigned int16 y;   //VRY on AN1
+.................... int1 sw;            //Button on B0
+.................... 
+.................... void joystick_init();
+.................... 
+.................... int get_Joystick_X();
+.................... int get_Joystick_Y();
+.................... int1 get_Joystick_SW();
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... #define VER_BORDER 56
+.................... #define HOR_BORDER 120
+.................... 
+.................... #define MOVE_SPEED      5
+.................... #define ADC_MAX_VALUE   255
+.................... 
+.................... #define X_DEADZONE_MIN 120
+.................... #define X_DEADZONE_MAX 135
+.................... #define Y_DEADZONE_MIN 120
+.................... #define Y_DEADZONE_MAX 135
+.................... 
+.................... static int1 button_pressed = 0;
+.................... static int1 last_button_state = 0;
+.................... static int1 just_pressed = 0;
+.................... static int1 just_released = 0;
+.................... 
+.................... void controller_init(){
+....................     joystick_init();
+*
+002D6:  BRA    02A6
+002D8:  GOTO   14D8 (RETURN)
+.................... }
+.................... 
+.................... void controller_update(Vec2 *player_pos){
+*
+00950:  BRA    090C
+00952:  MOVFF  01,4C2
+00956:  BRA    092E
+00958:  MOVFF  01,4C3
+....................     int x = get_Joystick_X();  // 0–255
+....................     int y = get_Joystick_Y();
+.................... 
+....................     // LEFT
+....................     if (x < X_DEADZONE_MIN && player_pos->x > 0)
+0095C:  MOVLB  4
+0095E:  MOVF   xC2,W
+00960:  SUBLW  77
+00962:  BNC   0980
+00964:  MOVFF  4C0,FE9
+00968:  MOVFF  4C1,FEA
+0096C:  MOVF   FEF,F
+0096E:  BZ    0980
+....................         player_pos->x -= MOVE_SPEED;
+00970:  MOVFF  4C0,FE9
+00974:  MOVFF  4C1,FEA
+00978:  MOVLW  05
+0097A:  SUBWF  FEF,W
+0097C:  MOVWF  FEF
+0097E:  BRA    09A2
+....................     // RIGHT
+....................     else if (x > X_DEADZONE_MAX && player_pos->x < HOR_BORDER)
+00980:  MOVF   xC2,W
+00982:  SUBLW  87
+00984:  BC    09A2
+00986:  MOVFF  4C0,FE9
+0098A:  MOVFF  4C1,FEA
+0098E:  MOVF   FEF,W
+00990:  SUBLW  77
+00992:  BNC   09A2
+....................         player_pos->x += MOVE_SPEED;
+00994:  MOVFF  4C0,FE9
+00998:  MOVFF  4C1,FEA
+0099C:  MOVLW  05
+0099E:  ADDWF  FEF,W
+009A0:  MOVWF  FEF
+.................... 
+....................     // DOWN
+....................     if (y < Y_DEADZONE_MIN && player_pos->y < VER_BORDER)
+009A2:  MOVF   xC3,W
+009A4:  SUBLW  77
+009A6:  BNC   09CE
+009A8:  MOVLW  01
+009AA:  ADDWF  xC0,W
+009AC:  MOVWF  FE9
+009AE:  MOVLW  00
+009B0:  ADDWFC xC1,W
+009B2:  MOVWF  FEA
+009B4:  MOVF   FEF,W
+009B6:  SUBLW  37
+009B8:  BNC   09CE
+....................         player_pos->y += MOVE_SPEED;
+009BA:  MOVLW  01
+009BC:  ADDWF  xC0,W
+009BE:  MOVWF  FE9
+009C0:  MOVLW  00
+009C2:  ADDWFC xC1,W
+009C4:  MOVWF  FEA
+009C6:  MOVLW  05
+009C8:  ADDWF  FEF,W
+009CA:  MOVWF  FEF
+009CC:  BRA    09F6
+....................     // UP
+....................     else if (y > Y_DEADZONE_MAX && player_pos->y > 0)
+009CE:  MOVF   xC3,W
+009D0:  SUBLW  87
+009D2:  BC    09F6
+009D4:  MOVLW  01
+009D6:  ADDWF  xC0,W
+009D8:  MOVWF  FE9
+009DA:  MOVLW  00
+009DC:  ADDWFC xC1,W
+009DE:  MOVWF  FEA
+009E0:  MOVF   FEF,F
+009E2:  BZ    09F6
+....................         player_pos->y -= MOVE_SPEED;
+009E4:  MOVLW  01
+009E6:  ADDWF  xC0,W
+009E8:  MOVWF  FE9
+009EA:  MOVLW  00
+009EC:  ADDWFC xC1,W
+009EE:  MOVWF  FEA
+009F0:  MOVLW  05
+009F2:  SUBWF  FEF,W
+009F4:  MOVWF  FEF
+.................... 
+....................     if (player_pos->x < 0)
+009F6:  MOVFF  4C0,FE9
+009FA:  MOVFF  4C1,FEA
+....................         player_pos->x = 0;
+....................     if (player_pos->x > HOR_BORDER)
+009FE:  MOVFF  4C0,FE9
+00A02:  MOVFF  4C1,FEA
+00A06:  MOVF   FEF,W
+00A08:  SUBLW  78
+00A0A:  BC    0A18
+....................         player_pos->x = HOR_BORDER;
+00A0C:  MOVFF  4C0,FE9
+00A10:  MOVFF  4C1,FEA
+00A14:  MOVLW  78
+00A16:  MOVWF  FEF
+.................... 
+....................     if (player_pos->y < 0)
+00A18:  MOVLW  01
+00A1A:  ADDWF  xC0,W
+00A1C:  MOVWF  FE9
+00A1E:  MOVLW  00
+00A20:  ADDWFC xC1,W
+00A22:  MOVWF  FEA
+....................         player_pos->y = 0;
+....................     if (player_pos->y > VER_BORDER)
+00A24:  MOVLW  01
+00A26:  ADDWF  xC0,W
+00A28:  MOVWF  FE9
+00A2A:  MOVLW  00
+00A2C:  ADDWFC xC1,W
+00A2E:  MOVWF  FEA
+00A30:  MOVF   FEF,W
+00A32:  SUBLW  38
+00A34:  BC    0A46
+....................         player_pos->y = VER_BORDER;
+00A36:  MOVLW  01
+00A38:  ADDWF  xC0,W
+00A3A:  MOVWF  FE9
+00A3C:  MOVLW  00
+00A3E:  ADDWFC xC1,W
+00A40:  MOVWF  FEA
+00A42:  MOVLW  38
+00A44:  MOVWF  FEF
+.................... 
+....................     
+....................     //button handling
+....................     int1 sw = get_Joystick_SW();
+00A46:  MOVLB  0
+00A48:  RCALL  0544
+00A4A:  MOVLB  4
+00A4C:  BCF    xC4.0
+00A4E:  BTFSC  01.0
+00A50:  BSF    xC4.0
+....................     button_pressed = !sw;  // active-low
+00A52:  BCF    08.2
+00A54:  BTFSS  xC4.0
+00A56:  BSF    08.2
+....................     just_pressed = (button_pressed && !last_button_state);
+00A58:  BCF    08.4
+00A5A:  BTFSS  08.2
+00A5C:  BRA    0A64
+00A5E:  BTFSC  08.3
+00A60:  BRA    0A64
+00A62:  BSF    08.4
+....................     just_released = (!button_pressed && last_button_state);
+00A64:  BCF    08.5
+00A66:  BTFSC  08.2
+00A68:  BRA    0A70
+00A6A:  BTFSS  08.3
+00A6C:  BRA    0A70
+00A6E:  BSF    08.5
+....................     last_button_state = button_pressed;
+00A70:  BCF    08.3
+00A72:  BTFSC  08.2
+00A74:  BSF    08.3
+00A76:  MOVLB  0
+00A78:  GOTO   0DC0 (RETURN)
+.................... }
+.................... 
+.................... void controller_update_button_only(){
+*
+00550:  RCALL  0544
+00552:  MOVLB  4
+00554:  BCF    xB2.0
+00556:  BTFSC  01.0
+00558:  BSF    xB2.0
+....................     int1 sw = get_Joystick_SW();
+....................     button_pressed = !sw;  // active-low
+0055A:  BCF    08.2
+0055C:  BTFSS  xB2.0
+0055E:  BSF    08.2
+....................     just_pressed = (button_pressed && !last_button_state);
+00560:  BCF    08.4
+00562:  BTFSS  08.2
+00564:  BRA    056C
+00566:  BTFSC  08.3
+00568:  BRA    056C
+0056A:  BSF    08.4
+....................     just_released = (!button_pressed && last_button_state);
+0056C:  BCF    08.5
+0056E:  BTFSC  08.2
+00570:  BRA    0578
+00572:  BTFSS  08.3
+00574:  BRA    0578
+00576:  BSF    08.5
+....................     last_button_state = button_pressed;
+00578:  BCF    08.3
+0057A:  BTFSC  08.2
+0057C:  BSF    08.3
+0057E:  MOVLB  0
+00580:  RETURN 0
+.................... }
+.................... 
+.................... int1 is_button_pressed(){
+....................     return button_pressed;
+*
+00A7C:  MOVLW  00
+00A7E:  BTFSC  08.2
+00A80:  MOVLW  01
+00A82:  MOVWF  01
+00A84:  GOTO   0A8A (RETURN)
+.................... }
+.................... 
+.................... int1 is_button_just_pressed(){
+....................     return just_pressed;
+*
+00582:  MOVLW  00
+00584:  BTFSC  08.4
+00586:  MOVLW  01
+00588:  MOVWF  01
+0058A:  RETURN 0
+.................... }
+.................... 
+.................... int1 is_button_just_released(){
+....................     return just_released;
+.................... }
+.................... 
+.................... void controller_shoot(Player p, Bullet *b){
+....................     if (is_button_pressed() && !b->is_active){
+*
+00A88:  BRA    0A7C
+00A8A:  MOVF   01,F
+00A8C:  BZ    0AD6
+00A8E:  MOVLW  03
+00A90:  MOVLB  4
+00A92:  ADDWF  xC3,W
+00A94:  MOVWF  FE9
+00A96:  MOVLW  00
+00A98:  ADDWFC xC4,W
+00A9A:  MOVWF  FEA
+00A9C:  MOVF   FEF,F
+00A9E:  BTFSC  FD8.2
+00AA0:  BRA    0AA6
+00AA2:  MOVLB  0
+00AA4:  BRA    0AD6
+....................             b->is_active = 1;
+00AA6:  MOVLW  03
+00AA8:  ADDWF  xC3,W
+00AAA:  MOVWF  FE9
+00AAC:  MOVLW  00
+00AAE:  ADDWFC xC4,W
+00AB0:  MOVWF  FEA
+00AB2:  MOVLW  01
+00AB4:  MOVWF  FEF
+....................             b->pos.x = p.pos.x + 3;
+00AB6:  ADDWF  xC3,W
+00AB8:  MOVWF  FE9
+00ABA:  MOVLW  00
+00ABC:  ADDWFC xC4,W
+00ABE:  MOVWF  FEA
+00AC0:  MOVLW  03
+00AC2:  ADDWF  xC1,W
+00AC4:  MOVWF  FEF
+....................             b->pos.y = p.pos.y;
+00AC6:  MOVLW  02
+00AC8:  ADDWF  xC3,W
+00ACA:  MOVWF  FE9
+00ACC:  MOVLW  00
+00ACE:  ADDWFC xC4,W
+00AD0:  MOVWF  FEA
+00AD2:  MOVFF  4C2,FEF
+00AD6:  MOVLB  0
+....................         }
+00AD8:  GOTO   0DDA (RETURN)
+.................... }
+.................... 
+.................... /*By removing the update from the second half of functions, you can draw in buffer and then later push to the screen and make
+.................... /*By removing the update from the second half of functions, you can draw in buffer and then later push to the screen and make
+....................   rendering enemies way more efficient that way.
+.................... 
+....................   use an enemy move interval to move enmies every x frames
+....................   then draw player/bullet to buffer
+....................   then push to screen all at once
+.................... 
+....................   1.0: now enemies are rendered together - need to implement move intervals
+.................... 
+....................   NB: screen top left is 0,0 while bottom right is (128, 64)
+.................... */
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+*
+007A4:  MOVLB  4
+007A6:  MOVF   xEB,W
+007A8:  CLRF   01
+007AA:  SUBWF  xEA,W
+007AC:  BC    07B4
+007AE:  MOVFF  4EA,00
+007B2:  BRA    07CC
+007B4:  CLRF   00
+007B6:  MOVLW  08
+007B8:  MOVWF  xEC
+007BA:  RLCF   xEA,F
+007BC:  RLCF   00,F
+007BE:  MOVF   xEB,W
+007C0:  SUBWF  00,W
+007C2:  BTFSC  FD8.0
+007C4:  MOVWF  00
+007C6:  RLCF   01,F
+007C8:  DECFSZ xEC,F
+007CA:  BRA    07BA
+007CC:  MOVLB  0
+007CE:  RETURN 0
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=16M)
+.................... 
+.................... #include "display.h"
+.................... #ifndef DISPLAY_H
+.................... #define DISPLAY_H
+.................... 
+.................... #include "../Utilities/vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... void display_init();
+.................... void display_clear();
+.................... void display_update();
+.................... 
+.................... void display_gameover_screen(int score, int high_score);
+.................... void display_start_screen();
+.................... 
+.................... void display_draw_digit(Vec2 pos, int digit);
+.................... void display_draw_number(Vec2 pos, int number);
+.................... void display_count_0_to_100();
+.................... 
+.................... void display_draw_letter(Vec2 pos, char c);
+.................... void display_draw_word(Vec2 pos, int8 word[], int length);
+.................... 
+.................... void display_draw_player(Vec2 pos);
+.................... void display_draw_enemy(Vec2 pos);
+.................... void display_draw_bullet(Vec2 pos);
+.................... void display_draw_score(int score);
+.................... 
+.................... void display_clear_score();
+.................... 
+.................... void display_clear_entity(Vec2 pos, int h, int w);
+.................... void display_draw_entity(Vec2 pos, int8 sprite[], int h, int w);
+.................... 
+.................... Vec2 display_move_player(Vec2 pos);
+.................... Enemy display_move_enemy(Enemy enemy);
+.................... Bullet display_move_bullet(Bullet bullet);
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/font.h"
+.................... #ifndef FONT_H
+.................... #define FONT_H
+.................... 
+.................... #define LETTER_ARR_SIZE     17
+.................... 
+.................... int8 digit_font_3x5[10][3] = {
+....................     {0x1F, 0x11, 0x1F}, // 0
+....................     {0x00, 0x1F, 0x00}, // 1
+....................     {0x1D, 0x15, 0x17}, // 2
+....................     {0x15, 0x15, 0x1F}, // 3
+....................     {0x07, 0x04, 0x1F}, // 4
+....................     {0x17, 0x15, 0x1D}, // 5
+....................     {0x1F, 0x15, 0x1D}, // 6
+....................     {0x01, 0x01, 0x1F}, // 7
+....................     {0x1F, 0x15, 0x1F}, // 8
+....................     {0x17, 0x15, 0x1F}  // 9
+.................... };
+.................... 
+.................... char letter_index_3x5[] = {
+....................     'a', 'e', 'g', 'h', 'm', 'o', 'r', 's', 't', 'v', 'p', 'c', 'l', 'i', 'k', 'n', 'd'
+.................... };
+.................... 
+.................... int8 letter_font_3x5[17][3] = {
+....................     {0x1E, 0x05, 0x1F}, // a
+....................     {0x1F, 0x15, 0x15}, // e
+....................     {0x0E, 0x11, 0x1D}, // g
+....................     {0x1F, 0x04, 0x1F}, // h
+....................     {0x1F, 0x06, 0x1F}, // m
+....................     {0x0E, 0x11, 0x0E}, // o
+....................     {0x1F, 0x05, 0x1A}, // r
+....................     {0x12, 0x15, 0x09}, // s
+....................     {0x01, 0x1F, 0x01}, // t
+....................     {0x07, 0x18, 0x07}, // v
+....................     {0x1F, 0x05, 0x02}, // p
+....................     {0x0E, 0x11, 0x11}, // c
+....................     {0x1F, 0x10, 0x10}, // l
+....................     {0x00, 0x1D, 0x00}, // i
+....................     {0x1F, 0x04, 0x1B}, // k
+....................     {0x1F, 0x01, 0x1E}, // n
+....................     {0x1F, 0x11, 0x0E}  // d
+.................... };
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/sprites.h"
+.................... #ifndef SPRITES_H
+.................... #define SPRITES_H
+.................... 
+.................... #define SPRITE_SIZE 8 
+.................... 
+.................... extern  int8 PLAYER_SPRITE[8];
+.................... extern  int8 ENEMY_SPRITE[8];
+.................... extern  int8 BULLET_SPRITE[8];
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Drivers/sh1106.h"
+.................... //sh1106.h
+.................... #ifndef SH1106_H
+.................... #define SH1106_H
+.................... 
+.................... #define SH1106_ADDR 0x78
+.................... #define WIDTH 128
+.................... #define HEIGHT 64
+.................... 
+.................... extern BYTE buffer[8][128];
+.................... 
+.................... void sh1106_cmd(unsigned char cmd);
+.................... void sh1106_data(unsigned char data);
+.................... void sh1106_init();
+.................... void sh1106_update_screen();
+.................... void sh1106_draw_pixel(int x, int y, int color);
+.................... void sh1106_clear_buffer();
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... void display_init(){
+....................     //wrapper for oled driver to initialize
+....................     sh1106_init();
+*
+0029C:  BRA    008C
+....................     display_clear();
+0029E:  RCALL  01F0
+....................     display_update();
+002A0:  RCALL  0298
+002A2:  GOTO   14D4 (RETURN)
+.................... }
+.................... 
+.................... void display_clear(){
+....................     //wrapper for oled driver clear
+....................     sh1106_clear_buffer();
+*
+001F0:  BRA    01A0
+001F2:  RETURN 0
+.................... }
+.................... 
+.................... void display_update(){
+....................     //wrapper for oled driver update
+....................     sh1106_update_screen();
+*
+00298:  BRA    021E
+0029A:  RETURN 0
+.................... }
+.................... 
+.................... void display_draw_digit(Vec2 pos, int digit){
+....................     if (digit < 0 || digit > 9) return;
+*
+00728:  MOVLB  4
+0072A:  MOVF   xEC,W
+0072C:  SUBLW  09
+0072E:  BTFSS  FD8.0
+00730:  BRA    07A0
+.................... 
+....................     for (int col = 0; col < 3; col++){
+00732:  CLRF   xED
+00734:  MOVF   xED,W
+00736:  SUBLW  02
+00738:  BNC   07A0
+....................         for (int row = 0; row < 5; row++){
+0073A:  CLRF   xEE
+0073C:  MOVF   xEE,W
+0073E:  SUBLW  04
+00740:  BNC   079C
+....................             int pixel = (digit_font_3x5[digit][col] >> row) & 1;
+00742:  MOVF   xEC,W
+00744:  MULLW  03
+00746:  MOVF   FF3,W
+00748:  CLRF   xF1
+0074A:  MOVWF  xF0
+0074C:  CLRF   03
+0074E:  MOVF   xED,W
+00750:  ADDWF  xF0,W
+00752:  MOVWF  01
+00754:  MOVF   xF1,W
+00756:  ADDWFC 03,F
+00758:  MOVF   01,W
+0075A:  ADDLW  0D
+0075C:  MOVWF  FE9
+0075E:  MOVLW  04
+00760:  ADDWFC 03,W
+00762:  MOVWF  FEA
+00764:  MOVFF  FEF,00
+00768:  MOVF   xEE,W
+0076A:  MOVWF  01
+0076C:  BZ    0776
+0076E:  BCF    FD8.0
+00770:  RRCF   00,F
+00772:  DECFSZ 01,F
+00774:  BRA    076E
+00776:  MOVF   00,W
+00778:  ANDLW  01
+0077A:  MOVWF  xEF
+....................             sh1106_draw_pixel(pos.x + col, pos.y + row, pixel);
+0077C:  MOVF   xED,W
+0077E:  ADDWF  xEA,W
+00780:  MOVWF  xF0
+00782:  MOVF   xEE,W
+00784:  ADDWF  xEB,W
+00786:  MOVWF  xF1
+00788:  MOVFF  4F0,4F4
+0078C:  MOVWF  xF5
+0078E:  MOVFF  4EF,4F6
+00792:  MOVLB  0
+00794:  RCALL  02DC
+00796:  MOVLB  4
+00798:  INCF   xEE,F
+0079A:  BRA    073C
+....................         }
+0079C:  INCF   xED,F
+0079E:  BRA    0734
+....................     }
+007A0:  MOVLB  0
+007A2:  RETURN 0
+.................... }
+.................... 
+.................... void display_draw_number(Vec2 pos, int number) {
+....................     if (number < 0 || number > 100) return;
+*
+007D0:  MOVLB  4
+007D2:  MOVF   xDF,W
+007D4:  SUBLW  64
+007D6:  BTFSS  FD8.0
+007D8:  BRA    08B6
+.................... 
+....................     if (number == 100) {
+007DA:  MOVF   xDF,W
+007DC:  SUBLW  64
+007DE:  BNZ   0828
+....................         Vec2 pos1, pos2;
+.................... 
+....................         display_draw_digit(pos, 1);
+007E0:  MOVFF  4DE,4EB
+007E4:  MOVFF  4DD,4EA
+007E8:  MOVLW  01
+007EA:  MOVWF  xEC
+007EC:  MOVLB  0
+007EE:  RCALL  0728
+.................... 
+....................         pos1.x = pos.x + 4;
+007F0:  MOVLW  04
+007F2:  MOVLB  4
+007F4:  ADDWF  xDD,W
+007F6:  MOVWF  xE0
+....................         pos1.y = pos.y;
+007F8:  MOVFF  4DE,4E1
+....................         display_draw_digit(pos1, 0);
+007FC:  MOVFF  4E1,4EB
+00800:  MOVFF  4E0,4EA
+00804:  CLRF   xEC
+00806:  MOVLB  0
+00808:  RCALL  0728
+.................... 
+....................         pos2.x = pos.x + 8;
+0080A:  MOVLW  08
+0080C:  MOVLB  4
+0080E:  ADDWF  xDD,W
+00810:  MOVWF  xE2
+....................         pos2.y = pos.y;
+00812:  MOVFF  4DE,4E3
+....................         display_draw_digit(pos2, 0);
+00816:  MOVFF  4E3,4EB
+0081A:  MOVFF  4E2,4EA
+0081E:  CLRF   xEC
+00820:  MOVLB  0
+00822:  RCALL  0728
+.................... 
+....................         return;
+00824:  MOVLB  4
+00826:  BRA    08B6
+....................     }
+.................... 
+....................     int tens = number / 10;
+....................     int ones = number % 10;
+00828:  MOVFF  4DF,4EA
+0082C:  MOVLW  0A
+0082E:  MOVWF  xEB
+00830:  MOVLB  0
+00832:  RCALL  07A4
+00834:  MOVFF  01,4E4
+00838:  MOVFF  4DF,4EA
+0083C:  MOVLW  0A
+0083E:  MOVLB  4
+00840:  MOVWF  xEB
+00842:  MOVLB  0
+00844:  RCALL  07A4
+00846:  MOVFF  00,4E5
+.................... 
+....................     if (tens > 0) {
+0084A:  MOVLB  4
+0084C:  MOVF   xE4,F
+0084E:  BZ    0864
+....................         display_draw_digit(pos, tens);
+00850:  MOVFF  4DE,4EB
+00854:  MOVFF  4DD,4EA
+00858:  MOVFF  4E4,4EC
+0085C:  MOVLB  0
+0085E:  RCALL  0728
+....................     } else {
+00860:  BRA    0898
+00862:  MOVLB  4
+....................         //clear tens digit area if number < 10
+....................         for (int col = 0; col < 3; col++) {
+00864:  CLRF   xE6
+00866:  MOVF   xE6,W
+00868:  SUBLW  02
+0086A:  BNC   0896
+....................             for (int row = 0; row < 5; row++) {
+0086C:  CLRF   xE7
+0086E:  MOVF   xE7,W
+00870:  SUBLW  04
+00872:  BNC   0892
+....................                 sh1106_draw_pixel(pos.x + col, pos.y + row, 0);
+00874:  MOVF   xE6,W
+00876:  ADDWF  xDD,W
+00878:  MOVWF  xEA
+0087A:  MOVF   xE7,W
+0087C:  ADDWF  xDE,W
+0087E:  MOVWF  xEB
+00880:  MOVFF  4EA,4F4
+00884:  MOVWF  xF5
+00886:  CLRF   xF6
+00888:  MOVLB  0
+0088A:  RCALL  02DC
+0088C:  MOVLB  4
+0088E:  INCF   xE7,F
+00890:  BRA    086E
+....................             }
+00892:  INCF   xE6,F
+00894:  BRA    0866
+00896:  MOVLB  0
+....................         }
+....................     }
+.................... 
+....................     Vec2 ones_pos;
+....................     ones_pos.x = pos.x + 4;
+00898:  MOVLW  04
+0089A:  MOVLB  4
+0089C:  ADDWF  xDD,W
+0089E:  MOVWF  xE8
+....................     ones_pos.y = pos.y;
+008A0:  MOVFF  4DE,4E9
+....................     display_draw_digit(ones_pos, ones);
+008A4:  MOVFF  4E9,4EB
+008A8:  MOVFF  4E8,4EA
+008AC:  MOVFF  4E5,4EC
+008B0:  MOVLB  0
+008B2:  RCALL  0728
+008B4:  MOVLB  4
+008B6:  MOVLB  0
+008B8:  RETURN 0
+.................... }
+.................... 
+.................... //only for testing if all digits are working
+.................... void display_count_0_to_100() {
+....................     Vec2 pos = {0, 0};
+.................... 
+....................     for (int i = 0; i <= 100; i++) {
+....................         display_clear();           // Clear screen buffer
+....................         display_draw_number(pos, i);
+....................         display_update();          // Push buffer to screen
+....................         delay_ms(200);             // Wait 200ms between numbers
+....................     }
+.................... }
+.................... 
+.................... void display_draw_letter(Vec2 pos, char c){
+....................     //displays letter at pos.x, pos.y
+....................     for (int i = 0; i < LETTER_ARR_SIZE; i++){
+*
+0038C:  MOVLB  4
+0038E:  CLRF   xE8
+00390:  MOVF   xE8,W
+00392:  SUBLW  10
+00394:  BNC   041E
+....................         if (letter_index_3x5[i] == c){
+00396:  CLRF   03
+00398:  MOVF   xE8,W
+0039A:  ADDLW  2B
+0039C:  MOVWF  FE9
+0039E:  MOVLW  04
+003A0:  ADDWFC 03,W
+003A2:  MOVWF  FEA
+003A4:  MOVF   xE7,W
+003A6:  SUBWF  FEF,W
+003A8:  BNZ   041A
+....................             for (int col = 0; col < 3; col++){
+003AA:  CLRF   xE9
+003AC:  MOVF   xE9,W
+003AE:  SUBLW  02
+003B0:  BNC   0418
+....................                 for (int row = 0; row < 5; row++){
+003B2:  CLRF   xEA
+003B4:  MOVF   xEA,W
+003B6:  SUBLW  04
+003B8:  BNC   0414
+....................                     int pixel = (letter_font_3x5[i][col] >> row) & 1;
+003BA:  MOVF   xE8,W
+003BC:  MULLW  03
+003BE:  MOVF   FF3,W
+003C0:  CLRF   xED
+003C2:  MOVWF  xEC
+003C4:  CLRF   03
+003C6:  MOVF   xE9,W
+003C8:  ADDWF  xEC,W
+003CA:  MOVWF  01
+003CC:  MOVF   xED,W
+003CE:  ADDWFC 03,F
+003D0:  MOVF   01,W
+003D2:  ADDLW  3C
+003D4:  MOVWF  FE9
+003D6:  MOVLW  04
+003D8:  ADDWFC 03,W
+003DA:  MOVWF  FEA
+003DC:  MOVFF  FEF,00
+003E0:  MOVF   xEA,W
+003E2:  MOVWF  01
+003E4:  BZ    03EE
+003E6:  BCF    FD8.0
+003E8:  RRCF   00,F
+003EA:  DECFSZ 01,F
+003EC:  BRA    03E6
+003EE:  MOVF   00,W
+003F0:  ANDLW  01
+003F2:  MOVWF  xEB
+....................                     sh1106_draw_pixel(pos.x + col, pos.y + row, pixel);
+003F4:  MOVF   xE9,W
+003F6:  ADDWF  xE5,W
+003F8:  MOVWF  xEC
+003FA:  MOVF   xEA,W
+003FC:  ADDWF  xE6,W
+003FE:  MOVWF  xED
+00400:  MOVFF  4EC,4F4
+00404:  MOVWF  xF5
+00406:  MOVFF  4EB,4F6
+0040A:  MOVLB  0
+0040C:  RCALL  02DC
+0040E:  MOVLB  4
+00410:  INCF   xEA,F
+00412:  BRA    03B4
+....................                 }
+00414:  INCF   xE9,F
+00416:  BRA    03AC
+....................             }
+....................             return;
+00418:  BRA    041E
+....................         }
+0041A:  INCF   xE8,F
+0041C:  BRA    0390
+....................     }
+0041E:  MOVLB  0
+00420:  GOTO   044A (RETURN)
+.................... }
+.................... 
+.................... void display_draw_word(Vec2 pos, int8 word[], int length){
+....................     for (int i = 0; i < length; i++){
+00424:  MOVLB  4
+00426:  CLRF   xE3
+00428:  MOVF   xE2,W
+0042A:  SUBWF  xE3,W
+0042C:  BC    0454
+....................         display_draw_letter(pos, word[i]);
+0042E:  MOVF   xE3,W
+00430:  ADDWF  xE0,W
+00432:  MOVWF  FE9
+00434:  MOVLW  00
+00436:  ADDWFC xE1,W
+00438:  MOVWF  FEA
+0043A:  MOVFF  FEF,4E7
+0043E:  MOVFF  4DF,4E6
+00442:  MOVFF  4DE,4E5
+00446:  MOVLB  0
+00448:  BRA    038C
+....................         pos.x += 4; // move right to draw next letter (3 width + 1 space)
+0044A:  MOVLW  04
+0044C:  MOVLB  4
+0044E:  ADDWF  xDE,F
+00450:  INCF   xE3,F
+00452:  BRA    0428
+....................     }
+00454:  MOVLB  0
+00456:  RETURN 0
+.................... }
+.................... 
+.................... void display_draw_entity(Vec2 pos, int8 *sprite_data, int h, int w){
+....................     //renders an entity on screen
+....................     int i, j;
+....................     for (i = 0; i < h; i++){
+*
+005B8:  MOVLB  4
+005BA:  CLRF   xEF
+005BC:  MOVF   xED,W
+005BE:  SUBWF  xEF,W
+005C0:  BC    0612
+....................         for (j = 0; j < w; j++){
+005C2:  CLRF   xF0
+005C4:  MOVF   xEE,W
+005C6:  SUBWF  xF0,W
+005C8:  BC    060E
+....................             int pixel = (sprite_data[i] >> j) & 1;
+005CA:  MOVF   xEF,W
+005CC:  ADDWF  xEB,W
+005CE:  MOVWF  FE9
+005D0:  MOVLW  00
+005D2:  ADDWFC xEC,W
+005D4:  MOVWF  FEA
+005D6:  MOVFF  FEF,00
+005DA:  MOVF   xF0,W
+005DC:  MOVWF  01
+005DE:  BZ    05E8
+005E0:  BCF    FD8.0
+005E2:  RRCF   00,F
+005E4:  DECFSZ 01,F
+005E6:  BRA    05E0
+005E8:  MOVF   00,W
+005EA:  ANDLW  01
+005EC:  MOVWF  xF1
+....................             sh1106_draw_pixel(pos.x + j, pos.y + i, pixel);
+005EE:  MOVF   xF0,W
+005F0:  ADDWF  xE9,W
+005F2:  MOVWF  xF2
+005F4:  MOVF   xEF,W
+005F6:  ADDWF  xEA,W
+005F8:  MOVWF  xF3
+005FA:  MOVFF  4F2,4F4
+005FE:  MOVWF  xF5
+00600:  MOVFF  4F1,4F6
+00604:  MOVLB  0
+00606:  RCALL  02DC
+00608:  MOVLB  4
+0060A:  INCF   xF0,F
+0060C:  BRA    05C4
+....................         }
+0060E:  INCF   xEF,F
+00610:  BRA    05BC
+....................     }
+00612:  MOVLB  0
+00614:  RETURN 0
+.................... }
+.................... 
+.................... void display_clear_entity(Vec2 pos, int h, int w){
+....................     //clears an entity from the screen
+....................     int i, j;
+....................     for (i = 0; i < h; i++){
+*
+008D4:  MOVLB  4
+008D6:  CLRF   xDA
+008D8:  MOVF   xD8,W
+008DA:  SUBWF  xDA,W
+008DC:  BC    0908
+....................         for (j = 0; j < w; j++){
+008DE:  CLRF   xDB
+008E0:  MOVF   xD9,W
+008E2:  SUBWF  xDB,W
+008E4:  BC    0904
+....................             sh1106_draw_pixel(pos.x + j, pos.y + i, 0);
+008E6:  MOVF   xDB,W
+008E8:  ADDWF  xD6,W
+008EA:  MOVWF  xDC
+008EC:  MOVF   xDA,W
+008EE:  ADDWF  xD7,W
+008F0:  MOVWF  xDD
+008F2:  MOVFF  4DC,4F4
+008F6:  MOVWF  xF5
+008F8:  CLRF   xF6
+008FA:  MOVLB  0
+008FC:  RCALL  02DC
+008FE:  MOVLB  4
+00900:  INCF   xDB,F
+00902:  BRA    08E0
+....................         }
+00904:  INCF   xDA,F
+00906:  BRA    08D8
+....................     }
+00908:  MOVLB  0
+0090A:  RETURN 0
+.................... }
+.................... 
+.................... void display_draw_player(Vec2 pos){
+....................     //renders player at pos.x and pos.y
+....................     display_draw_entity(pos, PLAYER_SPRITE, 8, 8);
+*
+00CD8:  MOVFF  4C5,4EA
+00CDC:  MOVFF  4C4,4E9
+00CE0:  MOVLW  04
+00CE2:  MOVLB  4
+00CE4:  MOVWF  xEC
+00CE6:  MOVLW  6F
+00CE8:  MOVWF  xEB
+00CEA:  MOVLW  08
+00CEC:  MOVWF  xED
+00CEE:  MOVWF  xEE
+00CF0:  MOVLB  0
+00CF2:  RCALL  05B8
+00CF4:  GOTO   0D40 (RETURN)
+.................... }
+.................... 
+.................... void display_draw_enemy(Vec2 pos){
+....................     //renders enemy at pos.x and pso.y
+....................     display_draw_entity(pos, ENEMY_SPRITE, 8, 8);
+*
+00616:  MOVFF  4E8,4EA
+0061A:  MOVFF  4E7,4E9
+0061E:  MOVLW  04
+00620:  MOVLB  4
+00622:  MOVWF  xEC
+00624:  MOVLW  77
+00626:  MOVWF  xEB
+00628:  MOVLW  08
+0062A:  MOVWF  xED
+0062C:  MOVWF  xEE
+0062E:  MOVLB  0
+00630:  RCALL  05B8
+00632:  RETURN 0
+.................... }
+.................... 
+.................... void display_draw_bullet(Vec2 pos){
+....................     //renders bullet at pos.x and pso.y
+....................     display_draw_entity(pos, BULLET_SPRITE, 8, 8);
+*
+00ADC:  MOVFF  4C7,4EA
+00AE0:  MOVFF  4C6,4E9
+00AE4:  MOVLW  04
+00AE6:  MOVLB  4
+00AE8:  MOVWF  xEC
+00AEA:  MOVLW  7F
+00AEC:  MOVWF  xEB
+00AEE:  MOVLW  08
+00AF0:  MOVWF  xED
+00AF2:  MOVWF  xEE
+00AF4:  MOVLB  0
+00AF6:  RCALL  05B8
+00AF8:  GOTO   0B54 (RETURN)
+.................... }
+.................... 
+.................... void display_draw_score(int score){
+....................     Vec2 pos = {112, 0};
+*
+008BA:  MOVLW  70
+008BC:  MOVLB  4
+008BE:  MOVWF  xC1
+008C0:  CLRF   xC2
+....................     display_draw_number(pos, score);
+008C2:  MOVFF  4C2,4DE
+008C6:  MOVFF  4C1,4DD
+008CA:  MOVFF  4C0,4DF
+008CE:  MOVLB  0
+008D0:  RCALL  07D0
+008D2:  RETURN 0
+.................... }
+.................... 
+.................... void display_clear_score(){
+....................     Vec2 pos = {112, 0};
+*
+00D50:  MOVLW  70
+00D52:  MOVLB  4
+00D54:  MOVWF  xC0
+00D56:  CLRF   xC1
+....................     display_clear_entity(pos, 11, 5);
+00D58:  MOVFF  4C1,4D7
+00D5C:  MOVFF  4C0,4D6
+00D60:  MOVLW  0B
+00D62:  MOVWF  xD8
+00D64:  MOVLW  05
+00D66:  MOVWF  xD9
+00D68:  MOVLB  0
+00D6A:  RCALL  08D4
+00D6C:  GOTO   1148 (RETURN)
+.................... }
+.................... 
+.................... Vec2 display_move_player(Vec2 pos){
+*
+00CF8:  MOVFF  4C1,4C3
+00CFC:  MOVFF  4C0,4C2
+....................     //moves the player
+....................     Vec2 last_pos = pos;
+.................... 
+....................     display_clear_entity(last_pos, 8, 8);
+00D00:  MOVFF  4C3,4D7
+00D04:  MOVFF  4C2,4D6
+00D08:  MOVLW  08
+00D0A:  MOVLB  4
+00D0C:  MOVWF  xD8
+00D0E:  MOVWF  xD9
+00D10:  MOVLB  0
+00D12:  RCALL  08D4
+.................... 
+....................     //pos.x = new_pos.x;
+....................     //pos.y = new_pos.y;
+.................... 
+....................     if (pos.x < PLAYER_MIN_X) pos.x = PLAYER_MIN_X;
+00D14:  MOVLB  4
+00D16:  MOVF   xC0,W
+00D18:  SUBLW  45
+00D1A:  BNC   0D20
+00D1C:  MOVLW  46
+00D1E:  MOVWF  xC0
+....................     if (pos.x > PLAYER_MAX_X) pos.x = PLAYER_MAX_X;
+00D20:  MOVF   xC0,W
+00D22:  SUBLW  6E
+00D24:  BC    0D2A
+00D26:  MOVLW  6E
+00D28:  MOVWF  xC0
+.................... 
+....................     if (pos.y < PLAYER_TOP_Y) pos.y = PLAYER_TOP_Y;
+....................     if (pos.y > PLAYER_BOT_Y) pos.y = PLAYER_BOT_Y;
+00D2A:  MOVF   xC1,W
+00D2C:  SUBLW  32
+00D2E:  BC    0D34
+00D30:  MOVLW  32
+00D32:  MOVWF  xC1
+.................... 
+....................     display_draw_player(pos);
+00D34:  MOVFF  4C1,4C5
+00D38:  MOVFF  4C0,4C4
+00D3C:  MOVLB  0
+00D3E:  BRA    0CD8
+....................     //delay_ms(200);                  //the higher the delay the lower the flicker
+....................     //display_update();
+.................... 
+....................     return pos;
+00D40:  MOVLB  4
+00D42:  MOVFF  4C0,01
+00D46:  MOVFF  4C1,02
+00D4A:  MOVLB  0
+00D4C:  GOTO   1134 (RETURN)
+.................... }
+.................... 
+.................... Enemy display_move_enemy(Enemy enemy){
+*
+00B9C:  MOVFF  4D0,4D5
+00BA0:  MOVFF  4CF,4D4
+....................     Vec2 last_pos = enemy.pos;
+.................... 
+....................     if (enemy.reached_y_edge != 0){
+00BA4:  MOVLB  4
+00BA6:  MOVF   xD2,F
+00BA8:  BZ    0BE4
+....................         enemy.pos.x += ENEMY_STEP_X;
+00BAA:  MOVLW  0F
+00BAC:  ADDWF  xCF,F
+....................         enemy.vdir = (enemy.reached_y_edge == 1)? 1 : -1;
+00BAE:  DECFSZ xD2,W
+00BB0:  BRA    0BB6
+00BB2:  MOVLW  01
+00BB4:  BRA    0BB8
+00BB6:  MOVLW  FF
+00BB8:  MOVWF  xD1
+....................         enemy.reached_y_edge = 0;
+00BBA:  CLRF   xD2
+.................... 
+....................         display_clear_entity(last_pos, 8, 8);
+00BBC:  MOVFF  4D5,4D7
+00BC0:  MOVFF  4D4,4D6
+00BC4:  MOVLW  08
+00BC6:  MOVWF  xD8
+00BC8:  MOVWF  xD9
+00BCA:  MOVLB  0
+00BCC:  RCALL  08D4
+....................         display_draw_enemy(enemy.pos);
+00BCE:  MOVFF  4D0,4E8
+00BD2:  MOVFF  4CF,4E7
+00BD6:  RCALL  0616
+....................         return enemy;
+00BD8:  MOVLW  CE
+00BDA:  MOVWF  01
+00BDC:  MOVLW  04
+00BDE:  MOVWF  02
+00BE0:  BRA    0C2C
+00BE2:  MOVLB  4
+....................     }
+.................... 
+....................     enemy.pos.y += enemy.vdir * ENEMY_STEP_Y;
+00BE4:  MOVF   xD1,W
+00BE6:  MULLW  05
+00BE8:  MOVF   FF3,W
+00BEA:  ADDWF  xD0,F
+.................... 
+....................     if (enemy.pos.y <= ENEMY_TOP_Y){
+00BEC:  MOVF   xD0,W
+00BEE:  SUBLW  02
+00BF0:  BNC   0BFC
+....................         enemy.pos.y = ENEMY_TOP_Y;
+00BF2:  MOVLW  02
+00BF4:  MOVWF  xD0
+....................         enemy.reached_y_edge = 1;       //reached top
+00BF6:  MOVLW  01
+00BF8:  MOVWF  xD2
+....................     }else if (enemy.pos.y >= ENEMY_BOT_Y){
+00BFA:  BRA    0C08
+00BFC:  MOVF   xD0,W
+00BFE:  SUBLW  31
+00C00:  BC    0C08
+....................         enemy.pos.y = ENEMY_BOT_Y;
+00C02:  MOVLW  32
+00C04:  MOVWF  xD0
+....................         enemy.reached_y_edge = -1;      //reached bottom
+00C06:  SETF   xD2
+....................     }
+.................... 
+....................     display_clear_entity(last_pos, 8, 8);
+00C08:  MOVFF  4D5,4D7
+00C0C:  MOVFF  4D4,4D6
+00C10:  MOVLW  08
+00C12:  MOVWF  xD8
+00C14:  MOVWF  xD9
+00C16:  MOVLB  0
+00C18:  RCALL  08D4
+....................     display_draw_enemy(enemy.pos);
+00C1A:  MOVFF  4D0,4E8
+00C1E:  MOVFF  4CF,4E7
+00C22:  RCALL  0616
+.................... 
+....................     return enemy;
+00C24:  MOVLW  CE
+00C26:  MOVWF  01
+00C28:  MOVLW  04
+00C2A:  MOVWF  02
+00C2C:  GOTO   1018 (RETURN)
+.................... }
+.................... 
+.................... 
+.................... Bullet display_move_bullet(Bullet bullet){
+*
+00AFC:  MOVFF  4C2,4C5
+00B00:  MOVFF  4C1,4C4
+....................     Vec2 last_pos = bullet.pos;
+.................... 
+....................     bullet.pos.x -= BULLET_SPEED;
+00B04:  MOVLW  0C
+00B06:  MOVLB  4
+00B08:  SUBWF  xC1,F
+.................... 
+....................     if (bullet.pos.x <= BULLET_MIN_X){
+00B0A:  MOVF   xC1,W
+00B0C:  SUBLW  04
+00B0E:  BNC   0B38
+....................         display_clear_entity(last_pos, 8, 8);
+00B10:  MOVFF  4C5,4D7
+00B14:  MOVFF  4C4,4D6
+00B18:  MOVLW  08
+00B1A:  MOVWF  xD8
+00B1C:  MOVWF  xD9
+00B1E:  MOVLB  0
+00B20:  RCALL  08D4
+....................         bullet.is_active = 0;
+00B22:  MOVLB  4
+00B24:  CLRF   xC3
+....................         return bullet;
+00B26:  MOVFF  4C0,00
+00B2A:  MOVFF  4C1,01
+00B2E:  MOVFF  4C2,02
+00B32:  MOVFF  4C3,03
+00B36:  BRA    0B66
+....................     }
+.................... 
+....................     display_clear_entity(last_pos, 8, 8);
+00B38:  MOVFF  4C5,4D7
+00B3C:  MOVFF  4C4,4D6
+00B40:  MOVLW  08
+00B42:  MOVWF  xD8
+00B44:  MOVWF  xD9
+00B46:  MOVLB  0
+00B48:  RCALL  08D4
+....................     display_draw_bullet(bullet.pos);
+00B4A:  MOVFF  4C2,4C7
+00B4E:  MOVFF  4C1,4C6
+00B52:  BRA    0ADC
+....................     
+....................     return bullet;
+00B54:  MOVFF  4C0,00
+00B58:  MOVFF  4C1,01
+00B5C:  MOVFF  4C2,02
+00B60:  MOVFF  4C3,03
+00B64:  MOVLB  4
+00B66:  MOVLB  0
+00B68:  GOTO   0DF4 (RETURN)
+.................... }
+.................... 
+.................... void display_gameover_screen(int score, int high_score){
+....................     Vec2 gameover_pos = {46, 10};
+*
+01256:  MOVLW  2E
+01258:  MOVLB  4
+0125A:  MOVWF  xB4
+0125C:  MOVLW  0A
+0125E:  MOVWF  xB5
+.................... 
+....................     Vec2 hs_label_pos = {10, 20};
+01260:  MOVWF  xB6
+01262:  MOVLW  14
+01264:  MOVWF  xB7
+....................     Vec2 hs_pos = {10, 26};
+01266:  MOVLW  0A
+01268:  MOVWF  xB8
+0126A:  MOVLW  1A
+0126C:  MOVWF  xB9
+.................... 
+....................     Vec2 ss_label_pos = {110, 20};
+0126E:  MOVLW  6E
+01270:  MOVWF  xBA
+01272:  MOVLW  14
+01274:  MOVWF  xBB
+....................     Vec2 ss_pos = {110, 26};
+01276:  MOVLW  6E
+01278:  MOVWF  xBC
+0127A:  MOVLW  1A
+0127C:  MOVWF  xBD
+.................... 
+....................     Vec2 restart_label_pos = {32, 54};
+0127E:  MOVLW  20
+01280:  MOVWF  xBE
+01282:  MOVLW  36
+01284:  MOVWF  xBF
+.................... 
+....................     int8 gameover_text[] = {'g', 'a', 'm', 'e', ' ', 'o', 'v', 'e', 'r'};
+01286:  MOVLW  67
+01288:  MOVWF  xC0
+0128A:  MOVLW  61
+0128C:  MOVWF  xC1
+0128E:  MOVLW  6D
+01290:  MOVWF  xC2
+01292:  MOVLW  65
+01294:  MOVWF  xC3
+01296:  MOVLW  20
+01298:  MOVWF  xC4
+0129A:  MOVLW  6F
+0129C:  MOVWF  xC5
+0129E:  MOVLW  76
+012A0:  MOVWF  xC6
+012A2:  MOVLW  65
+012A4:  MOVWF  xC7
+012A6:  MOVLW  72
+012A8:  MOVWF  xC8
+....................     int8 hs_text[] = {'h', 's'};
+012AA:  MOVLW  68
+012AC:  MOVWF  xC9
+012AE:  MOVLW  73
+012B0:  MOVWF  xCA
+....................     int8 ss_text[] = {'s', 's'};
+012B2:  MOVWF  xCB
+012B4:  MOVWF  xCC
+....................     int8 click_to_restart_text[] = {
+....................         'c', 'l', 'i', 'c', 'k', ' ',
+....................         't', 'o', ' ',
+....................         'r', 'e', 's', 't', 'a', 'r', 't'
+....................     };
+012B6:  MOVLW  63
+012B8:  MOVWF  xCD
+012BA:  MOVLW  6C
+012BC:  MOVWF  xCE
+012BE:  MOVLW  69
+012C0:  MOVWF  xCF
+012C2:  MOVLW  63
+012C4:  MOVWF  xD0
+012C6:  MOVLW  6B
+012C8:  MOVWF  xD1
+012CA:  MOVLW  20
+012CC:  MOVWF  xD2
+012CE:  MOVLW  74
+012D0:  MOVWF  xD3
+012D2:  MOVLW  6F
+012D4:  MOVWF  xD4
+012D6:  MOVLW  20
+012D8:  MOVWF  xD5
+012DA:  MOVLW  72
+012DC:  MOVWF  xD6
+012DE:  MOVLW  65
+012E0:  MOVWF  xD7
+012E2:  MOVLW  73
+012E4:  MOVWF  xD8
+012E6:  MOVLW  74
+012E8:  MOVWF  xD9
+012EA:  MOVLW  61
+012EC:  MOVWF  xDA
+012EE:  MOVLW  72
+012F0:  MOVWF  xDB
+012F2:  MOVLW  74
+012F4:  MOVWF  xDC
+....................     
+....................     display_draw_word(gameover_pos, gameover_text, 9);
+012F6:  MOVFF  4B5,4DF
+012FA:  MOVFF  4B4,4DE
+012FE:  MOVLW  04
+01300:  MOVWF  xE1
+01302:  MOVLW  C0
+01304:  MOVWF  xE0
+01306:  MOVLW  09
+01308:  MOVWF  xE2
+0130A:  MOVLB  0
+0130C:  CALL   0424
+....................     display_draw_word(hs_label_pos, hs_text, 2);
+01310:  MOVFF  4B7,4DF
+01314:  MOVFF  4B6,4DE
+01318:  MOVLW  04
+0131A:  MOVLB  4
+0131C:  MOVWF  xE1
+0131E:  MOVLW  C9
+01320:  MOVWF  xE0
+01322:  MOVLW  02
+01324:  MOVWF  xE2
+01326:  MOVLB  0
+01328:  CALL   0424
+....................     display_draw_word(ss_label_pos, ss_text, 2);
+0132C:  MOVFF  4BB,4DF
+01330:  MOVFF  4BA,4DE
+01334:  MOVLW  04
+01336:  MOVLB  4
+01338:  MOVWF  xE1
+0133A:  MOVLW  CB
+0133C:  MOVWF  xE0
+0133E:  MOVLW  02
+01340:  MOVWF  xE2
+01342:  MOVLB  0
+01344:  CALL   0424
+....................     display_draw_word(restart_label_pos, click_to_restart_text, 16);
+01348:  MOVFF  4BF,4DF
+0134C:  MOVFF  4BE,4DE
+01350:  MOVLW  04
+01352:  MOVLB  4
+01354:  MOVWF  xE1
+01356:  MOVLW  CD
+01358:  MOVWF  xE0
+0135A:  MOVLW  10
+0135C:  MOVWF  xE2
+0135E:  MOVLB  0
+01360:  CALL   0424
+.................... 
+....................     display_draw_number(hs_pos, high_score);
+01364:  MOVFF  4B9,4DE
+01368:  MOVFF  4B8,4DD
+0136C:  MOVFF  4B3,4DF
+01370:  CALL   07D0
+....................     display_draw_number(ss_pos, score);
+01374:  MOVFF  4BD,4DE
+01378:  MOVFF  4BC,4DD
+0137C:  MOVFF  4B2,4DF
+01380:  CALL   07D0
+01384:  GOTO   13A6 (RETURN)
+.................... }
+.................... 
+.................... void display_start_screen(){
+....................     Vec2 title_pos = {8, 5};
+*
+00458:  MOVLW  08
+0045A:  MOVLB  4
+0045C:  MOVWF  xB0
+0045E:  MOVLW  05
+00460:  MOVWF  xB1
+....................     Vec2 start_pos = {36, 59};
+00462:  MOVLW  24
+00464:  MOVWF  xB2
+00466:  MOVLW  3B
+00468:  MOVWF  xB3
+.................... 
+....................     int8 title_text[] = {
+....................         's', 'p', 'a', 'c', 'e', ' ',
+....................         'i', 'n', 'v', 'a', 'd', 'e', 'r', 's',
+....................         ' ', ' ', ' ',
+....................         'p', 'i', 'c', ' ',
+....................         'e', 'd', 'i', 't', 'i', 'o', 'n'
+....................     };
+0046A:  MOVLW  73
+0046C:  MOVWF  xB4
+0046E:  MOVLW  70
+00470:  MOVWF  xB5
+00472:  MOVLW  61
+00474:  MOVWF  xB6
+00476:  MOVLW  63
+00478:  MOVWF  xB7
+0047A:  MOVLW  65
+0047C:  MOVWF  xB8
+0047E:  MOVLW  20
+00480:  MOVWF  xB9
+00482:  MOVLW  69
+00484:  MOVWF  xBA
+00486:  MOVLW  6E
+00488:  MOVWF  xBB
+0048A:  MOVLW  76
+0048C:  MOVWF  xBC
+0048E:  MOVLW  61
+00490:  MOVWF  xBD
+00492:  MOVLW  64
+00494:  MOVWF  xBE
+00496:  MOVLW  65
+00498:  MOVWF  xBF
+0049A:  MOVLW  72
+0049C:  MOVWF  xC0
+0049E:  MOVLW  73
+004A0:  MOVWF  xC1
+004A2:  MOVLW  20
+004A4:  MOVWF  xC2
+004A6:  MOVWF  xC3
+004A8:  MOVWF  xC4
+004AA:  MOVLW  70
+004AC:  MOVWF  xC5
+004AE:  MOVLW  69
+004B0:  MOVWF  xC6
+004B2:  MOVLW  63
+004B4:  MOVWF  xC7
+004B6:  MOVLW  20
+004B8:  MOVWF  xC8
+004BA:  MOVLW  65
+004BC:  MOVWF  xC9
+004BE:  MOVLW  64
+004C0:  MOVWF  xCA
+004C2:  MOVLW  69
+004C4:  MOVWF  xCB
+004C6:  MOVLW  74
+004C8:  MOVWF  xCC
+004CA:  MOVLW  69
+004CC:  MOVWF  xCD
+004CE:  MOVLW  6F
+004D0:  MOVWF  xCE
+004D2:  MOVLW  6E
+004D4:  MOVWF  xCF
+.................... 
+....................     int8 start_text[] = {
+....................         'c', 'l', 'i', 'c', 'k', ' ',
+....................         't', 'o', ' ',
+....................         's', 't', 'a', 'r', 't'
+....................     };
+004D6:  MOVLW  63
+004D8:  MOVWF  xD0
+004DA:  MOVLW  6C
+004DC:  MOVWF  xD1
+004DE:  MOVLW  69
+004E0:  MOVWF  xD2
+004E2:  MOVLW  63
+004E4:  MOVWF  xD3
+004E6:  MOVLW  6B
+004E8:  MOVWF  xD4
+004EA:  MOVLW  20
+004EC:  MOVWF  xD5
+004EE:  MOVLW  74
+004F0:  MOVWF  xD6
+004F2:  MOVLW  6F
+004F4:  MOVWF  xD7
+004F6:  MOVLW  20
+004F8:  MOVWF  xD8
+004FA:  MOVLW  73
+004FC:  MOVWF  xD9
+004FE:  MOVLW  74
+00500:  MOVWF  xDA
+00502:  MOVLW  61
+00504:  MOVWF  xDB
+00506:  MOVLW  72
+00508:  MOVWF  xDC
+0050A:  MOVLW  74
+0050C:  MOVWF  xDD
+.................... 
+....................     display_draw_word(title_pos, title_text, 28);
+0050E:  MOVFF  4B1,4DF
+00512:  MOVFF  4B0,4DE
+00516:  MOVLW  04
+00518:  MOVWF  xE1
+0051A:  MOVLW  B4
+0051C:  MOVWF  xE0
+0051E:  MOVLW  1C
+00520:  MOVWF  xE2
+00522:  MOVLB  0
+00524:  RCALL  0424
+....................     display_draw_word(start_pos, start_text, 14);
+00526:  MOVFF  4B3,4DF
+0052A:  MOVFF  4B2,4DE
+0052E:  MOVLW  04
+00530:  MOVLB  4
+00532:  MOVWF  xE1
+00534:  MOVLW  D0
+00536:  MOVWF  xE0
+00538:  MOVLW  0E
+0053A:  MOVWF  xE2
+0053C:  MOVLB  0
+0053E:  RCALL  0424
+00540:  GOTO   0590 (RETURN)
+.................... }
+.................... 
+.................... //memory.c
+.................... //memory.c
+.................... //complete
+.................... 
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=16M)
+.................... 
+.................... #include "../Drivers/eeprom_24LC512.h"
+.................... //24LC512.h     i2c eeprom driver
+.................... #ifndef EEPROM_24LC512
+.................... #define EEPROM_24LC512
+.................... 
+.................... #define EEPROM_ADDR_WRITE  0xA0
+.................... #define EEPROM_ADDR_READ   0xA1
+.................... 
+.................... #define STATE_ADDR 0x0000
+.................... 
+.................... void eeprom_write_byte(BYTE data);
+.................... BYTE eeprom_read_byte();
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... int load_highscore(){
+*
+011E8:  BRA    1196
+011EA:  MOVFF  01,4B2
+....................     int highscore = eeprom_read_byte();
+....................     return highscore;
+011EE:  MOVLB  4
+011F0:  MOVFF  4B2,01
+011F4:  MOVLB  0
+011F6:  GOTO   138A (RETURN)
+.................... }
+.................... 
+.................... void save_highscore(int score, int hs){
+....................     if (score > hs){
+*
+0123E:  MOVLB  4
+01240:  MOVF   xB2,W
+01242:  SUBWF  xB3,W
+01244:  BC    1250
+....................         eeprom_write_byte(score);
+01246:  MOVFF  4B2,4B4
+0124A:  MOVLB  0
+0124C:  BRA    11FA
+0124E:  MOVLB  4
+....................     }
+01250:  MOVLB  0
+01252:  GOTO   1398 (RETURN)
+.................... }
+.................... 
+.................... /*
+.................... /*
+....................     Contains collision system 
+.................... */
+.................... 
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=16M)
+.................... 
+.................... #include "entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... #include "vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "sprites.h"
+.................... #ifndef SPRITES_H
+.................... #define SPRITES_H
+.................... 
+.................... #define SPRITE_SIZE 8 
+.................... 
+.................... extern  int8 PLAYER_SPRITE[8];
+.................... extern  int8 ENEMY_SPRITE[8];
+.................... extern  int8 BULLET_SPRITE[8];
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e){
+....................     return (b.pos.x < e.pos.x + SPRITE_SIZE) &&
+....................     (b.pos.x + SPRITE_SIZE > e.pos.x) &&
+....................     (b.pos.y < e.pos.y + SPRITE_SIZE) &&
+....................     (b.pos.y + SPRITE_SIZE > e.pos.y);
+*
+00B6C:  MOVLW  08
+00B6E:  MOVLB  4
+00B70:  ADDWF  xCB,W
+00B72:  SUBWF  xC7,W
+00B74:  BC    0B8E
+00B76:  MOVLW  08
+00B78:  ADDWF  xC7,W
+00B7A:  SUBWF  xCB,W
+00B7C:  BC    0B8E
+00B7E:  MOVLW  08
+00B80:  ADDWF  xCC,W
+00B82:  SUBWF  xC8,W
+00B84:  BC    0B8E
+00B86:  MOVLW  08
+00B88:  ADDWF  xC8,W
+00B8A:  SUBWF  xCC,W
+00B8C:  BNC   0B92
+00B8E:  MOVLW  00
+00B90:  BRA    0B94
+00B92:  MOVLW  01
+00B94:  MOVWF  01
+00B96:  MOVLB  0
+00B98:  GOTO   0E64 (RETURN)
+.................... }
+.................... 
+.................... int check_collisionPE(Player p, Enemy e){
+....................     return (p.pos.x < e.pos.x + SPRITE_SIZE) &&
+....................     (p.pos.x + SPRITE_SIZE > e.pos.x) &&
+....................     (p.pos.y < e.pos.y + SPRITE_SIZE) &&
+....................     (p.pos.y + SPRITE_SIZE > e.pos.y);
+.................... }
+.................... 
+.................... #include <18F46K22.h>
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=16M)
+.................... 
+.................... #include "sprites.h"
+.................... #ifndef SPRITES_H
+.................... #define SPRITES_H
+.................... 
+.................... #define SPRITE_SIZE 8 
+.................... 
+.................... extern  int8 PLAYER_SPRITE[8];
+.................... extern  int8 ENEMY_SPRITE[8];
+.................... extern  int8 BULLET_SPRITE[8];
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... int8 PLAYER_SPRITE[8] = {
+....................     0x70, 0x8c, 0x82, 0x81, 0x81, 0x82, 0x8c, 0x70
+.................... };
+.................... 
+.................... int8 ENEMY_SPRITE[8] = {
+....................     0x18, 0x24, 0x42, 0x81, 0x42, 0x5a, 0x24, 0xc3
+.................... };
+.................... 
+.................... int8 BULLET_SPRITE[8] = {
+....................     0x00, 0x00, 0x00, 0x7e, 0x7e, 0x00, 0x00, 0x00
+.................... };
+.................... 
+.................... #include <18F46K22.h>
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+*
+00004:  DATA 45,6E
+00006:  DATA 65,6D
+00008:  DATA 79,5B
+0000A:  DATA 25,75
+0000C:  DATA 5D,20
+0000E:  DATA 70,6F
+00010:  DATA 73,3A
+00012:  DATA 20,78
+00014:  DATA 3D,25
+00016:  DATA 75,2C
+00018:  DATA 20,79
+0001A:  DATA 3D,25
+0001C:  DATA 75,0D
+0001E:  DATA 0A,00
+*
+00C30:  TBLRD*+
+00C32:  MOVFF  FF6,4C5
+00C36:  MOVFF  FF7,4C6
+00C3A:  MOVF   FF5,W
+00C3C:  BTFSS  F9E.4
+00C3E:  BRA    0C3C
+00C40:  MOVWF  FAD
+00C42:  MOVFF  4C5,FF6
+00C46:  MOVFF  4C6,FF7
+00C4A:  MOVLB  4
+00C4C:  DECFSZ xC4,F
+00C4E:  BRA    0C52
+00C50:  BRA    0C56
+00C52:  MOVLB  0
+00C54:  BRA    0C30
+00C56:  MOVLB  0
+00C58:  RETURN 0
+00C5A:  MOVF   01,W
+00C5C:  MOVFF  4C4,4EA
+00C60:  MOVLW  64
+00C62:  MOVLB  4
+00C64:  MOVWF  xEB
+00C66:  MOVLB  0
+00C68:  RCALL  07A4
+00C6A:  MOVFF  00,4C4
+00C6E:  MOVF   01,W
+00C70:  MOVLW  30
+00C72:  BNZ   0C84
+00C74:  MOVLB  4
+00C76:  BTFSS  xC5.1
+00C78:  BRA    0C96
+00C7A:  BTFSC  xC5.3
+00C7C:  BRA    0C96
+00C7E:  BTFSC  xC5.4
+00C80:  MOVLW  20
+00C82:  BRA    0C8C
+00C84:  MOVLB  4
+00C86:  BCF    xC5.3
+00C88:  BCF    xC5.4
+00C8A:  BSF    xC5.0
+00C8C:  ADDWF  01,F
+00C8E:  MOVF   01,W
+00C90:  BTFSS  F9E.4
+00C92:  BRA    0C90
+00C94:  MOVWF  FAD
+00C96:  MOVFF  4C4,4EA
+00C9A:  MOVLW  0A
+00C9C:  MOVWF  xEB
+00C9E:  MOVLB  0
+00CA0:  RCALL  07A4
+00CA2:  MOVFF  00,4C4
+00CA6:  MOVF   01,W
+00CA8:  MOVLW  30
+00CAA:  BNZ   0CBC
+00CAC:  MOVLB  4
+00CAE:  BTFSC  xC5.3
+00CB0:  BRA    0CC8
+00CB2:  BTFSS  xC5.0
+00CB4:  BRA    0CC8
+00CB6:  BTFSC  xC5.4
+00CB8:  MOVLW  20
+00CBA:  MOVLB  0
+00CBC:  ADDWF  01,F
+00CBE:  MOVF   01,W
+00CC0:  BTFSS  F9E.4
+00CC2:  BRA    0CC0
+00CC4:  MOVWF  FAD
+00CC6:  MOVLB  4
+00CC8:  MOVLW  30
+00CCA:  ADDWF  xC4,F
+00CCC:  MOVF   xC4,W
+00CCE:  BTFSS  F9E.4
+00CD0:  BRA    0CCE
+00CD2:  MOVWF  FAD
+00CD4:  MOVLB  0
+00CD6:  RETURN 0
+.................... 
+.................... #list
+.................... 
+.................... #fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+.................... #use delay(clock=16MHz)
+.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+.................... 
+.................... #include "Utilities/vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "Drivers/joystick.h"
+.................... //joystick.h
+.................... 
+.................... #ifndef JOYSTICK_H
+.................... #define JOYSTICK_H
+.................... 
+.................... unsigned int16 x;   //VRX on AN2
+.................... unsigned int16 y;   //VRY on AN1
+.................... int1 sw;            //Button on B0
+.................... 
+.................... void joystick_init();
+.................... 
+.................... int get_Joystick_X();
+.................... int get_Joystick_Y();
+.................... int1 get_Joystick_SW();
+.................... 
+.................... #endif
+.................... 
+.................... #include "API/display.h"
+.................... #ifndef DISPLAY_H
+.................... #define DISPLAY_H
+.................... 
+.................... #include "../Utilities/vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... void display_init();
+.................... void display_clear();
+.................... void display_update();
+.................... 
+.................... void display_gameover_screen(int score, int high_score);
+.................... void display_start_screen();
+.................... 
+.................... void display_draw_digit(Vec2 pos, int digit);
+.................... void display_draw_number(Vec2 pos, int number);
+.................... void display_count_0_to_100();
+.................... 
+.................... void display_draw_letter(Vec2 pos, char c);
+.................... void display_draw_word(Vec2 pos, int8 word[], int length);
+.................... 
+.................... void display_draw_player(Vec2 pos);
+.................... void display_draw_enemy(Vec2 pos);
+.................... void display_draw_bullet(Vec2 pos);
+.................... void display_draw_score(int score);
+.................... 
+.................... void display_clear_score();
+.................... 
+.................... void display_clear_entity(Vec2 pos, int h, int w);
+.................... void display_draw_entity(Vec2 pos, int8 sprite[], int h, int w);
+.................... 
+.................... Vec2 display_move_player(Vec2 pos);
+.................... Enemy display_move_enemy(Enemy enemy);
+.................... Bullet display_move_bullet(Bullet bullet);
+.................... 
+.................... #endif
+.................... 
+.................... #include "API/controller.h"
+.................... #ifndef CONTROLLER_H
+.................... #define CONTROLLER_H
+.................... 
+.................... #include "../Utilities/vec2.h"
+.................... #ifndef VEC2_H
+.................... #define VEC2_H
+.................... 
+.................... typedef struct {
+....................     int x;
+....................     int y;
+.................... } Vec2;
+.................... 
+.................... #endif
+.................... 
+.................... #include "../Utilities/entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... void controller_init();
+.................... void controller_update(Vec2 *pos);
+.................... void controller_update_button_only();
+.................... 
+.................... int1 is_button_pressed();
+.................... int1 is_button_just_pressed();
+.................... int1 is_button_just_released();
+.................... 
+.................... void controller_shoot(Player p, Bullet *b);
+.................... 
+.................... #endif
+.................... 
+.................... #include "Utilities/entities.h"
+.................... #ifndef ENTITIES_H
+.................... #define ENTITIES_H
+.................... 
+.................... #include "vec2.h"
+.................... 
+.................... //type contains p for player
+.................... //              e for enemies
+.................... //              b for bullet
+.................... //this will help with detecting collisions later
+.................... 
+.................... #define PLAYER_MAX_X    110
+.................... #define PLAYER_MIN_X    70
+.................... #define PLAYER_TOP_Y    0
+.................... #define PLAYER_BOT_Y    50
+.................... 
+.................... #define ENEMY_TOP_Y     2
+.................... #define ENEMY_BOT_Y     50
+.................... #define ENEMY_STEP_X    15
+.................... #define ENEMY_STEP_Y    5
+.................... 
+.................... #define BULLET_SPEED    12
+.................... #define BULLET_MIN_X    4
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+.................... } Player;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int vdir;   //-1 = up, 1 = down
+....................     int reached_y_edge;    //1 for top, 0 for not reached, -1 for bottom
+....................     int is_active;
+.................... } Enemy;
+.................... 
+.................... typedef struct{
+....................     char type;
+....................     Vec2 pos;
+....................     int is_active;
+.................... } Bullet;
+.................... 
+.................... int check_collisionBE(Bullet b, Enemy e);
+.................... 
+.................... int check_collisionPE(Player p, Enemy e);
+.................... 
+.................... #endif
+.................... 
+.................... #include "API/memory.h"
+.................... #ifndef MEMORY_H
+.................... #define MEMORY_H
+.................... 
+.................... int load_highscore();
+.................... void save_highscore(int score, int hs); //score needs to be 8 bit max
+.................... 
+.................... #endif
+.................... 
+.................... 
+.................... #define ENEMIES_PER_WAVE     6
+.................... #define ENEMY_X_LIMIT        80
+.................... 
+.................... // Dummy constants for your example (adjust to your headers)
+.................... #define PLAYER_MIN_X 0
+.................... #define PLAYER_MAX_X 127
+.................... #define PLAYER_TOP_Y 0
+.................... #define PLAYER_BOT_Y 63
+.................... 
+.................... Enemy enemies[ENEMIES_PER_WAVE];
+.................... 
+.................... // Spawns a wave of enemies in their starting positions
+.................... void spawn_enemy_wave() {
+....................     Enemy new_wave[ENEMIES_PER_WAVE] = {
+....................         { 'e',  {5,  5}, 1, 0, 1 },  // enemies[0]
+....................         { 'e',  {5, 25}, 1, 0, 1 },  // enemies[1]
+....................         { 'e',  {5, 45}, 1, 0, 1 },  // enemies[2]
+....................         { 'e', {30,  5}, 1, 0, 1 },  // enemies[3]
+....................         { 'e', {30, 25}, 1, 0, 1 },  // enemies[4]
+....................         { 'e', {30, 45}, 1, 0, 1 }   // enemies[5]
+....................     };
+*
+00634:  MOVLW  65
+00636:  MOVLB  4
+00638:  MOVWF  xC0
+0063A:  MOVLW  05
+0063C:  MOVWF  xC1
+0063E:  MOVWF  xC2
+00640:  MOVLW  01
+00642:  MOVWF  xC3
+00644:  CLRF   xC4
+00646:  MOVWF  xC5
+00648:  MOVLW  65
+0064A:  MOVWF  xC6
+0064C:  MOVLW  05
+0064E:  MOVWF  xC7
+00650:  MOVLW  19
+00652:  MOVWF  xC8
+00654:  MOVLW  01
+00656:  MOVWF  xC9
+00658:  CLRF   xCA
+0065A:  MOVWF  xCB
+0065C:  MOVLW  65
+0065E:  MOVWF  xCC
+00660:  MOVLW  05
+00662:  MOVWF  xCD
+00664:  MOVLW  2D
+00666:  MOVWF  xCE
+00668:  MOVLW  01
+0066A:  MOVWF  xCF
+0066C:  CLRF   xD0
+0066E:  MOVWF  xD1
+00670:  MOVLW  65
+00672:  MOVWF  xD2
+00674:  MOVLW  1E
+00676:  MOVWF  xD3
+00678:  MOVLW  05
+0067A:  MOVWF  xD4
+0067C:  MOVLW  01
+0067E:  MOVWF  xD5
+00680:  CLRF   xD6
+00682:  MOVWF  xD7
+00684:  MOVLW  65
+00686:  MOVWF  xD8
+00688:  MOVLW  1E
+0068A:  MOVWF  xD9
+0068C:  MOVLW  19
+0068E:  MOVWF  xDA
+00690:  MOVLW  01
+00692:  MOVWF  xDB
+00694:  CLRF   xDC
+00696:  MOVWF  xDD
+00698:  MOVLW  65
+0069A:  MOVWF  xDE
+0069C:  MOVLW  1E
+0069E:  MOVWF  xDF
+006A0:  MOVLW  2D
+006A2:  MOVWF  xE0
+006A4:  MOVLW  01
+006A6:  MOVWF  xE1
+006A8:  CLRF   xE2
+006AA:  MOVWF  xE3
+.................... 
+....................     for (int i = 0; i < ENEMIES_PER_WAVE; i++) {
+006AC:  CLRF   xE4
+006AE:  MOVF   xE4,W
+006B0:  SUBLW  05
+006B2:  BNC   0724
+....................         enemies[i] = new_wave[i];
+006B4:  MOVF   xE4,W
+006B6:  MULLW  06
+006B8:  MOVF   FF3,W
+006BA:  CLRF   03
+006BC:  ADDLW  8B
+006BE:  MOVWF  01
+006C0:  MOVLW  04
+006C2:  ADDWFC 03,F
+006C4:  MOVFF  01,4E5
+006C8:  MOVFF  03,FEA
+006CC:  MOVF   xE4,W
+006CE:  MULLW  06
+006D0:  MOVF   FF3,W
+006D2:  CLRF   03
+006D4:  ADDLW  C0
+006D6:  MOVWF  FE1
+006D8:  MOVLW  04
+006DA:  ADDWFC 03,W
+006DC:  MOVWF  FE2
+006DE:  MOVFF  01,FE9
+006E2:  MOVLW  06
+006E4:  MOVWF  01
+006E6:  MOVFF  FE6,FEE
+006EA:  DECFSZ 01,F
+006EC:  BRA    06E6
+....................         display_draw_enemy(enemies[i].pos);
+006EE:  MOVF   xE4,W
+006F0:  MULLW  06
+006F2:  MOVF   FF3,W
+006F4:  CLRF   xE6
+006F6:  MOVWF  xE5
+006F8:  MOVLW  01
+006FA:  ADDWF  xE5,W
+006FC:  MOVWF  01
+006FE:  MOVLW  00
+00700:  ADDWFC xE6,W
+00702:  MOVWF  03
+00704:  MOVF   01,W
+00706:  ADDLW  8B
+00708:  MOVWF  FE9
+0070A:  MOVLW  04
+0070C:  ADDWFC 03,W
+0070E:  MOVWF  FEA
+00710:  MOVFF  FEC,4E8
+00714:  MOVF   FED,F
+00716:  MOVFF  FEF,4E7
+0071A:  MOVLB  0
+0071C:  RCALL  0616
+0071E:  MOVLB  4
+00720:  INCF   xE4,F
+00722:  BRA    06AE
+....................     }
+00724:  MOVLB  0
+00726:  RETURN 0
+.................... }
+.................... 
+.................... // The main gameplay loop — runs until game over
+.................... int main_loop() {
+*
+00D88:  CLRF   xB7
+00D8A:  MOVLW  02
+00D8C:  MOVWF  xB8
+00D8E:  CLRF   xB9
+00D90:  CLRF   xBA
+00D92:  CLRF   xBB
+....................     Player p = {'p', {80, 50}};
+*
+00D70:  MOVLW  70
+00D72:  MOVLB  4
+00D74:  MOVWF  xB0
+00D76:  MOVLW  50
+00D78:  MOVWF  xB1
+00D7A:  MOVLW  32
+00D7C:  MOVWF  xB2
+....................     Bullet b = {'b', {0, 0}, 0};
+00D7E:  MOVLW  62
+00D80:  MOVWF  xB3
+00D82:  CLRF   xB4
+00D84:  CLRF   xB5
+00D86:  CLRF   xB6
+.................... 
+....................     int frame_counter = 0;
+....................     int enemy_move_interval = 2;
+....................     int score = 0;
+....................     int last_score = 0;
+....................     int wave_spawned = 0;
+.................... 
+....................     spawn_enemy_wave();
+*
+00D94:  MOVLB  0
+00D96:  RCALL  0634
+....................     display_draw_score(score);
+00D98:  MOVFF  4B9,4C0
+00D9C:  RCALL  08BA
+.................... 
+....................     while (TRUE) {
+....................         display_clear_entity(p.pos, 8, 8);
+00D9E:  MOVFF  4B2,4D7
+00DA2:  MOVFF  4B1,4D6
+00DA6:  MOVLW  08
+00DA8:  MOVLB  4
+00DAA:  MOVWF  xD8
+00DAC:  MOVWF  xD9
+00DAE:  MOVLB  0
+00DB0:  RCALL  08D4
+....................         controller_update(&p.pos);
+00DB2:  MOVLW  04
+00DB4:  MOVLB  4
+00DB6:  MOVWF  xC1
+00DB8:  MOVLW  B1
+00DBA:  MOVWF  xC0
+00DBC:  MOVLB  0
+00DBE:  BRA    0950
+....................         controller_shoot(p, &b);
+00DC0:  MOVFF  4B2,4C2
+00DC4:  MOVFF  4B1,4C1
+00DC8:  MOVFF  4B0,4C0
+00DCC:  MOVLW  04
+00DCE:  MOVLB  4
+00DD0:  MOVWF  xC4
+00DD2:  MOVLW  B3
+00DD4:  MOVWF  xC3
+00DD6:  MOVLB  0
+00DD8:  BRA    0A88
+.................... 
+....................         if (b.is_active) {
+00DDA:  MOVLB  4
+00DDC:  MOVF   xB6,F
+00DDE:  BZ    0E06
+....................             b = display_move_bullet(b);
+00DE0:  MOVFF  4B6,4C3
+00DE4:  MOVFF  4B5,4C2
+00DE8:  MOVFF  4B4,4C1
+00DEC:  MOVFF  4B3,4C0
+00DF0:  MOVLB  0
+00DF2:  BRA    0AFC
+00DF4:  MOVFF  03,4B6
+00DF8:  MOVFF  02,4B5
+00DFC:  MOVFF  01,4B4
+00E00:  MOVFF  00,4B3
+00E04:  MOVLB  4
+....................         }
+.................... 
+....................         // COLLISION CHECK
+....................         for (int i = 0; i < ENEMIES_PER_WAVE; i++) {
+00E06:  CLRF   xBC
+00E08:  MOVF   xBC,W
+00E0A:  SUBLW  05
+00E0C:  BTFSS  FD8.0
+00E0E:  BRA    0F1E
+....................             if (check_collisionBE(b, enemies[i]) && b.is_active && enemies[i].is_active) {
+00E10:  MOVF   xBC,W
+00E12:  MULLW  06
+00E14:  MOVF   FF3,W
+00E16:  CLRF   03
+00E18:  ADDLW  8B
+00E1A:  MOVWF  FE9
+00E1C:  MOVLW  04
+00E1E:  ADDWFC 03,W
+00E20:  MOVWF  FEA
+00E22:  MOVF   FEE,F
+00E24:  MOVF   FEE,F
+00E26:  MOVF   FEE,F
+00E28:  MOVF   FEE,F
+00E2A:  MOVFF  FEC,4CF
+00E2E:  MOVF   FED,F
+00E30:  MOVFF  FEF,4CE
+00E34:  MOVF   FED,F
+00E36:  MOVFF  FEF,4CD
+00E3A:  MOVF   FED,F
+00E3C:  MOVFF  FEF,4CC
+00E40:  MOVF   FED,F
+00E42:  MOVFF  FEF,4C1
+00E46:  MOVF   FED,F
+00E48:  MOVFF  FEF,4CA
+00E4C:  MOVFF  4B6,4C9
+00E50:  MOVFF  4B5,4C8
+00E54:  MOVFF  4B4,4C7
+00E58:  MOVFF  4B3,4C6
+00E5C:  MOVFF  4C1,4CB
+00E60:  MOVLB  0
+00E62:  BRA    0B6C
+00E64:  MOVF   01,F
+00E66:  BZ    0F18
+00E68:  MOVLB  4
+00E6A:  MOVF   xB6,F
+00E6C:  BTFSS  FD8.2
+00E6E:  BRA    0E74
+00E70:  MOVLB  0
+00E72:  BRA    0F18
+00E74:  MOVF   xBC,W
+00E76:  MULLW  06
+00E78:  MOVF   FF3,W
+00E7A:  CLRF   xC1
+00E7C:  MOVWF  xC0
+00E7E:  MOVLW  05
+00E80:  ADDWF  xC0,W
+00E82:  MOVWF  01
+00E84:  MOVLW  00
+00E86:  ADDWFC xC1,W
+00E88:  MOVWF  03
+00E8A:  MOVF   01,W
+00E8C:  ADDLW  8B
+00E8E:  MOVWF  FE9
+00E90:  MOVLW  04
+00E92:  ADDWFC 03,W
+00E94:  MOVWF  FEA
+00E96:  MOVF   FEF,F
+00E98:  BTFSS  FD8.2
+00E9A:  BRA    0EA0
+00E9C:  MOVLB  0
+00E9E:  BRA    0F18
+....................                 b.is_active = 0;
+00EA0:  CLRF   xB6
+....................                 enemies[i].is_active = 0;
+00EA2:  MOVF   xBC,W
+00EA4:  MULLW  06
+00EA6:  MOVF   FF3,W
+00EA8:  CLRF   xC1
+00EAA:  MOVWF  xC0
+00EAC:  MOVLW  05
+00EAE:  ADDWF  xC0,W
+00EB0:  MOVWF  01
+00EB2:  MOVLW  00
+00EB4:  ADDWFC xC1,W
+00EB6:  MOVWF  03
+00EB8:  MOVF   01,W
+00EBA:  ADDLW  8B
+00EBC:  MOVWF  FE9
+00EBE:  MOVLW  04
+00EC0:  ADDWFC 03,W
+00EC2:  MOVWF  FEA
+00EC4:  CLRF   FEF
+....................                 display_clear_entity(enemies[i].pos, 8, 8);
+00EC6:  MOVF   xBC,W
+00EC8:  MULLW  06
+00ECA:  MOVF   FF3,W
+00ECC:  CLRF   xC1
+00ECE:  MOVWF  xC0
+00ED0:  MOVLW  01
+00ED2:  ADDWF  xC0,W
+00ED4:  MOVWF  01
+00ED6:  MOVLW  00
+00ED8:  ADDWFC xC1,W
+00EDA:  MOVWF  03
+00EDC:  MOVF   01,W
+00EDE:  ADDLW  8B
+00EE0:  MOVWF  FE9
+00EE2:  MOVLW  04
+00EE4:  ADDWFC 03,W
+00EE6:  MOVWF  FEA
+00EE8:  MOVFF  FEC,4D7
+00EEC:  MOVF   FED,F
+00EEE:  MOVFF  FEF,4D6
+00EF2:  MOVLW  08
+00EF4:  MOVWF  xD8
+00EF6:  MOVWF  xD9
+00EF8:  MOVLB  0
+00EFA:  RCALL  08D4
+....................                 display_clear_entity(b.pos, 8, 8);
+00EFC:  MOVFF  4B5,4D7
+00F00:  MOVFF  4B4,4D6
+00F04:  MOVLW  08
+00F06:  MOVLB  4
+00F08:  MOVWF  xD8
+00F0A:  MOVWF  xD9
+00F0C:  MOVLB  0
+00F0E:  RCALL  08D4
+....................                 score++;
+00F10:  MOVLB  4
+00F12:  INCF   xB9,F
+....................                 break;
+00F14:  BRA    0F1E
+00F16:  MOVLB  0
+....................             }
+00F18:  MOVLB  4
+00F1A:  INCF   xBC,F
+00F1C:  BRA    0E08
+....................         }
+.................... 
+....................         // WAVE SYSTEM
+....................         int active_count = 0;
+00F1E:  CLRF   xBD
+....................         for (int i = 0; i < ENEMIES_PER_WAVE; i++) {
+00F20:  CLRF   xBE
+00F22:  MOVF   xBE,W
+00F24:  SUBLW  05
+00F26:  BNC   0F54
+....................             if (enemies[i].is_active) {
+00F28:  MOVF   xBE,W
+00F2A:  MULLW  06
+00F2C:  MOVF   FF3,W
+00F2E:  CLRF   xC1
+00F30:  MOVWF  xC0
+00F32:  MOVLW  05
+00F34:  ADDWF  xC0,W
+00F36:  MOVWF  01
+00F38:  MOVLW  00
+00F3A:  ADDWFC xC1,W
+00F3C:  MOVWF  03
+00F3E:  MOVF   01,W
+00F40:  ADDLW  8B
+00F42:  MOVWF  FE9
+00F44:  MOVLW  04
+00F46:  ADDWFC 03,W
+00F48:  MOVWF  FEA
+00F4A:  MOVF   FEF,F
+00F4C:  BZ    0F50
+....................                 active_count++;
+00F4E:  INCF   xBD,F
+....................             }
+00F50:  INCF   xBE,F
+00F52:  BRA    0F22
+....................         }
+.................... 
+....................         if (active_count == 0 && !wave_spawned) {
+00F54:  MOVF   xBD,F
+00F56:  BNZ   0F70
+00F58:  MOVF   xBB,F
+00F5A:  BNZ   0F70
+....................             if (enemy_move_interval > 1) {
+00F5C:  MOVF   xB8,W
+00F5E:  SUBLW  01
+00F60:  BC    0F64
+....................                 enemy_move_interval--;
+00F62:  DECF   xB8,F
+....................             }
+....................             spawn_enemy_wave();
+00F64:  MOVLB  0
+00F66:  CALL   0634
+....................             wave_spawned = 1;
+00F6A:  MOVLW  01
+00F6C:  MOVLB  4
+00F6E:  MOVWF  xBB
+....................         }
+.................... 
+....................         if (wave_spawned && active_count > 0) {
+00F70:  MOVF   xBB,F
+00F72:  BZ    0F7A
+00F74:  MOVF   xBD,F
+00F76:  BZ    0F7A
+....................             wave_spawned = 0;
+00F78:  CLRF   xBB
+....................         }
+.................... 
+....................         // ENEMY MOVEMENT
+....................         if (frame_counter % enemy_move_interval == 0) {
+00F7A:  MOVFF  4B7,4EA
+00F7E:  MOVFF  4B8,4EB
+00F82:  MOVLB  0
+00F84:  RCALL  07A4
+00F86:  MOVF   00,F
+00F88:  BTFSS  FD8.2
+00F8A:  BRA    112A
+....................             for (int i = 0; i < ENEMIES_PER_WAVE; i++) {
+00F8C:  MOVLB  4
+00F8E:  CLRF   xBF
+00F90:  MOVF   xBF,W
+00F92:  SUBLW  05
+00F94:  BTFSS  FD8.0
+00F96:  BRA    1128
+....................                 if (enemies[i].is_active) {
+00F98:  MOVF   xBF,W
+00F9A:  MULLW  06
+00F9C:  MOVF   FF3,W
+00F9E:  CLRF   xC1
+00FA0:  MOVWF  xC0
+00FA2:  MOVLW  05
+00FA4:  ADDWF  xC0,W
+00FA6:  MOVWF  01
+00FA8:  MOVLW  00
+00FAA:  ADDWFC xC1,W
+00FAC:  MOVWF  03
+00FAE:  MOVF   01,W
+00FB0:  ADDLW  8B
+00FB2:  MOVWF  FE9
+00FB4:  MOVLW  04
+00FB6:  ADDWFC 03,W
+00FB8:  MOVWF  FEA
+00FBA:  MOVF   FEF,F
+00FBC:  BTFSC  FD8.2
+00FBE:  BRA    1124
+....................                     enemies[i] = display_move_enemy(enemies[i]);
+00FC0:  MOVF   xBF,W
+00FC2:  MULLW  06
+00FC4:  MOVF   FF3,W
+00FC6:  CLRF   03
+00FC8:  ADDLW  8B
+00FCA:  MOVWF  01
+00FCC:  MOVLW  04
+00FCE:  ADDWFC 03,F
+00FD0:  MOVFF  01,4C0
+00FD4:  MOVFF  03,4C1
+00FD8:  MOVF   xBF,W
+00FDA:  MULLW  06
+00FDC:  MOVF   FF3,W
+00FDE:  CLRF   03
+00FE0:  ADDLW  8B
+00FE2:  MOVWF  FE9
+00FE4:  MOVLW  04
+00FE6:  ADDWFC 03,W
+00FE8:  MOVWF  FEA
+00FEA:  MOVF   FEE,F
+00FEC:  MOVF   FEE,F
+00FEE:  MOVF   FEE,F
+00FF0:  MOVF   FEE,F
+00FF2:  MOVFF  FEC,4D3
+00FF6:  MOVF   FED,F
+00FF8:  MOVFF  FEF,4D2
+00FFC:  MOVF   FED,F
+00FFE:  MOVFF  FEF,4D1
+01002:  MOVF   FED,F
+01004:  MOVFF  FEF,4D0
+01008:  MOVF   FED,F
+0100A:  MOVFF  FEF,4CF
+0100E:  MOVF   FED,F
+01010:  MOVFF  FEF,4CE
+01014:  MOVLB  0
+01016:  BRA    0B9C
+01018:  MOVFF  02,03
+0101C:  MOVFF  01,FE1
+01020:  MOVFF  02,FE2
+01024:  MOVFF  4C1,FEA
+01028:  MOVFF  4C0,FE9
+0102C:  MOVLW  06
+0102E:  MOVWF  01
+01030:  MOVFF  FE6,FEE
+01034:  DECFSZ 01,F
+01036:  BRA    1030
+....................                     if (enemies[i].pos.x >= ENEMY_X_LIMIT) {
+01038:  MOVLB  4
+0103A:  MOVF   xBF,W
+0103C:  MULLW  06
+0103E:  MOVF   FF3,W
+01040:  CLRF   xC1
+01042:  MOVWF  xC0
+01044:  MOVLW  01
+01046:  ADDWF  xC0,F
+01048:  MOVLW  00
+0104A:  ADDWFC xC1,F
+0104C:  MOVLW  8B
+0104E:  ADDWF  xC0,W
+01050:  MOVWF  FE9
+01052:  MOVLW  04
+01054:  ADDWFC xC1,W
+01056:  MOVWF  FEA
+01058:  MOVF   FEF,W
+0105A:  SUBLW  4F
+0105C:  BC    1124
+....................                         printf("Enemy[%u] pos: x=%u, y=%u\r\n", i, enemies[i].pos.x, enemies[i].pos.y);
+0105E:  MOVF   xBF,W
+01060:  MULLW  06
+01062:  MOVF   FF3,W
+01064:  CLRF   xC1
+01066:  MOVWF  xC0
+01068:  MOVLW  01
+0106A:  ADDWF  xC0,F
+0106C:  MOVLW  00
+0106E:  ADDWFC xC1,F
+01070:  MOVLW  8B
+01072:  ADDWF  xC0,W
+01074:  MOVWF  FE9
+01076:  MOVLW  04
+01078:  ADDWFC xC1,W
+0107A:  MOVWF  FEA
+0107C:  MOVFF  FEF,4C2
+01080:  MOVF   xBF,W
+01082:  MULLW  06
+01084:  MOVF   FF3,W
+01086:  CLRF   xC4
+01088:  MOVWF  xC3
+0108A:  MOVLW  01
+0108C:  ADDWF  xC3,F
+0108E:  MOVLW  00
+01090:  ADDWFC xC4,F
+01092:  MOVLW  01
+01094:  ADDWF  xC3,W
+01096:  MOVWF  01
+01098:  MOVLW  00
+0109A:  ADDWFC xC4,W
+0109C:  MOVWF  03
+0109E:  MOVF   01,W
+010A0:  ADDLW  8B
+010A2:  MOVWF  FE9
+010A4:  MOVLW  04
+010A6:  ADDWFC 03,W
+010A8:  MOVWF  FEA
+010AA:  MOVFF  FEF,4C3
+010AE:  MOVLW  04
+010B0:  MOVWF  FF6
+010B2:  MOVLW  00
+010B4:  MOVWF  FF7
+010B6:  MOVLW  06
+010B8:  MOVWF  xC4
+010BA:  MOVLB  0
+010BC:  RCALL  0C30
+010BE:  MOVFF  4BF,4C4
+010C2:  MOVLW  1B
+010C4:  MOVLB  4
+010C6:  MOVWF  xC5
+010C8:  MOVLB  0
+010CA:  RCALL  0C5A
+010CC:  MOVLW  0C
+010CE:  MOVWF  FF6
+010D0:  MOVLW  00
+010D2:  MOVWF  FF7
+010D4:  MOVLW  09
+010D6:  MOVLB  4
+010D8:  MOVWF  xC4
+010DA:  MOVLB  0
+010DC:  RCALL  0C30
+010DE:  MOVFF  4C2,4C4
+010E2:  MOVLW  1B
+010E4:  MOVLB  4
+010E6:  MOVWF  xC5
+010E8:  MOVLB  0
+010EA:  RCALL  0C5A
+010EC:  MOVLW  17
+010EE:  MOVWF  FF6
+010F0:  MOVLW  00
+010F2:  MOVWF  FF7
+010F4:  MOVLW  04
+010F6:  MOVLB  4
+010F8:  MOVWF  xC4
+010FA:  MOVLB  0
+010FC:  RCALL  0C30
+010FE:  MOVFF  4C3,4C4
+01102:  MOVLW  1B
+01104:  MOVLB  4
+01106:  MOVWF  xC5
+01108:  MOVLB  0
+0110A:  RCALL  0C5A
+0110C:  MOVLW  0D
+0110E:  BTFSS  F9E.4
+01110:  BRA    110E
+01112:  MOVWF  FAD
+01114:  MOVLW  0A
+01116:  BTFSS  F9E.4
+01118:  BRA    1116
+0111A:  MOVWF  FAD
+....................                         return score;  // Exit main_loop, triggers game over
+0111C:  MOVLB  4
+0111E:  MOVFF  4B9,01
+01122:  BRA    1172
+....................                     }
+....................                 }
+01124:  INCF   xBF,F
+01126:  BRA    0F90
+01128:  MOVLB  0
+....................             }
+....................         }
+.................... 
+....................         // PLAYER MOVEMENT
+....................         p.pos = display_move_player(p.pos);
+0112A:  MOVFF  4B2,4C1
+0112E:  MOVFF  4B1,4C0
+01132:  BRA    0CF8
+01134:  MOVFF  02,4B2
+01138:  MOVFF  01,4B1
+.................... 
+....................         // SCORE UPDATER
+....................         if (score != last_score) {
+0113C:  MOVLB  4
+0113E:  MOVF   xBA,W
+01140:  SUBWF  xB9,W
+01142:  BZ    1156
+....................             display_clear_score();
+01144:  MOVLB  0
+01146:  BRA    0D50
+....................             display_draw_score(score);
+01148:  MOVFF  4B9,4C0
+0114C:  CALL   08BA
+....................             last_score = score;
+01150:  MOVFF  4B9,4BA
+01154:  MOVLB  4
+....................         }
+.................... 
+....................         // SCREEN UPDATE
+....................         display_update();
+01156:  MOVLB  0
+01158:  CALL   0298
+....................         delay_ms(100);
+0115C:  MOVLW  64
+0115E:  MOVLB  4
+01160:  MOVWF  xC0
+01162:  MOVLB  0
+01164:  CALL   0020
+....................         frame_counter++;
+01168:  MOVLB  4
+0116A:  INCF   xB7,F
+0116C:  MOVLB  0
+0116E:  BRA    0D9E
+01170:  MOVLB  4
+....................     }
+01172:  MOVLB  0
+01174:  GOTO   14DE (RETURN)
+.................... }
+.................... 
+.................... // Displays the game over screen and waits for restart button press
+.................... void game_over_loop(int score) {
+*
+01388:  BRA    11E8
+0138A:  MOVFF  01,4B1
+....................     int hs = load_highscore();
+....................     save_highscore(score, hs);
+0138E:  MOVFF  4B0,4B2
+01392:  MOVFF  4B1,4B3
+01396:  BRA    123E
+.................... 
+....................     display_clear();
+01398:  CALL   01A0
+....................     display_gameover_screen(score, hs);
+0139C:  MOVFF  4B0,4B2
+013A0:  MOVFF  4B1,4B3
+013A4:  BRA    1256
+....................     display_update();
+013A6:  CALL   0298
+.................... 
+....................     while (TRUE) {
+....................         controller_update_button_only();  // update joystick button state
+013AA:  CALL   0550
+....................         if (is_button_just_pressed()) {
+013AE:  CALL   0582
+013B2:  MOVF   01,F
+013B4:  BZ    13C8
+....................             display_clear();
+013B6:  CALL   01A0
+....................             delay_ms(100);
+013BA:  MOVLW  64
+013BC:  MOVLB  4
+013BE:  MOVWF  xC0
+013C0:  MOVLB  0
+013C2:  CALL   0020
+....................             break;  // exit loop to restart game
+013C6:  BRA    13D6
+....................         }
+....................         delay_ms(100);
+013C8:  MOVLW  64
+013CA:  MOVLB  4
+013CC:  MOVWF  xC0
+013CE:  MOVLB  0
+013D0:  CALL   0020
+013D4:  BRA    13AA
+....................     }
+013D6:  GOTO   14E8 (RETURN)
+.................... }
+.................... 
+.................... void start_screen_loop(){
+....................     display_clear();
+*
+0058C:  RCALL  01F0
+....................     display_start_screen();
+0058E:  BRA    0458
+....................     display_update();
+00590:  RCALL  0298
+.................... 
+....................     while (TRUE) {
+....................         controller_update_button_only();
+00592:  RCALL  0550
+....................         if (is_button_just_pressed()) {
+00594:  RCALL  0582
+00596:  MOVF   01,F
+00598:  BZ    05A8
+....................             display_clear();
+0059A:  RCALL  01F0
+....................             delay_ms(100);
+0059C:  MOVLW  64
+0059E:  MOVLB  4
+005A0:  MOVWF  xC0
+005A2:  MOVLB  0
+005A4:  RCALL  0020
+....................             break;
+005A6:  BRA    05B4
+....................         }
+....................         delay_ms(100);
+005A8:  MOVLW  64
+005AA:  MOVLB  4
+005AC:  MOVWF  xC0
+005AE:  MOVLB  0
+005B0:  RCALL  0020
+005B2:  BRA    0592
+....................     }
+005B4:  GOTO   14DC (RETURN)
+.................... }
+.................... 
+.................... void main() {
+*
+013DA:  CLRF   FF8
+013DC:  BCF    FD0.7
+013DE:  MOVLW  70
+013E0:  MOVWF  FD3
+013E2:  BCF    F9B.6
+013E4:  BCF    F9B.7
+013E6:  BSF    F94.3
+013E8:  BSF    F94.4
+013EA:  BCF    FCB.0
+013EC:  BCF    FCB.1
+013EE:  BCF    FCB.3
+013F0:  MOVLW  27
+013F2:  MOVWF  FC8
+013F4:  MOVLW  28
+013F6:  MOVWF  FC6
+013F8:  BSF    FC7.7
+013FA:  BCF    FC7.6
+013FC:  BCF    08.2
+013FE:  BCF    08.3
+01400:  BCF    08.4
+01402:  BCF    08.5
+01404:  BRA    1492
+01406:  DATA 7A,04
+01408:  DATA 0D,1F
+0140A:  DATA 11,1F
+0140C:  DATA 00,1F
+0140E:  DATA 00,1D
+01410:  DATA 15,17
+01412:  DATA 15,15
+01414:  DATA 1F,07
+01416:  DATA 04,1F
+01418:  DATA 17,15
+0141A:  DATA 1D,1F
+0141C:  DATA 15,1D
+0141E:  DATA 01,01
+01420:  DATA 1F,1F
+01422:  DATA 15,1F
+01424:  DATA 17,15
+01426:  DATA 1F,61
+01428:  DATA 65,67
+0142A:  DATA 68,6D
+0142C:  DATA 6F,72
+0142E:  DATA 73,74
+01430:  DATA 76,70
+01432:  DATA 63,6C
+01434:  DATA 69,6B
+01436:  DATA 6E,64
+01438:  DATA 1E,05
+0143A:  DATA 1F,1F
+0143C:  DATA 15,15
+0143E:  DATA 0E,11
+01440:  DATA 1D,1F
+01442:  DATA 04,1F
+01444:  DATA 1F,06
+01446:  DATA 1F,0E
+01448:  DATA 11,0E
+0144A:  DATA 1F,05
+0144C:  DATA 1A,12
+0144E:  DATA 15,09
+01450:  DATA 01,1F
+01452:  DATA 01,07
+01454:  DATA 18,07
+01456:  DATA 1F,05
+01458:  DATA 02,0E
+0145A:  DATA 11,11
+0145C:  DATA 1F,10
+0145E:  DATA 10,00
+01460:  DATA 1D,00
+01462:  DATA 1F,04
+01464:  DATA 1B,1F
+01466:  DATA 01,1E
+01468:  DATA 1F,11
+0146A:  DATA 0E,70
+0146C:  DATA 8C,82
+0146E:  DATA 81,81
+01470:  DATA 82,8C
+01472:  DATA 70,18
+01474:  DATA 24,42
+01476:  DATA 81,42
+01478:  DATA 5A,24
+0147A:  DATA C3,00
+0147C:  DATA 00,00
+0147E:  DATA 7E,7E
+01480:  DATA 00,00
+01482:  DATA 00,05
+01484:  DATA 4F,38
+01486:  DATA 00,03
+01488:  DATA 0F,77
+0148A:  DATA 00,00
+0148C:  DATA 00,01
+0148E:  DATA 0F,D3
+01490:  DATA 70,00
+01492:  MOVLW  00
+01494:  MOVWF  FF8
+01496:  MOVLW  14
+01498:  MOVWF  FF7
+0149A:  MOVLW  06
+0149C:  MOVWF  FF6
+0149E:  TBLRD*+
+014A0:  MOVF   FF5,W
+014A2:  MOVWF  00
+014A4:  XORLW  00
+014A6:  BZ    14CE
+014A8:  TBLRD*+
+014AA:  MOVF   FF5,W
+014AC:  MOVWF  01
+014AE:  BTFSC  FE8.7
+014B0:  BRA    14BC
+014B2:  ANDLW  3F
+014B4:  MOVWF  FEA
+014B6:  TBLRD*+
+014B8:  MOVFF  FF5,FE9
+014BC:  BTFSC  01.6
+014BE:  TBLRD*+
+014C0:  BTFSS  01.6
+014C2:  TBLRD*+
+014C4:  MOVFF  FF5,FEE
+014C8:  DCFSNZ 00,F
+014CA:  BRA    149E
+014CC:  BRA    14C0
+014CE:  CLRF   FF8
+....................     display_init();
+014D0:  GOTO   029C
+....................     controller_init();
+014D4:  GOTO   02D6
+.................... 
+....................     while (TRUE) {
+....................         start_screen_loop();
+014D8:  GOTO   058C
+....................         int final_score = main_loop();        // Run the game, exits on game over condition
+014DC:  BRA    0D70
+014DE:  MOVFF  01,4AF
+....................         game_over_loop(final_score);  // Show game over and wait for button press
+014E2:  MOVFF  4AF,4B0
+014E6:  BRA    1388
+014E8:  BRA    14D8
+....................         // Restart: loop back and run main_loop() again
+....................     }
+.................... }
+.................... 
+014EA:  SLEEP 
+
+Configuration Fuses:
+   Word  1: E800   INTRC_IO NOPLLEN PRIMARY_ON FCMEN IESO
+   Word  2: 3C1E   PUT BROWNOUT BORV19 NOWDT WDT32768
+   Word  3: BF00   CCP2C1 PBADEN CCP3B5 HFOFST TIMER3C0 P2BD2 MCLR
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

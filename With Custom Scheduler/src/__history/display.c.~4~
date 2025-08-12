@@ -1,0 +1,94 @@
+#include <18F46K22.h>
+#use delay(clock=16M)
+
+#include "display.h"
+#include "font.h"
+#include "sh1106.h"
+#include "sprites.h"
+
+// Dummy sprite definitions (replace with your own designs)
+/*BYTE PLAYER_SPRITE[8] = {
+    0b00111100,
+    0b01111110,
+    0b11111111,
+    0b11011011,
+    0b11111111,
+    0b01111110,
+    0b00111100,
+    0b00011000
+};
+
+BYTE ENEMY_SPRITE[8] = {
+    0b00111100,
+    0b01000010,
+    0b10100101,
+    0b10000001,
+    0b10100101,
+    0b10011001,
+    0b01000010,
+    0b00111100
+};
+
+BYTE BULLET_SPRITE[8] = {
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000,
+    0b00011000
+};*/
+
+void display_init(){
+    sh1106_init();
+    display_clear();
+    display_update();
+}
+
+void display_clear(){
+    sh1106_clear_buffer();
+}
+
+void display_update(){
+    sh1106_update_screen();
+}
+
+/*void display_draw_entity(Vec2 pos, BYTE sprite_data[], int height){
+    int i, j;
+    for (i = 0; i < height; i++){
+        for (j = 0; j < 8; j++){
+            int pixel = (sprite_data[i] >> j) & 1;
+            sh1106_draw_pixel(pos.x + j, pos.y + i, pixel);
+        }
+    }
+}
+
+void display_clear_entity(Vec2 pos, BYTE sprite_data[], int height){
+    int i, j;
+    for (i = 0; i < height; i++){
+        for (j = 0; j < 8; j++){
+            sh1106_draw_pixel(pos.x + j, pos.y + i, 0);
+        }
+    }
+}
+
+void display_draw_player(Vec2 pos){
+    BYTE sprite_buffer[8];
+    for(int i = 0; i < 8; i++) sprite_buffer[i] = PLAYER_SPRITE[i];
+    display_draw_entity(pos, sprite_buffer, 8);
+}
+
+void display_draw_enemy(Vec2 pos){
+    BYTE sprite_buffer[8];
+    int i;
+    for(i = 0; i < 8; i++) sprite_buffer[i] = ENEMY_SPRITE[i];
+    display_draw_entity(pos, sprite_buffer, 8);
+}
+
+void display_draw_bullet(Vec2 pos){
+    BYTE sprite_buffer[8];
+    int i;
+    for(i = 0; i < 8; i++) sprite_buffer[i] = BULLET_SPRITE[i];
+    display_draw_entity(pos, sprite_buffer, 8);
+}*/

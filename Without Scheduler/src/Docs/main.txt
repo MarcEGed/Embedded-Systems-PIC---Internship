@@ -1,0 +1,46 @@
+#include <18F46K22.h>
+#fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
+#use delay(clock=16MHz)
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+
+#include "vec2.h"
+#include "joystick.h"
+#include "display.h"
+#include "controller.h"
+#include "entities.h"
+#include "memory.h"
+
+#define ENEMIES_PER_WAVE     6
+
+Enemy enemies[ENEMIES_PER_WAVE];
+
+void spawn_enemy_wave(){
+    Enemy new_wave[ENEMIES_PER_WAVE] = {
+        { 'e',  {5,  5}, 1, 0, 1 },  // enemies[0]
+        { 'e',  {5, 25}, 1, 0, 1 },  // enemies[1]
+        { 'e',  {5, 45}, 1, 0, 1 },  // enemies[2]
+
+        // Column 2 (x = 5 + 8 + 10 = 23)
+        { 'e', {30,  5}, 1, 0, 1 },  // enemies[3]
+        { 'e', {30, 25}, 1, 0, 1 },  // enemies[4]
+        { 'e', {30, 45}, 1, 0, 1 } 
+    };
+
+    for (int i = 0; i < ENEMIES_PER_WAVE; i++) {
+        enemies[i] = new_wave[i];
+        display_draw_enemy(enemies[i].pos);
+    }
+}
+
+Vec2 pos2 = {10, 10};
+
+int a = 1;
+int b = 4;
+
+void main() {
+    display_init();
+    display_gameover_screen(a, b);
+    display_update();
+
+    while (TRUE);
+}
