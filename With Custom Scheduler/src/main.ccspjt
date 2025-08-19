@@ -9,7 +9,7 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=73
+buildcount=75
 
 [fileformats]
 forcecoff=0
@@ -60,7 +60,7 @@ AdditionalOptionString=
 Fixed=
 
 [ProjectLog]
-Days=19
+Days=20
 D1=21-07-2025
 D1_L=8
 D1_L1=[376]Project Closed.
@@ -277,6 +277,16 @@ D19_L8=[71416]Project Opened.
 D19_L9=[71416]Project Closed.
 D19_L10=[71417]Project Opened.
 D19_L11=[83436]Project Closed.
+D20=17-08-2025
+D20_L=8
+D20_L1=[1054]Project Opened.
+D20_L2=[1055]Project Closed.
+D20_L3=[1055]Project Opened.
+D20_L4=[1364]Project Closed.
+D20_L5=[37244]Project Opened.
+D20_L6=[37244]Project Closed.
+D20_L7=[37245]Project Opened.
+D20_L8=[37268]Project Closed.
 
 [Opened Files]
 1=Drivers\eeprom_24LC512.c
@@ -327,7 +337,7 @@ BuildTool=
 OptionString=
 AdditionalOptionString=
 [Units]
-Count=11
+Count=12
 1=Drivers\eeprom_24LC512
 2=Drivers\joystick
 3=Drivers\sh1106
@@ -339,4 +349,5 @@ Count=11
 9=simple_scheduler
 10=main
 11=tasks
+12=config
 Link=1

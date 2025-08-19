@@ -1,8 +1,6 @@
-#include <18F46K22.h>
-#fuses INTRC_IO, NOWDT, NOLVP, NOPROTECT
-#use delay(clock=16MHz)
-#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+//main.c
 
+#include "config.h"
 #include "simple_scheduler.h"
 #include "tasks.h"
 
@@ -10,6 +8,7 @@ void main() {
     tasks_init();
 
     sched_init();
+    
     sched_add_task(task_start_screen);
     sched_add_task(task_game_init);
     sched_add_task(task_enemies); 
@@ -22,6 +21,6 @@ void main() {
 
     while (TRUE) {
         sched_run_cycle();
-        delay_ms(40);
+        delay_ms(SCHED_TICK);
     }
 }

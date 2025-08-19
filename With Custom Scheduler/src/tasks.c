@@ -1,3 +1,8 @@
+/*
+    tasks.c - contains all tasks needed for the MCU 
+    Depends on the APIs in the API folder, utilities and scheduler
+*/
+
 #include <18F46K22.h>
 #include "API/display.h"
 #include "API/controller.h"
@@ -29,6 +34,7 @@ static int frame_counter = 0;
 static Mailbox collision_mbox;
 
 static void reset_globals(void) {
+    //resets all global variables
     score = 0;
     last_score = 0;
     enemy_move_interval = 2;
@@ -40,6 +46,7 @@ static void reset_globals(void) {
 }
 
 static void spawn_enemy_wave(void) {
+    //spawns the array of enemies
     Enemy new_wave[ENEMIES_PER_WAVE] = {
         {{5, 5}, 1, 0, 1},
         {{5, 25}, 1, 0, 1},
@@ -56,6 +63,7 @@ static void spawn_enemy_wave(void) {
 }
 
 void tasks_init(void) {
+    //initializes APIs and game variables
     display_init();
     controller_init();
     sem_init(&enemy_move_sem, 0);
