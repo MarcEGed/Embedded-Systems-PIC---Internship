@@ -1,0 +1,97 @@
+[PROJECT]
+Target=..\output\space_invaders.hex
+Processor_Text=PIC18F46K22
+Compiler=PCH
+Development_Mode=
+ToolSuite=CCS
+CCSVersion=5.121
+[Target Data]
+FileList=$linker.c
+BuildTool=C-COMPILER
+OptionString=+FH
+AdditionalOptionString=
+BuildRequired=1
+[Directories]
+Include=
+Library=
+LinkerScript=
+output=..\output\
+[mru-list]
+1=..\output\space_invaders.c
+
+[fileformats]
+forcecoff=0
+debug=4
+error=2
+object=0
+list=0
+scratch=0
+sta=0
+tre=0
+expandtree=0
+allerrors=1
+allwarnings=1
+stayupne=1
+stayupoe=0
+
+[defines]
+enabled=0
+chip=1
+D1=
+V1=
+buildcount=4
+
+[main.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+
+
+[Opened Files]
+1=main.c
+t1=1
+Count=1
+2=space_invaders Notes.txt
+t2=1
+3=cdb.c
+t3=1
+4=cdb.c
+t4=1
+5=target_port.h
+t5=1
+[..\output\space_invaders.c]
+Type=4
+
+[ProjectLog]
+Days=1
+D1=21-08-2025
+D1_L=4
+D1_L1=[76555]Project Opened.
+D1_L2=[76731]Started Editing.
+D1_L3=[76750]Stopped Editing.
+TotalEdit=1
+TotalDebug=0
+D1_E=1
+D1_D=0
+D1_L4=[76765]Project Closed.
+
+
+[CompilerVersion]
+Fixed=
+[..\..\..\..\..\..\..\EDU\2024-2025\INCI\Firmware design\Lab quiz\firmware\output\space_invaders.c]
+Type=4
+[Units]
+Count=6
+1=main
+2=scheduler
+3=hardware
+4=system
+5=timer
+6=adc
+Link=1
