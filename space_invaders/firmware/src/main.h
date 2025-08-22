@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <18F46K22.h>
-#device ADC=8           /*ADC resulution in bits*/
+#device ADC=8           /*ADC resolution in bits*/
 #device ANSI            /*ANSI C*/
 
 /*Chip configuration*/
