@@ -17,10 +17,10 @@ void init_io_ports(void)
     set_tris_b(0x00);    /*B: All outputs*/
     output_b(0x00);      /*all ZEROs*/
 
-    set_tris_c(0x80);    /*C: all ouputs, except RC7 (UART - Rx)*/
-    output_c(0x20);      /*all ZEROs, except EE_WP*/
+    set_tris_c(0x98);    /*C: all outputs, except RC3 (SCL), RC4 (SDA) and RC7 (UART - Rx)*/
+    output_c(0x00);      /*all ZEROs*/
 
-    set_tris_d(0x00);    /*D: all ouputs - used to interface to external DAC*/
+    set_tris_d(0x00);    /*D: all outputs - used to interface to external DAC*/
     output_d(0x00);      /*all ZEROs*/
 
     set_tris_e(0x08);    /*E*/

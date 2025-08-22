@@ -23,6 +23,7 @@ void main(void)
 
         if (true == ret)    /*success?*/
         {
+            printf("OK\n\r");
             while (true)
             {
                 scheduler();    /*run scheduler forever*/
@@ -30,6 +31,7 @@ void main(void)
         }
         else
         {
+            printf("ERROR\n\r");
             while (true);   /*stall*/
         }
     }
