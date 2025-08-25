@@ -5,7 +5,7 @@
 void sample_next_adc_ch(s_task_handle_t me, s_task_msg_t **msg, void* arg);
 
 /*list ADC channels*/
-uint8_t adc_channels[MAX_ADC_CHANNELS] = {0, 1};	//JUST ONE CHANNEL FOR THIS APP
+uint8_t adc_channels[MAX_ADC_CHANNELS] = {1, 2};	//AN1 & AN2
 adc_info_t adc_info[MAX_ADC_CHANNELS];
 
 /**
@@ -18,7 +18,7 @@ bool init_adc(void)
 	uint8_t adc_index;
 
 	/*Analog*/
-    setup_adc_ports(sAN0 | sAN1, VSS_VDD);
+    setup_adc_ports(sAN1| sAN2, VSS_VDD);
     setup_adc(ADC_CLOCK_DIV_64 | ADC_TAD_MUL_8);
 	set_adc_channel(adc_channels[0]);	/*select 1st channel*/
 

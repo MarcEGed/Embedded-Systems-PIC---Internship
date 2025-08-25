@@ -11,7 +11,7 @@ void heart_beat_led(s_task_handle_t me, s_task_msg_t **msg, void* arg);
  */
 void init_io_ports(void)
 {
-    set_tris_a(0x03);    /*A: all outputs expect AN0 & 1*/
+    set_tris_a(0x06);    /*A: all outputs expect AN1 & 2*/
     output_a(0x00);      /*all ZEROs*/
 
     set_tris_b(0x00);    /*B: All outputs*/

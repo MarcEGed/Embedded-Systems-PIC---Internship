@@ -4,7 +4,7 @@ Processor_Text=PIC18F46K22
 Compiler=PCH
 Development_Mode=
 ToolSuite=CCS
-CCSVersion=5.121
+CCSVersion=5.122P
 [Target Data]
 FileList=$linker.c
 BuildTool=C-COMPILER
@@ -39,7 +39,7 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=4
+buildcount=5
 
 [main.c]
 Type=4
@@ -55,7 +55,7 @@ AdditionalOptionString=
 
 [Opened Files]
 1=main.c
-t1=1
+t1=2
 Count=1
 2=space_invaders Notes.txt
 t2=1
@@ -69,17 +69,25 @@ t5=1
 Type=4
 
 [ProjectLog]
-Days=1
+Days=2
 D1=21-08-2025
 D1_L=4
 D1_L1=[76555]Project Opened.
 D1_L2=[76731]Started Editing.
 D1_L3=[76750]Stopped Editing.
-TotalEdit=1
+TotalEdit=2
 TotalDebug=0
 D1_E=1
 D1_D=0
 D1_L4=[76765]Project Closed.
+D2=25-08-2025
+D2_L=4
+D2_L1=[40779]Project Opened.
+D2_L2=[40867]Started Editing.
+D2_L3=[41205]Stopped Editing.
+D2_E=1
+D2_D=0
+D2_L4=[41700]Project Closed.
 
 
 [CompilerVersion]
@@ -87,11 +95,15 @@ Fixed=
 [..\..\..\..\..\..\..\EDU\2024-2025\INCI\Firmware design\Lab quiz\firmware\output\space_invaders.c]
 Type=4
 [Units]
-Count=6
+Count=10
 1=main
 2=scheduler
 3=hardware
 4=system
 5=timer
 6=adc
+7=API\display
+8=Drivers\sh1106
+9=Utilities\sprites
+10=Drivers\joystick
 Link=1
