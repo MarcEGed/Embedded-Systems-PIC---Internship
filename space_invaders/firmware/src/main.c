@@ -4,6 +4,7 @@
 #include "system.h"
 #include "scheduler.h"
 #include "adc.h"
+#include "tasks.h"
 
 void main(void)
 {
@@ -17,6 +18,7 @@ void main(void)
         ret &= init_system();       /*initialize system and create task(s)*/
         ret &= init_hw();           /*initialize HW*/
         ret &= init_adc();          /*initialize ADC*/
+        ret &= init_player_draw_task();
         
         //TODO: list others:
 
