@@ -6,8 +6,6 @@
 #define WIDTH 128
 #define HEIGHT 64
 
-extern BYTE buffer[8][128];
-
 void sh1106_cmd(unsigned char cmd);
 void sh1106_data(unsigned char data);
 void sh1106_init();

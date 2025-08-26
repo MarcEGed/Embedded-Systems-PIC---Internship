@@ -3,6 +3,8 @@
         "hardware.h": "c",
         "target_port.h": "c",
         "main.h": "c",
-        "tasks.h": "c"
+        "tasks.h": "c",
+        "sh1106.h": "c",
+        "adc.h": "c"
     }
 }

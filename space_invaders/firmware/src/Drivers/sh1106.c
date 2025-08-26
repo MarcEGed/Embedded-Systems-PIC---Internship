@@ -13,6 +13,7 @@ BYTE buffer[8][128];
 
 void sh1106_cmd(unsigned char cmd) {
    //send a command to the screen
+   //printf("CMD: 0x%02X\r\n", cmd);
    i2c_start();
    i2c_write(SH1106_ADDR);
    i2c_write(0x00);
@@ -22,6 +23,7 @@ void sh1106_cmd(unsigned char cmd) {
 
 void sh1106_data(unsigned char data) {
    //send data to the screen
+   //printf("DATA: 0x%02X\r\n", data);
    i2c_start();
    i2c_write(SH1106_ADDR);
    i2c_write(0x40);
