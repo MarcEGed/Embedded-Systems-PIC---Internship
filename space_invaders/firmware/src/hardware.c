@@ -14,7 +14,7 @@ void init_io_ports(void)
     set_tris_a(0x06);    /*A: all outputs expect AN1 & 2*/
     output_a(0x00);      /*all ZEROs*/
 
-    set_tris_b(0x00);    /*B: All outputs*/
+    set_tris_b(0x01);    /*B: All outputs except RB0 (joystick SW)*/
     output_b(0x00);      /*all ZEROs*/
 
     set_tris_c(0x98);    /*C: all outputs, except RC3 (SCL), RC4 (SDA) and RC7 (UART - Rx)*/

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "hardware.h": "c",
+        "target_port.h": "c",
+        "main.h": "c",
+        "tasks.h": "c"
+    }
+}

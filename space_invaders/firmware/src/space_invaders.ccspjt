@@ -39,7 +39,7 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=6
+buildcount=13
 
 [main.c]
 Type=4
@@ -55,7 +55,7 @@ AdditionalOptionString=
 
 [Opened Files]
 1=main.c
-t1=1
+t1=17
 Count=2
 2=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdbool.h
 t2=1
@@ -75,7 +75,7 @@ D1_L=4
 D1_L1=[76555]Project Opened.
 D1_L2=[76731]Started Editing.
 D1_L3=[76750]Stopped Editing.
-TotalEdit=2
+TotalEdit=18
 TotalDebug=0
 D1_E=1
 D1_D=0
@@ -89,12 +89,31 @@ D2_E=1
 D2_D=0
 D2_L4=[41700]Project Closed.
 D3=26-08-2025
-D3_L=5
+D3_L=22
 D3_L1=[36901]Project Opened.
 D3_L2=[36943]Project Closed.
 D3_L3=[37894]Project Opened.
 D3_L4=[37895]Project Closed.
 D3_L5=[37895]Project Opened.
+D3_L6=[38676]Project Closed.
+D3_L7=[39982]Project Opened.
+D3_L8=[39983]Project Closed.
+D3_L9=[39983]Project Opened.
+D3_L10=[40084]Project Closed.
+D3_L11=[42129]Project Opened.
+D3_L12=[42130]Project Closed.
+D3_L13=[42130]Project Opened.
+D3_L14=[42170]Started Editing.
+D3_L15=[42280]Stopped Editing.
+D3_E=16
+D3_D=0
+D3_L16=[42292]Started Editing.
+D3_L17=[43381]Stopped Editing.
+D3_L18=[43875]Project Closed.
+D3_L19=[43937]Project Opened.
+D3_L20=[43938]Project Closed.
+D3_L21=[43939]Project Opened.
+D3_L22=[43970]Project Closed.
 
 
 [CompilerVersion]
@@ -102,7 +121,7 @@ Fixed=
 [..\..\..\..\..\..\..\EDU\2024-2025\INCI\Firmware design\Lab quiz\firmware\output\space_invaders.c]
 Type=4
 [Units]
-Count=11
+Count=12
 1=main
 2=scheduler
 3=hardware
@@ -114,4 +133,5 @@ Count=11
 9=Utilities\sprites
 10=Drivers\joystick
 11=tasks
+12=Drivers\eeprom_24LC512
 Link=1
