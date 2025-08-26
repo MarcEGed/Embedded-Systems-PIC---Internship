@@ -20,6 +20,14 @@ void main(void)
         
         //TODO: list others:
 
+        //TEST CODE _ TO BE REMOVED
+        i2c_start();
+        i2c_write(0xA1);
+        i2c_read(1);
+        i2c_stop();
+
+        ////////////////////////////
+
 
         if (true == ret)    /*success?*/
         {
