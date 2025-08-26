@@ -5,6 +5,9 @@
         "main.h": "c",
         "tasks.h": "c",
         "sh1106.h": "c",
-        "adc.h": "c"
+        "adc.h": "c",
+        "joystick.h": "c",
+        "oled.h": "c",
+        "eeprom_24lc512.h": "c"
     }
 }

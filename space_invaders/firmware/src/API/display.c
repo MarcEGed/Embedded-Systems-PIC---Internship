@@ -11,10 +11,11 @@
 #include "../main.h"
 
 #include "display.h"
+#include "Drivers/sh1106.h"
+
 #include "../Utilities/font.h"
 #include "../Utilities/sprites.h"
 #include "../Utilities/vec2.h"
-#include "../Drivers/sh1106.h"
 #include "../Utilities/entities.h"
 
 void display_init(){

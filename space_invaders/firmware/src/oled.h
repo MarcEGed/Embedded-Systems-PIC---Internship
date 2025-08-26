@@ -1,6 +1,6 @@
 //sh1106.h
-#ifndef SH1106_H
-#define SH1106_H
+#ifndef OLED_H
+#define OLED_H
 
 #define SH1106_ADDR 0x78
 #define WIDTH 128
