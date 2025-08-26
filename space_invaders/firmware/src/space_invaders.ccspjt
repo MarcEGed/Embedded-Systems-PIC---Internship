@@ -4,7 +4,7 @@ Processor_Text=PIC18F46K22
 Compiler=PCH
 Development_Mode=
 ToolSuite=CCS
-CCSVersion=5.122P
+CCSVersion=5.120
 [Target Data]
 FileList=$linker.c
 BuildTool=C-COMPILER
@@ -39,7 +39,7 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=5
+buildcount=6
 
 [main.c]
 Type=4
@@ -55,9 +55,9 @@ AdditionalOptionString=
 
 [Opened Files]
 1=main.c
-t1=2
-Count=1
-2=space_invaders Notes.txt
+t1=1
+Count=2
+2=..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdbool.h
 t2=1
 3=cdb.c
 t3=1
@@ -69,7 +69,7 @@ t5=1
 Type=4
 
 [ProjectLog]
-Days=2
+Days=3
 D1=21-08-2025
 D1_L=4
 D1_L1=[76555]Project Opened.
@@ -88,6 +88,13 @@ D2_L3=[41205]Stopped Editing.
 D2_E=1
 D2_D=0
 D2_L4=[41700]Project Closed.
+D3=26-08-2025
+D3_L=5
+D3_L1=[36901]Project Opened.
+D3_L2=[36943]Project Closed.
+D3_L3=[37894]Project Opened.
+D3_L4=[37895]Project Closed.
+D3_L5=[37895]Project Opened.
 
 
 [CompilerVersion]
@@ -95,7 +102,7 @@ Fixed=
 [..\..\..\..\..\..\..\EDU\2024-2025\INCI\Firmware design\Lab quiz\firmware\output\space_invaders.c]
 Type=4
 [Units]
-Count=10
+Count=11
 1=main
 2=scheduler
 3=hardware
@@ -106,4 +113,5 @@ Count=10
 8=Drivers\sh1106
 9=Utilities\sprites
 10=Drivers\joystick
+11=tasks
 Link=1

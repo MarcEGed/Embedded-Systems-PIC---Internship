@@ -1,5 +1,5 @@
-#include "tasks.h"
 #include "main.h"
+#include "tasks.h"
 
 static s_task_handle_t player_draw_task_handle;
 
