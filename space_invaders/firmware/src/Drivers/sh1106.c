@@ -1,11 +1,11 @@
 /*
-   sh1106.c - Driver for sh1106 OLED screen module (written for PIC18F46K22)
-   Controls OLED via I2C using pins C4 (SDA) and C3 (SDL)
-   Provides functions to initialize, update screen, draw pixels and clear buffer
-   Needs CCS I2C library
+   sh1106.c - SH1106 OLED driver for PIC18F46K22
+   Designed specifically for this project with CCS C compiler
+   Uses I2C1 with proper error handling and timing
+   Address: 0x3C - write adress 0x78
 */
 
-#include "../main.h"       //chip config are here
+#include "../main.h"
 #include "sh1106.h"
 
 uint8_t buffer[8][128];

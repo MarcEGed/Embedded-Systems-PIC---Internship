@@ -18,18 +18,14 @@ void main(void)
     delay_ms(250);
 
     ret = scheduler_init(get_ticks_counter);    /*Initialize scheduler*/
-    printf("scheduler_init ret = %u\r\n", ret);
 
     if (true == ret)
     {   
         ret &= init_system();
-        printf("after init_system ret = %u\r\n", ret);
         
         ret &= init_hw();
-        printf("after init_hw ret = %u\r\n", ret);
          
         ret &= init_adc();
-        printf("after init_adc ret = %u\r\n", ret);
 
         
         Vec2 pos = {50, 50};

@@ -4,3 +4,4 @@
 /space_invaders/firmware/output/
 /space_invaders/PoC/*.pdsbak
 /space_invaders/PoC/*.workspace
+/space_invaders/firmware/src/__history/
