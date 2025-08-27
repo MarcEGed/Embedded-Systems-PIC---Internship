@@ -26,8 +26,8 @@ void controller_init(){
 }
 
 void controller_update(Vec2 *player_pos){
-    uint8_t x = get_Joystick_X();
-    uint8_t y = get_Joystick_Y();
+    uint16_t x = get_Joystick_X();
+    uint16_t y = get_Joystick_Y();
     
     //deadzone +- 15 from center
     #define X_DEADZONE_MIN 112  // 127 - 15

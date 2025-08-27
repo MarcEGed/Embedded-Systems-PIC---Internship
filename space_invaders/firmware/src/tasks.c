@@ -103,6 +103,7 @@ void task_start_screen(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
 
     if (!initialized) {
         display_clear();
+        reset_globals();
         initialized = 1;
     }
 

@@ -5,3 +5,5 @@
 /space_invaders/PoC/*.pdsbak
 /space_invaders/PoC/*.workspace
 /space_invaders/firmware/src/__history/
+/space_invaders/firmware/src/API/__history/
+/space_invaders/PoC/simple adc test/__history/
