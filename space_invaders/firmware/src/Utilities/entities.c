@@ -2,8 +2,7 @@
     Contains collision system 
 */
 
-#include <18F46K22.h>
-#use delay(clock=16M)
+#include "../main.h"
 
 #include "entities.h"
 #include "vec2.h"

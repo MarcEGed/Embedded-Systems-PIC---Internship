@@ -2,12 +2,28 @@
 #define TASKS_H
 
 #include "scheduler.h"
-#include "API/display.h"
-#include "Drivers/sh1106.h"
-#include "Utilities/vec2.h"
 
-void task_draw_pixel(s_task_handle_t task_handle, s_task_msg_t **msg_head, void* arg);
+void task_start_screen(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_game_init(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_player(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_bullet(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_collision(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_display(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_enemies(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_score(s_task_handle_t me, s_task_msg_t** msg, void* arg);
+void task_game_over(s_task_handle_t me, s_task_msg_t** msg, void* arg);
 
-bool init_pixel_draw_task(void);
+
+bool tasks_init(void);
+
+extern s_task_handle_t start_screen_task_handle;
+extern s_task_handle_t game_init_task_handle;
+extern s_task_handle_t player_task_handle;
+extern s_task_handle_t bullet_task_handle;
+extern s_task_handle_t collision_task_handle;
+extern s_task_handle_t display_task_handle;
+extern s_task_handle_t enemies_task_handle;
+extern s_task_handle_t score_task_handle;
+extern s_task_handle_t game_over_task_handle;
 
 #endif

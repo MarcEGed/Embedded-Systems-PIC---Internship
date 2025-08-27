@@ -14,7 +14,7 @@
 
 #use delay(internal=64000000)
 
-#use I2C(master, fast=100000, I2C1)        /*I2C HAL*/
+#use I2C(master, fast=400000, I2C1)        /*I2C HAL*/
 #use RS232(baud=115200, UART1)      /*UART HAL*/
 
 #use fast_io(ALL)

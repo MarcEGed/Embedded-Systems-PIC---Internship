@@ -15,7 +15,7 @@
 #define ENEMY_STEP_X    13
 #define ENEMY_STEP_Y    5
 
-#define BULLET_SPEED    12
+#define BULLET_SPEED    6
 #define BULLET_MIN_X    5
 
 typedef struct{

@@ -48,7 +48,7 @@
 #elif defined(STM32F40XX) || defined(STM32F4XX)	|| defined(STM32F2XX)//add more?
 	#include <stdint.h>
 
-	typedef	uint8_t  	bool;
+	// typedef	uint8_t  	bool;  //commented out to prevent bool type conflict
 	typedef	uint32_t cntr_size_t;
 	
 	#include <stdlib.h>

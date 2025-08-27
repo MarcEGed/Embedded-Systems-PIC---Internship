@@ -1,6 +1,6 @@
 /*
     joystick.c - Driver for generic joystick module (written for PIC18F46K22)
-    Reads X/Y axes via ADC channels AN1 (RA2) for X and AN2 (RA1) for Y
+    Reads X/Y axes via ADC channels RA2 for X and RA1 for Y
     Reads SW (switch) state via digital input PIN_B0
     Needs ADC modules and digital I/O ports to function
 */
@@ -10,17 +10,18 @@
 #include "../adc.h"
 
 void joystick_init(){
+    // No need for ADC setup here - it's handled by the ADC system
     delay_ms(5);
 }
 
-int get_Joystick_X(){
+uint16_t get_Joystick_X(){
     // Get X axis ADC value (AN1/RA2)
-    return (int)get_adc_live(VRX_PIN_INDEX);
+    return get_adc(VRX_PIN_INDEX);
 }
 
-int get_Joystick_Y(){
+uint16_t get_Joystick_Y(){
     // Get Y axis ADC value (AN2/RA1) 
-    return (int)get_adc_live(VRY_PIN_INDEX);
+    return get_adc(VRY_PIN_INDEX);
 }
 
 int1 get_Joystick_SW(){
