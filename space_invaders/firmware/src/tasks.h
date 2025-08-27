@@ -13,8 +13,17 @@ void task_enemies(s_task_handle_t me, s_task_msg_t** msg, void* arg);
 void task_score(s_task_handle_t me, s_task_msg_t** msg, void* arg);
 void task_game_over(s_task_handle_t me, s_task_msg_t** msg, void* arg);
 
-
 bool tasks_init(void);
+
+bool create_start_screen_task(void);
+bool create_game_init_task(void);
+bool create_player_task(void);
+bool create_enemies_task(void);
+bool create_bullet_task(void);
+bool create_collision_task(void);
+bool create_display_task(void);
+bool create_score_task(void);
+bool create_game_over_task(void);
 
 extern s_task_handle_t start_screen_task_handle;
 extern s_task_handle_t game_init_task_handle;

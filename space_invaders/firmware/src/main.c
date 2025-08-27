@@ -29,15 +29,15 @@ void main(void)
 
         ret &= tasks_init();
         
-        ret &= s_task_create(true, S_TASK_HIGH_PRIORITY, 100, task_start_screen, &start_screen_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_NORMAL_PRIORITY, 0, task_game_init, &game_init_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_player, &player_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_enemies, &enemies_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_bullet, &bullet_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_HIGH_PRIORITY, 10, task_collision, &collision_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_NORMAL_PRIORITY, 100, task_display, &display_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_NORMAL_PRIORITY, 100, task_score, &score_task_handle, NULL);
-        ret &= s_task_create(true, S_TASK_LOW_PRIORITY, 500, task_game_over, &game_over_task_handle, NULL);
+        ret &= create_start_screen_task();
+        ret &= create_game_init_task();
+        ret &= create_player_task();
+        ret &= create_enemies_task();
+        ret &= create_bullet_task();
+        ret &= create_collision_task();
+        ret &= create_display_task();
+        ret &= create_score_task();
+        ret &= create_game_over_task();
         
         
         if (true == ret)    /*success?*/

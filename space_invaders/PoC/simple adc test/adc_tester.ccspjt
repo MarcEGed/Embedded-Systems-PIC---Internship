@@ -85,7 +85,7 @@ t11=76
 Count=1
 
 [ProjectLog]
-Days=1
+Days=2
 D1=27-08-2025
 D1_L=7
 D1_L1=[72274]Project Closed.
@@ -99,6 +99,10 @@ D1_D=0
 D1_L5=[72353]Started Editing.
 D1_L6=[72427]Stopped Editing.
 D1_L7=[72427]Project Closed.
+D2=28-08-2025
+D2_L=2
+D2_L1=[1211]Project Opened.
+D2_L2=[1230]Project Closed.
 [Units]
 Count=1
 1=adc_tester (main)

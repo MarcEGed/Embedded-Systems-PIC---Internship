@@ -93,6 +93,42 @@ bool tasks_init(void) {
     return ret;
 }
 
+bool create_start_screen_task(void) {
+    return s_task_create(true, S_TASK_HIGH_PRIORITY, 100, task_start_screen, &start_screen_task_handle, NULL);
+}
+
+bool create_game_init_task(void) {
+    return s_task_create(true, S_TASK_NORMAL_PRIORITY, 0, task_game_init, &game_init_task_handle, NULL);
+}
+
+bool create_player_task(void) {
+    return s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_player, &player_task_handle, NULL);
+}
+
+bool create_enemies_task(void) {
+    return s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_enemies, &enemies_task_handle, NULL);
+}
+
+bool create_bullet_task(void) {
+    return s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_bullet, &bullet_task_handle, NULL);
+}
+
+bool create_collision_task(void) {
+    return s_task_create(true, S_TASK_HIGH_PRIORITY, 10, task_collision, &collision_task_handle, NULL);
+}
+
+bool create_display_task(void) {
+    return s_task_create(true, S_TASK_NORMAL_PRIORITY, 100, task_display, &display_task_handle, NULL);
+}
+
+bool create_score_task(void) {
+    return s_task_create(true, S_TASK_NORMAL_PRIORITY, 100, task_score, &score_task_handle, NULL);
+}
+
+bool create_game_over_task(void) {
+    return s_task_create(true, S_TASK_LOW_PRIORITY, 500, task_game_over, &game_over_task_handle, NULL);
+}
+
 void task_start_screen(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
     static int initialized = 0;
 
