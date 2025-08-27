@@ -27,7 +27,7 @@ void main(void)
          
         ret &= init_adc();
 
-        ret &= tasks_init();
+        /*ret &= tasks_init();
         
         ret &= s_task_create(true, S_TASK_HIGH_PRIORITY, 100, task_start_screen, &start_screen_task_handle, NULL);
         ret &= s_task_create(true, S_TASK_NORMAL_PRIORITY, 0, task_game_init, &game_init_task_handle, NULL);
@@ -38,15 +38,15 @@ void main(void)
         ret &= s_task_create(true, S_TASK_NORMAL_PRIORITY, 100, task_display, &display_task_handle, NULL);
         ret &= s_task_create(true, S_TASK_NORMAL_PRIORITY, 100, task_score, &score_task_handle, NULL);
         ret &= s_task_create(true, S_TASK_LOW_PRIORITY, 500, task_game_over, &game_over_task_handle, NULL);
-        
+        */
         
         if (true == ret)    /*success?*/
         {
             printf("OK\n\r");
             while (true)
             {
-                uint16_t x_val = get_Joystick_X();
-                uint16_t y_val = get_Joystick_Y();
+                uint16_t x_val = get_adc(1);
+                uint16_t y_val = get_adc(0);
                 int1 sw_val = get_Joystick_SW();
                 
                 

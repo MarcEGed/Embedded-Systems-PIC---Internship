@@ -15,13 +15,11 @@ void joystick_init(){
 }
 
 uint16_t get_Joystick_X(){
-    // Get X axis ADC value (AN1/RA2)
-    return get_adc(VRX_PIN_INDEX);
+	return get_adc(VRX_PIN_INDEX);
 }
 
 uint16_t get_Joystick_Y(){
-    // Get Y axis ADC value (AN2/RA1) 
-    return get_adc(VRY_PIN_INDEX);
+	return get_adc(VRY_PIN_INDEX);
 }
 
 int1 get_Joystick_SW(){
