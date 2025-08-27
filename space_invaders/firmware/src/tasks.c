@@ -102,11 +102,11 @@ bool create_game_init_task(void) {
 }
 
 bool create_player_task(void) {
-    return s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_player, &player_task_handle, NULL);
+    return s_task_create(true, S_TASK_HIGH_PRIORITY, 200, task_player, &player_task_handle, NULL);
 }
 
 bool create_enemies_task(void) {
-    return s_task_create(true, S_TASK_HIGH_PRIORITY, 50, task_enemies, &enemies_task_handle, NULL);
+    return s_task_create(true, S_TASK_HIGH_PRIORITY, 200, task_enemies, &enemies_task_handle, NULL);
 }
 
 bool create_bullet_task(void) {

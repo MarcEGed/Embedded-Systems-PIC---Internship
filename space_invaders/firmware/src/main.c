@@ -45,16 +45,16 @@ void main(void)
             printf("OK\n\r");
             while (true)
             {
-                // uint16_t x_val = get_adc(1);
-                // uint16_t y_val = get_adc(0);
-                // int1 sw_val = get_Joystick_SW();
+                uint16_t x_val = get_Joystick_X();
+                uint16_t y_val = get_Joystick_Y();
+                //int1 sw_val = get_Joystick_SW();
                 
                 
-                // static uint16_t print_counter = 0;
-                // if (++print_counter >= 500) {
-                //     printf("Joystick X: %d, Y: %d, SW: %d\r\n", (int)x_val, (int)y_val, sw_val);
-                //     print_counter = 0;
-                // }
+                static uint16_t print_counter = 0;
+                if (++print_counter >= 500) {
+                    printf("Joystick X: %lu, Y: %lu\r\n", x_val, y_val);
+                    print_counter = 0;
+                }
                 
                 scheduler();    /*run scheduler forever*/
             }

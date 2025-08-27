@@ -8,6 +8,7 @@
         "adc.h": "c",
         "joystick.h": "c",
         "oled.h": "c",
-        "eeprom_24lc512.h": "c"
+        "eeprom_24lc512.h": "c",
+        "vec2.h": "c"
     }
 }

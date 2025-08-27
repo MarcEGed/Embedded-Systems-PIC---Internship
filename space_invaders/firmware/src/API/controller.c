@@ -12,8 +12,12 @@
 #include "../Utilities/vec2.h"
 #include "../Utilities/entities.h"
 
+#define MOVE_SPEED      5
 
-#define MOVE_SPEED      3
+#define X_DEADZONE_MIN 120
+#define X_DEADZONE_MAX 135
+#define Y_DEADZONE_MIN 120
+#define Y_DEADZONE_MAX 135
 
 static int1 button_pressed = 0;
 static int1 last_button_state = 0;
@@ -26,37 +30,36 @@ void controller_init(){
 }
 
 void controller_update(Vec2 *player_pos){
-    uint16_t x = get_Joystick_X();
-    uint16_t y = get_Joystick_Y();
-    
-    //deadzone +- 15 from center
-    #define X_DEADZONE_MIN 112  // 127 - 15
-    #define X_DEADZONE_MAX 142  // 127 + 15
-    #define Y_DEADZONE_MIN 110  // 125 - 15
-    #define Y_DEADZONE_MAX 140  // 125 + 15
+    //updates player position and button state
+    uint16_t x = get_Joystick_X();  // 0–255
+    uint16_t y = get_Joystick_Y();  // 0–255
 
     // LEFT
-    if (x < X_DEADZONE_MIN && player_pos->x > PLAYER_MIN_X) {
+    if (x < X_DEADZONE_MIN && player_pos->x > PLAYER_MIN_X)
         player_pos->x -= MOVE_SPEED;
-        if (player_pos->x < PLAYER_MIN_X) player_pos->x = PLAYER_MIN_X;
-    }
     // RIGHT
-    else if (x > X_DEADZONE_MAX && player_pos->x < PLAYER_MAX_X) {
+    else if (x > X_DEADZONE_MAX && player_pos->x < PLAYER_MAX_X)
         player_pos->x += MOVE_SPEED;
-        if (player_pos->x > PLAYER_MAX_X) player_pos->x = PLAYER_MAX_X;
-    }
 
-    // UP
-    if (y < Y_DEADZONE_MIN && player_pos->y > PLAYER_TOP_Y) {
-        player_pos->y -= MOVE_SPEED;
-        if (player_pos->y < PLAYER_TOP_Y) player_pos->y = PLAYER_TOP_Y;
-    }
     // DOWN
-    else if (y > Y_DEADZONE_MAX && player_pos->y < PLAYER_BOT_Y) {
+    if (y < Y_DEADZONE_MIN && player_pos->y < PLAYER_BOT_Y)
         player_pos->y += MOVE_SPEED;
-        if (player_pos->y > PLAYER_BOT_Y) player_pos->y = PLAYER_BOT_Y;
-    }
+    // UP
+    else if (y > Y_DEADZONE_MAX && player_pos->y > PLAYER_TOP_Y)
+        player_pos->y -= MOVE_SPEED;
 
+    if (player_pos->x < PLAYER_MIN_X)
+        player_pos->x = PLAYER_MIN_X;
+    if (player_pos->x > PLAYER_MAX_X)
+        player_pos->x = PLAYER_MAX_X;
+
+    if (player_pos->y < PLAYER_TOP_Y)
+        player_pos->y = PLAYER_TOP_Y;
+    if (player_pos->y > PLAYER_BOT_Y)
+        player_pos->y = PLAYER_BOT_Y;
+
+    
+    //button handling section
     int1 sw = get_Joystick_SW();
     button_pressed = !sw;               // active-low
     just_pressed = (button_pressed && !last_button_state);
