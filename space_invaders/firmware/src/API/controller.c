@@ -41,12 +41,12 @@ void controller_update(Vec2 *player_pos){
     else if (x > X_DEADZONE_MAX && player_pos->x < PLAYER_MAX_X)
         player_pos->x += MOVE_SPEED;
 
-    // DOWN
-    if (y < Y_DEADZONE_MIN && player_pos->y < PLAYER_BOT_Y)
-        player_pos->y += MOVE_SPEED;
     // UP
-    else if (y > Y_DEADZONE_MAX && player_pos->y > PLAYER_TOP_Y)
+    if (y < Y_DEADZONE_MIN && player_pos->y < PLAYER_BOT_Y)
         player_pos->y -= MOVE_SPEED;
+    // DOWN
+    else if (y > Y_DEADZONE_MAX && player_pos->y > PLAYER_TOP_Y)
+        player_pos->y += MOVE_SPEED;
 
     if (player_pos->x < PLAYER_MIN_X)
         player_pos->x = PLAYER_MIN_X;
