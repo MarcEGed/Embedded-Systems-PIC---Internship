@@ -84,9 +84,6 @@ bool tasks_init(void) {
 
     reset_globals();
     display_clear();
-    spawn_enemy_wave();
-    display_draw_score(score);
-    display_update();
     frame_counter = 0;
     game_state = GAME_START;
     
