@@ -10,16 +10,16 @@
 #include "../adc.h"
 
 void joystick_init(){
-    // No need for ADC setup here - it's handled by the ADC system
+    //replaced by init_adc()
     delay_ms(5);
 }
 
 uint16_t get_Joystick_X(){
-	return get_adc(VRX_PIN_INDEX);
+	return get_adc_live(VRX_PIN_INDEX);
 }
 
 uint16_t get_Joystick_Y(){
-	return get_adc(VRY_PIN_INDEX);
+	return get_adc_live(VRY_PIN_INDEX);
 }
 
 int1 get_Joystick_SW(){

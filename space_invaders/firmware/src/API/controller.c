@@ -12,7 +12,7 @@
 #include "../Utilities/vec2.h"
 #include "../Utilities/entities.h"
 
-#define MOVE_SPEED      5
+#define MOVE_SPEED      8
 
 #define X_DEADZONE_MIN 120
 #define X_DEADZONE_MAX 135
