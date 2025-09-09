@@ -4,7 +4,7 @@
 void audio_init(){
     DFPM_set_device(1);     //for TF card
     DFPM_set_EQ(0);         //for normal eq
-    DFPM_set_volume(5);
+    DFPM_set_volume(2);
 }
 
 void audio_play_shooting(){

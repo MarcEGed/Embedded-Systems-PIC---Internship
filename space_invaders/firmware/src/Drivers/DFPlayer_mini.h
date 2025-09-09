@@ -1,34 +1,21 @@
-#ifndef DFPLAYERMINI_H
-#define DFPLAYERMINI_H
+#ifndef DFPLAYER_H
+#define DFPLAYER_H
 
-typedef enum DFPM_cmd
-{
-	DFP_CMD_NEXT	=1,
-	DFP_CMD_PREVIOUS,
-	DFP_CMD_TRACKNB,
-	DFP_CMD_INCVOL,
-	DFP_CMD_DECVOL,
-	DFP_CMD_SETVOL,
-	DFP_CMD_SETEQ,
-	DFP_CMD_PLAYMODE,
-	DFP_CMD_PLAYSOURCE,
-	DFP_CMD_LOWPOWER,
-	DFP_CMD_NORMALOP,
-	DFP_CMD_RESET,
-	DFP_CMD_PLAYBACK,
-	DFP_CMD_PAUSE,
-	DFP_CMD_SETFOLDER
-}DFPM_cmd;
+#define DF_START  0x7E
+#define DF_VER    0xFF
+#define DF_LEN    0x06
+#define DF_END    0xEF
 
-int DFPM_get_checksum(int buff[]);
-void DFPM_send_cmd(int8 cmd, int16 arg, int1 feedback);
+#define HIGH_BYTE(x)   ((x >> 8) & 0xFF)
+#define LOW_BYTE(x)    (x & 0xFF)
 
-void DFPM_set_device(int16 device);
-void DFPM_set_EQ(int16 eq);
-void DFPM_set_volume(int16 volume);
 
-void DFPM_play_track(int16 track_num);
-
-void DFPM_stop();
+void df_init(void);
+void df_setVolume(int8 vol);
+void df_playTrack(int16 track);
+void df_pause(void);
+void df_resume(void);
+void df_stop(void);
+void df_playFolder(int8 folder, int8 track);
 
 #endif
