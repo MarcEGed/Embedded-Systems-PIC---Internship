@@ -16,7 +16,7 @@
 
 #use I2C(master, fast=400000, I2C1)        /*I2C HAL*/
 #use RS232(baud=115200, UART1)      /*UART HAL*/
-#use rs232(baud=9600, xmit=PIN_D6, rcv=PIN_D7, bits=8, parity=N, stop=1, stream=DFPLAYER)
+#use RS232(baud=9600, UART2, stream = DFPLAYER)
 
 #use fast_io(ALL)
 

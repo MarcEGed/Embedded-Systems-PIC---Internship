@@ -81,7 +81,7 @@ t11=1
 Type=4
 
 [ProjectLog]
-Days=7
+Days=8
 D1=21-08-2025
 D1_L=4
 D1_L1=[76555]Project Opened.
@@ -226,6 +226,12 @@ D7_L8=[3041]Stopped Editing.
 D7_E=4
 D7_D=0
 D7_L9=[3041]Project Closed.
+D8=17-09-2025
+D8_L=4
+D8_L1=[40457]Project Opened.
+D8_L2=[40458]Project Closed.
+D8_L3=[40458]Project Opened.
+D8_L4=[40515]Project Closed.
 
 
 [CompilerVersion]

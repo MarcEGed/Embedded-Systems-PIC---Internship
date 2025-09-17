@@ -5,6 +5,7 @@
 
 #include "main.h"
 #include "scheduler.h"
+#include "Drivers/DFPlayer_mini.h"
 #include "API/display.h"
 #include "API/controller.h"
 #include "API/memory.h"
@@ -81,6 +82,8 @@ bool tasks_init(void) {
     //initializes APIs and game variables
     display_init();
     controller_init();
+    df_init();
+    df_setVolume(20);
 
     reset_globals();
     display_clear();
@@ -192,6 +195,7 @@ void task_collision(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
             enemies[i].is_active = 0;
             display_clear_entity(enemies[i].pos, 8, 8);
             display_clear_entity(b.pos, 8, 8);
+            df_playFolder(1, 1);
             break;
         }
     }
