@@ -9,7 +9,6 @@
 #include "Drivers/eeprom_24LC512.h"
 #include "Drivers/joystick.h"
 #include "API/display.h"
-#include "Drivers/DFPlayer_mini.h"
 
 
 void main(void)
@@ -28,10 +27,6 @@ void main(void)
         ret &= init_hw();
          
         ret &= init_adc();
-
-        df_init();
-        df_setVolume(20);
-        df_playFolder(1, 1);
 
         ret &= tasks_init();
         

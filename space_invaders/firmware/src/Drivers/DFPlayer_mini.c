@@ -1,5 +1,5 @@
 #include "../main.h"
-#include "dfplayer_mini.h"
+#include "DFPlayer_mini.h"
 
 
 static int16 df_checksum(int8 cmd, int8 feedback, int8 param1, int8 param2) {

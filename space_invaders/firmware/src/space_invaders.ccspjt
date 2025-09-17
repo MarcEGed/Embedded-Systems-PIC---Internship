@@ -39,7 +39,7 @@ enabled=0
 chip=1
 D1=
 V1=
-buildcount=22
+buildcount=25
 
 [main.c]
 Type=4
@@ -227,11 +227,17 @@ D7_E=4
 D7_D=0
 D7_L9=[3041]Project Closed.
 D8=17-09-2025
-D8_L=4
+D8_L=10
 D8_L1=[40457]Project Opened.
 D8_L2=[40458]Project Closed.
 D8_L3=[40458]Project Opened.
 D8_L4=[40515]Project Closed.
+D8_L5=[43072]Project Opened.
+D8_L6=[43248]Project Closed.
+D8_L7=[43944]Project Opened.
+D8_L8=[43944]Project Closed.
+D8_L9=[43945]Project Opened.
+D8_L10=[44378]Project Closed.
 
 
 [CompilerVersion]
@@ -247,7 +253,7 @@ BuildTool=
 OptionString=
 AdditionalOptionString=
 [Units]
-Count=16
+Count=17
 1=system
 2=hardware
 3=timer
@@ -264,4 +270,5 @@ Count=16
 14=tasks
 15=main
 16=Drivers\DFPlayer_mini
+17=API\audio
 Link=1

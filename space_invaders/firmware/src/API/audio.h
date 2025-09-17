@@ -3,7 +3,8 @@
 
 void audio_init();
 void audio_play_shooting();
-void audio_play_startSong();
-void audio_play_gameOverSong();
+void audio_play_explosion();
+void audio_play_gameOver();
+void audio_stop();
 
 #endif

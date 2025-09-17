@@ -10,6 +10,7 @@
         "oled.h": "c",
         "eeprom_24lc512.h": "c",
         "vec2.h": "c",
-        "dfplayer_mini.h": "c"
+        "dfplayer_mini.h": "c",
+        "display.h": "c"
     }
 }
