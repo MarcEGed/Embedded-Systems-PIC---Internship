@@ -1,3 +1,9 @@
+/*
+    audio.c - API for dfplayer
+    Wrapper for DFPlayer_mini for ease of use
+    Needs dfplayer driver
+*/
+
 #include "../main.h"
 #include "Drivers/DFPlayer_mini.h"
 

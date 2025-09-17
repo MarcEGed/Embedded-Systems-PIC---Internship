@@ -1,3 +1,10 @@
+/*
+    DFPlayer_mini.c - Driver for DFPlayer mini
+    Implements playing audio from SD card using dfplayer
+    Uses DFPLAYER stream (mapped to UART2) to send commands to the hardware
+    Needs UART
+*/
+
 #include "../main.h"
 #include "DFPlayer_mini.h"
 

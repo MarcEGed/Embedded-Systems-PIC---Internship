@@ -5,10 +5,6 @@
 #include "scheduler.h"
 #include "adc.h"
 #include "tasks.h"
-#include "Utilities/vec2.h"
-#include "Drivers/eeprom_24LC512.h"
-#include "Drivers/joystick.h"
-#include "API/display.h"
 
 
 void main(void)
@@ -45,18 +41,7 @@ void main(void)
         {
             printf("OK\n\r");
             while (true)
-            {
-                uint16_t x_val = get_Joystick_X();
-                uint16_t y_val = get_Joystick_Y();
-                //int1 sw_val = get_Joystick_SW();
-                
-                
-                static uint16_t print_counter = 0;
-                if (++print_counter >= 500) {
-                    printf("Joystick X: %lu, Y: %lu\r\n", x_val, y_val);
-                    print_counter = 0;
-                }
-                
+            {   
                 scheduler();    /*run scheduler forever*/
             }
         }

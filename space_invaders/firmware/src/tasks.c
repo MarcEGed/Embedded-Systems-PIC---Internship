@@ -129,6 +129,7 @@ bool create_game_over_task(void) {
 }
 
 void task_start_screen(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles start screen
     static int initialized = 0;
 
     if (game_state != GAME_START) {
@@ -160,7 +161,7 @@ void task_game_init(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
     }
 
     if (!initialized) {
-        // Initialize game state for new game
+        //initialize game state for new game
         reset_globals();
         display_clear();
         spawn_enemy_wave();
@@ -170,6 +171,7 @@ void task_game_init(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
 }
 
 void task_player(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles player actions while in GAME_PLAYING state
     if (game_state != GAME_PLAYING) return;
 
     display_clear_entity(p.pos, 8, 8);
@@ -184,12 +186,14 @@ void task_player(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
 }
 
 void task_bullet(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles bullet while in GAME_PLAYING state
     if (game_state != GAME_PLAYING) return;
 
     b = display_move_bullet(b);
 }
 
 void task_collision(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles collisions while in GAME_PLAYING state
     if (game_state != GAME_PLAYING) return;
 
     for (int i = 0; i < ENEMIES_PER_WAVE; i++) {
@@ -204,13 +208,14 @@ void task_collision(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
         }
     }
 
-    if (b.is_active && b.pos.x <= BULLET_MIN_X) {
+    if (b.is_active && b.pos.x <= BULLET_MIN_X) {     //despawn bullet when out of bounds
         b.is_active = 0;
         display_clear_entity(b.pos, 8, 8);
     }
 }
 
 void task_enemies(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles enemies while in GAME_PLAYING state
     if (game_state != GAME_PLAYING) return;
 
     int active_count = 0;
@@ -218,7 +223,7 @@ void task_enemies(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
         if (enemies[i].is_active) active_count++;
     }
 
-    if (active_count == 0 && !wave_spawned) {
+    if (active_count == 0 && !wave_spawned) { //spawn new wave if all enemies are gone
         if (enemy_move_interval > 1) enemy_move_interval--;
         spawn_enemy_wave();
         wave_spawned = 1;
@@ -227,7 +232,7 @@ void task_enemies(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
         wave_spawned = 0;
     }
 
-    // Move enemies based on frame counter
+    //move enemies based on frame counter
     enemy_move_counter++;
     if (enemy_move_counter >= enemy_move_interval) {
         enemy_move_counter = 0;
@@ -244,6 +249,7 @@ void task_enemies(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
 }
 
 void task_score(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles score while in GAME_PLAYING state
     if (game_state != GAME_PLAYING) return;
 
     if (collision_detected) {
@@ -259,6 +265,7 @@ void task_score(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
 }
 
 void task_display(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles display updates while in GAME_PLAYING state
     if (game_state != GAME_PLAYING) return;
 
     display_update();
@@ -266,6 +273,7 @@ void task_display(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
 }
 
 void task_game_over(s_task_handle_t me, s_task_msg_t** msg, void* arg) {
+    //handles game over state
     static int hs_saved = 0;
 
     if (game_state != GAME_OVER) {
