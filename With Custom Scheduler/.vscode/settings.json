@@ -7,6 +7,7 @@
         "cstdlib": "c",
         "controller.h": "c",
         "display.h": "c",
-        "simple_scheduler.h": "c"
+        "simple_scheduler.h": "c",
+        "tasks.h": "c"
     }
 }

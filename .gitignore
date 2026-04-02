@@ -1,1 +1,11 @@
-**/_history/
+/With Custom Scheduler/__history/
+/With Custom Scheduler/src/__history/
+/With Custom Scheduler/ouput/
+/space_invaders/firmware/output/
+/space_invaders/PoC/*.pdsbak
+/space_invaders/PoC/*.workspace
+/space_invaders/firmware/src/__history/
+/space_invaders/firmware/src/API/__history/
+/space_invaders/PoC/simple adc test/__history/
+/space_invaders/PoC/adc debugging/__history/
+/space_invaders/PoC/adc debugging

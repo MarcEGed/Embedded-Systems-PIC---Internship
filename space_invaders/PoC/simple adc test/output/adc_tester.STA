@@ -1,0 +1,51 @@
+
+ROM used:   578/65536 (1%)
+            578/65536 (1%) including unused fragments
+
+            0.5 Average locations per line
+            41.3 Average locations per statement
+
+RAM used:   8/3896 (0%) at main() level
+            13/3896 (0%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   48    14 100  adc_tester.c
+ 1099     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F46K22.h
+----- -----
+ 1147    14 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     42   4    1             @delay_ms1
+0    274  24    2    380  3.2  main
+0     24   2    0             @const813
+0     36   3    2             @PSTRINGC_115200_31766_31767
+0     16   1    0             @const818
+0     40   3    3             @DIV88
+0    108   9    2             @PRINTF_U_115200_31766_31767
+0     34   3    3             @PSTRINGCN_115200_31766_31767
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              14
+    Comments                195
+    Volume (V)              397
+    Difficulty (D)          2.6
+    Effort to implement (E) 1042
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    114
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-0FFFE   574  64958  
+
+
+

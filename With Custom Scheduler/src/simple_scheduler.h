@@ -5,7 +5,7 @@
 
 typedef void (*task_fn_t)(void);  //function pointer for tasks
 
-#define SCHED_MAX_TASKS 6
+#define SCHED_MAX_TASKS 12
 
 typedef struct{
     task_fn_t fn;

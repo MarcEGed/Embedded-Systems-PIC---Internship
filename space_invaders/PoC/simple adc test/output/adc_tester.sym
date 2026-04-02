@@ -1,0 +1,92 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 @sprintf_string
+006     main.adc_x
+007     main.adc_y
+008     @delay_ms1.P1
+008     @PSTRINGCN_115200_31766_31767.P2
+008     @PRINTF_U_115200_31766_31767.P3
+008     @PSTRINGC_115200_31766_31767.@SCRATCH1
+009     @PRINTF_U_115200_31766_31767.P1
+009     @PSTRINGC_115200_31766_31767.@SCRATCH2
+009     @PSTRINGCN_115200_31766_31767.@SCRATCH1
+00A     @DIV88.P1
+00A     @PSTRINGCN_115200_31766_31767.@SCRATCH2
+00B     @DIV88.P1
+00C     @DIV88.@SCRATCH1
+F55     CCP_5_LOW
+F55     CCP_5
+F56     CCP_5_HIGH
+F58     CCP_4
+F58     CCP_4_LOW
+F59     CCP_4_HIGH
+F5E     CCP_3_LOW
+F5E     CCP_3
+F5F     CCP_3_HIGH
+F67     CCP_2_LOW
+F67     CCP_2
+F68     CCP_2_HIGH
+F78.6   C2OUT
+F79.6   C1OUT
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PROGRAM_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  @const813.call
+00001C  @const818.call
+00002C  @PSTRINGC_115200_31766_31767
+000050  @DIV88
+000078  @PRINTF_U_115200_31766_31767
+0000E4  @PSTRINGCN_115200_31766_31767
+000106  @delay_ms1
+000130  @cinit1
+000130  main
+00017E  @cinit2
+
+Project Directory:
+    C:\Users\User\Desktop\Stage\Project Final\space_invaders\PoC\simple adc test\
+
+Project Files:
+    adc_tester.c                                            [27-Aug-25 20:05  CRC=76F19008]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F46K22.h [30-May-25 13:08  CRC=4F466C02]
+
+Source signature=157E680C
+Program memory checksum=0000
+Hex file CRC=D8D3
+
+Units:
+    C:\Users\User\Desktop\Stage\Project Final\space_invaders\PoC\simple adc test\adc_tester (main)
+
+Compiler Settings:
+    Processor:      PIC18F46K22
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: SIGNED: 1,8,16
+    Float,Double:   32,32
+    Case Sensitive: Yes
+    Compile Mode:   ANSI
+
+Output Files:
+    XREF file:   adc_tester.xsym
+    Errors:      adc_tester.err
+    Ext Symbols: adc_tester.esym
+    INHX32:      adc_tester.hex
+    Symbols:     adc_tester.sym
+    List:        adc_tester.lst
+    Debug/COFF:  adc_tester.cof
+    Project:     adc_tester.ccspjt
+    Call Tree:   adc_tester.tre
+    Statistics:  adc_tester.STA

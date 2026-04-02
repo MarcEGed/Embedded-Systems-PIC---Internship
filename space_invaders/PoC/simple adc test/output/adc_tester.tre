@@ -1,0 +1,12 @@
+ÀÄadc_tester
+   ÀÄmain  0/274  Ram=2
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ@cinit2  (Inline)  Ram=0
+      ÃÄ@PSTRINGC_115200_31766_31767  0/36  Ram=2
+      ÃÄ@PRINTF_U_115200_31766_31767  0/108  Ram=2
+      ³  ÃÄ@DIV88  0/40  Ram=3
+      ³  ÀÄ@DIV88  0/40  Ram=3
+      ÃÄ@PSTRINGCN_115200_31766_31767  0/34  Ram=3
+      ÃÄ@PRINTF_U_115200_31766_31767  0/108  Ram=2
+      ³  ÀÄ*
+      ÀÄ@delay_ms1  0/42  Ram=1

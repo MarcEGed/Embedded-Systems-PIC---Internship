@@ -1,0 +1,350 @@
+CCS PCH C Compiler, Version 5.120, 4205               27-Aug-25 20:05
+
+               Filename:   C:\Users\User\Desktop\Stage\Project Final\space_invaders\PoC\simple adc test\adc_tester.lst
+
+               ROM used:   578 bytes (1%)
+                           Largest free fragment is 64958
+               RAM used:   8 (0%) at main() level
+                           13 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+00000:  GOTO   0130
+.................... #include <18F46K22.h>
+.................... //////////// Standard Header file for the PIC18F46K22 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F46K22
+00004:  DATA 53,74
+00006:  DATA 61,72
+00008:  DATA 74,69
+0000A:  DATA 6E,67
+0000C:  DATA 20,41
+0000E:  DATA 44,43
+00010:  DATA 20,74
+00012:  DATA 65,73
+00014:  DATA 74,2E
+00016:  DATA 2E,2E
+00018:  DATA 0D,0A
+0001A:  DATA 00,00
+0001C:  DATA 58,3D
+0001E:  DATA 25,33
+00020:  DATA 75,20
+00022:  DATA 20,59
+00024:  DATA 3D,25
+00026:  DATA 33,75
+00028:  DATA 0D,0A
+0002A:  DATA 00,00
+0002C:  TBLRD*+
+0002E:  MOVF   FF5,F
+00030:  BZ    004C
+00032:  MOVFF  FF6,08
+00036:  MOVFF  FF7,09
+0003A:  MOVF   FF5,W
+0003C:  BTFSS  F9E.4
+0003E:  BRA    003C
+00040:  MOVWF  FAD
+00042:  MOVFF  08,FF6
+00046:  MOVFF  09,FF7
+0004A:  BRA    002C
+0004C:  GOTO   01B6 (RETURN)
+00050:  MOVF   0B,W
+00052:  CLRF   01
+00054:  SUBWF  0A,W
+00056:  BC    005E
+00058:  MOVFF  0A,00
+0005C:  BRA    0076
+0005E:  CLRF   00
+00060:  MOVLW  08
+00062:  MOVWF  0C
+00064:  RLCF   0A,F
+00066:  RLCF   00,F
+00068:  MOVF   0B,W
+0006A:  SUBWF  00,W
+0006C:  BTFSC  FD8.0
+0006E:  MOVWF  00
+00070:  RLCF   01,F
+00072:  DECFSZ 0C,F
+00074:  BRA    0064
+00076:  RETURN 0
+00078:  MOVF   01,W
+0007A:  MOVFF  08,0A
+0007E:  MOVLW  64
+00080:  MOVWF  0B
+00082:  RCALL  0050
+00084:  MOVFF  00,08
+00088:  MOVF   01,W
+0008A:  MOVLW  30
+0008C:  BNZ   009C
+0008E:  BTFSS  09.1
+00090:  BRA    00AC
+00092:  BTFSC  09.3
+00094:  BRA    00AC
+00096:  BTFSC  09.4
+00098:  MOVLW  20
+0009A:  BRA    00A2
+0009C:  BCF    09.3
+0009E:  BCF    09.4
+000A0:  BSF    09.0
+000A2:  ADDWF  01,F
+000A4:  MOVF   01,W
+000A6:  BTFSS  F9E.4
+000A8:  BRA    00A6
+000AA:  MOVWF  FAD
+000AC:  MOVFF  08,0A
+000B0:  MOVLW  0A
+000B2:  MOVWF  0B
+000B4:  RCALL  0050
+000B6:  MOVFF  00,08
+000BA:  MOVF   01,W
+000BC:  MOVLW  30
+000BE:  BNZ   00CC
+000C0:  BTFSC  09.3
+000C2:  BRA    00D6
+000C4:  BTFSS  09.0
+000C6:  BRA    00D6
+000C8:  BTFSC  09.4
+000CA:  MOVLW  20
+000CC:  ADDWF  01,F
+000CE:  MOVF   01,W
+000D0:  BTFSS  F9E.4
+000D2:  BRA    00D0
+000D4:  MOVWF  FAD
+000D6:  MOVLW  30
+000D8:  ADDWF  08,F
+000DA:  MOVF   08,W
+000DC:  BTFSS  F9E.4
+000DE:  BRA    00DC
+000E0:  MOVWF  FAD
+000E2:  RETURN 0
+000E4:  TBLRD*+
+000E6:  MOVFF  FF6,09
+000EA:  MOVFF  FF7,0A
+000EE:  MOVF   FF5,W
+000F0:  BTFSS  F9E.4
+000F2:  BRA    00F0
+000F4:  MOVWF  FAD
+000F6:  MOVFF  09,FF6
+000FA:  MOVFF  0A,FF7
+000FE:  DECFSZ 08,F
+00100:  BRA    00E4
+00102:  GOTO   021E (RETURN)
+.................... 
+.................... #list
+.................... 
+.................... #device ADC=8           /* 8-bit ADC */
+.................... #device ANSI            /* ANSI C */
+.................... 
+.................... #FUSES NOWDT            // No Watch Dog Timer
+.................... #FUSES PUT              // Power Up Timer
+.................... #FUSES NOBROWNOUT       // No brownout reset
+.................... #FUSES BORV29           // Brownout reset at 2.85V
+.................... #FUSES TIMER3B5         // Timer3 Clock In is on pin B5
+.................... #FUSES LVP              // Low Voltage Programming
+.................... 
+.................... #use delay(internal=64000000)             // 64 MHz internal oscillator
+00106:  CLRF   FEA
+00108:  MOVLW  08
+0010A:  MOVWF  FE9
+0010C:  MOVF   FEF,W
+0010E:  BZ    012C
+00110:  MOVLW  14
+00112:  MOVWF  01
+00114:  CLRF   00
+00116:  DECFSZ 00,F
+00118:  BRA    0116
+0011A:  DECFSZ 01,F
+0011C:  BRA    0114
+0011E:  MOVLW  BF
+00120:  MOVWF  00
+00122:  DECFSZ 00,F
+00124:  BRA    0122
+00126:  BRA    0128
+00128:  DECFSZ FEF,F
+0012A:  BRA    0110
+0012C:  GOTO   023E (RETURN)
+.................... #use RS232(baud=115200, UART1)            // UART1 for terminal
+.................... #use fast_io(ALL)                         // fast I/O
+.................... 
+.................... typedef unsigned char uint8_t;
+.................... 
+.................... void main(void)
+00130:  CLRF   FF8
+00132:  BCF    FD0.7
+00134:  MOVLW  36
+00136:  MOVWF  00
+00138:  MOVLW  10
+0013A:  MOVWF  01
+0013C:  MOVLW  02
+0013E:  MOVWF  FE9
+00140:  MOVLW  00
+00142:  MOVWF  FEA
+00144:  CLRF   FEE
+00146:  DECFSZ 00,F
+00148:  BRA    0144
+0014A:  DECFSZ 01,F
+0014C:  BRA    0144
+0014E:  MOVLW  70
+00150:  MOVWF  FD3
+00152:  BSF    F9B.6
+00154:  BCF    F9B.7
+00156:  BSF    FB8.3
+00158:  MOVLW  8A
+0015A:  MOVWF  FAF
+0015C:  MOVLW  00
+0015E:  MOVWF  FB0
+00160:  MOVLW  A6
+00162:  MOVWF  FAC
+00164:  MOVLW  90
+00166:  MOVWF  FAB
+00168:  CLRF   05
+0016A:  CLRF   04
+0016C:  MOVLB  F
+0016E:  CLRF   x38
+00170:  CLRF   x39
+00172:  CLRF   x3A
+00174:  CLRF   x3B
+00176:  CLRF   x3C
+00178:  CLRF   F77
+0017A:  CLRF   F78
+0017C:  CLRF   F79
+.................... {
+....................     uint8_t adc_x, adc_y;
+.................... 
+....................     // Configure analog pins AN1 and AN2
+....................     setup_adc_ports(sAN1 | sAN2, VSS_VDD);
+0017E:  MOVF   FC1,W
+00180:  ANDLW  F0
+00182:  MOVWF  FC1
+00184:  MOVLW  06
+00186:  MOVWF  x38
+00188:  MOVLW  00
+0018A:  MOVWF  x3C
+0018C:  MOVWF  x39
+0018E:  MOVWF  x3A
+00190:  MOVWF  x3B
+....................     setup_adc(ADC_CLOCK_DIV_64);   // ADC clock
+00192:  MOVF   FC0,W
+00194:  ANDLW  C0
+00196:  IORLW  06
+00198:  MOVWF  FC0
+0019A:  BCF    FC0.7
+0019C:  BSF    FC2.0
+....................     set_adc_channel(1);            // start with AN1
+0019E:  MOVLW  04
+001A0:  MOVWF  01
+001A2:  MOVF   FC2,W
+001A4:  ANDLW  83
+001A6:  IORWF  01,W
+001A8:  MOVWF  FC2
+.................... 
+....................     printf("Starting ADC test...\r\n");
+001AA:  MOVLW  04
+001AC:  MOVWF  FF6
+001AE:  MOVLW  00
+001B0:  MOVWF  FF7
+001B2:  MOVLB  0
+001B4:  BRA    002C
+.................... 
+....................     while(TRUE)
+....................     {
+....................         // Read AN1 (joystick X)
+....................         set_adc_channel(1);
+001B6:  MOVLW  04
+001B8:  MOVWF  01
+001BA:  MOVF   FC2,W
+001BC:  ANDLW  83
+001BE:  IORWF  01,W
+001C0:  MOVWF  FC2
+....................         delay_us(20);               // allow acquisition time
+001C2:  MOVLW  6A
+001C4:  MOVWF  00
+001C6:  DECFSZ 00,F
+001C8:  BRA    01C6
+001CA:  NOP   
+....................         adc_x = read_adc();
+001CC:  BSF    FC2.1
+001CE:  BTFSC  FC2.1
+001D0:  BRA    01CE
+001D2:  MOVFF  FC4,06
+.................... 
+....................         // Read AN2 (joystick Y)
+....................         set_adc_channel(2);
+001D6:  MOVLW  08
+001D8:  MOVWF  01
+001DA:  MOVF   FC2,W
+001DC:  ANDLW  83
+001DE:  IORWF  01,W
+001E0:  MOVWF  FC2
+....................         delay_us(20);
+001E2:  MOVLW  6A
+001E4:  MOVWF  00
+001E6:  DECFSZ 00,F
+001E8:  BRA    01E6
+001EA:  NOP   
+....................         adc_y = read_adc();
+001EC:  BSF    FC2.1
+001EE:  BTFSC  FC2.1
+001F0:  BRA    01EE
+001F2:  MOVFF  FC4,07
+.................... 
+....................         // Print raw 0-255 values to terminal
+....................         printf("X=%3u  Y=%3u\r\n", adc_x, adc_y);
+001F6:  MOVLW  58
+001F8:  BTFSS  F9E.4
+001FA:  BRA    01F8
+001FC:  MOVWF  FAD
+001FE:  MOVLW  3D
+00200:  BTFSS  F9E.4
+00202:  BRA    0200
+00204:  MOVWF  FAD
+00206:  MOVFF  06,08
+0020A:  MOVLW  13
+0020C:  MOVWF  09
+0020E:  RCALL  0078
+00210:  MOVLW  21
+00212:  MOVWF  FF6
+00214:  MOVLW  00
+00216:  MOVWF  FF7
+00218:  MOVLW  04
+0021A:  MOVWF  08
+0021C:  BRA    00E4
+0021E:  MOVFF  07,08
+00222:  MOVLW  13
+00224:  MOVWF  09
+00226:  RCALL  0078
+00228:  MOVLW  0D
+0022A:  BTFSS  F9E.4
+0022C:  BRA    022A
+0022E:  MOVWF  FAD
+00230:  MOVLW  0A
+00232:  BTFSS  F9E.4
+00234:  BRA    0232
+00236:  MOVWF  FAD
+.................... 
+....................         delay_ms(100);              // sample every 100 ms
+00238:  MOVLW  64
+0023A:  MOVWF  08
+0023C:  BRA    0106
+0023E:  BRA    01B6
+....................     }
+.................... }
+.................... 
+00240:  SLEEP 
+
+Configuration Fuses:
+   Word  1: E800   INTRC_IO NOPLLEN PRIMARY_ON FCMEN IESO
+   Word  2: 3C00   PUT NOBROWNOUT BORV29 NOWDT WDT32768
+   Word  3: AF00   CCP2C1 PBADEN CCP3B5 HFOFST TIMER3B5 P2BD2 MCLR
+   Word  4: 0085   STVREN LVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

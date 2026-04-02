@@ -1,0 +1,108 @@
+[Directories]
+Include=
+Library=
+LinkerScript=
+output=
+
+[defines]
+enabled=0
+chip=1
+D1=
+V1=
+buildcount=1
+
+[fileformats]
+forcecoff=0
+debug=4
+error=2
+object=0
+list=0
+scratch=0
+sta=1
+tre=1
+expandtree=0
+allerrors=1
+allwarnings=1
+stayupne=3
+stayupoe=0
+
+[PROJECT]
+Target=adc_tester.hex
+Development_Mode=
+Processor_Text=PIC18F46K22
+ToolSuite=CCS
+CCSVersion=5.120
+Compiler=PCH
+
+[Target Data]
+BuildTool=C-COMPILER
+OptionString=+FH
+AdditionalOptionString=
+BuildRequired=1
+FileList=adc_tester.c
+
+[adc_tester.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=adc_tester.c
+
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+
+
+[CompilerVersion]
+Fixed=
+
+[Opened Files]
+1=adc_tester.c
+t1=1
+2=..\..\firmware\src\adc.h
+t2=1
+3=..\..\firmware\src\main.h
+t3=1
+4=..\..\firmware\src\Drivers\sh1106.c
+t4=1
+5=..\..\firmware\src\API\display.c
+t5=1
+6=..\..\firmware\src\Utilities\vec2.h
+t6=1
+7=..\..\firmware\src\Utilities\entities.c
+t7=1
+8=..\..\firmware\src\API\controller.c
+t8=1
+9=..\..\firmware\src\system.c
+t9=15
+10=..\..\firmware\src\tasks.h
+t10=1
+11=..\..\firmware\src\tasks.c
+t11=76
+Count=1
+
+[ProjectLog]
+Days=2
+D1=27-08-2025
+D1_L=7
+D1_L1=[72274]Project Closed.
+D1_L2=[72274]Project Opened.
+D1_L3=[72279]Started Editing.
+D1_L4=[72282]Stopped Editing.
+TotalEdit=3
+TotalDebug=0
+D1_E=3
+D1_D=0
+D1_L5=[72353]Started Editing.
+D1_L6=[72427]Stopped Editing.
+D1_L7=[72427]Project Closed.
+D2=28-08-2025
+D2_L=2
+D2_L1=[1211]Project Opened.
+D2_L2=[1230]Project Closed.
+[Units]
+Count=1
+1=adc_tester (main)
